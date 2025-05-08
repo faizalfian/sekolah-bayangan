@@ -6,11 +6,8 @@ public class PlayerController : MonoBehaviour
 {
     public float moveSpeed = 5f;
     public float jumpForce = 5f;
-<<<<<<< Updated upstream
     public bool isFightingMode = false;
     public bool doingSkill = false;
-=======
->>>>>>> Stashed changes
 
     private Rigidbody rb;
     private Animator animator;
@@ -28,7 +25,6 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         HandleMovement();
-<<<<<<< Updated upstream
         HandleFighting();
     }
 
@@ -57,16 +53,11 @@ public class PlayerController : MonoBehaviour
             animator.SetBool("isDoAction", true);
             StartCoroutine(ResetIsDoAction());
         }
-=======
->>>>>>> Stashed changes
     }
 
     void HandleMovement()
     {
-<<<<<<< Updated upstream
         if (animator.GetBool("isDoAction")) return;
-=======
->>>>>>> Stashed changes
         float h = Input.GetAxis("Horizontal");
         float v = Input.GetAxis("Vertical");
 
@@ -74,20 +65,13 @@ public class PlayerController : MonoBehaviour
 
         if (movement.magnitude > 0)
         {
-<<<<<<< Updated upstream
             isFightingMode = false;
             animator.SetBool("isFightIdle", isFightingMode);
-=======
->>>>>>> Stashed changes
             transform.Translate(movement * moveSpeed * Time.deltaTime, Space.World);
             transform.forward = movement; // Menghadap ke arah gerakan
         }
 
         animator.SetBool("isMoving", movement.magnitude > 0);
-<<<<<<< Updated upstream
-
-=======
->>>>>>> Stashed changes
     }
 
     void OnCollisionEnter(Collision collision)
@@ -98,13 +82,10 @@ public class PlayerController : MonoBehaviour
             isGrounded = true;
         }
     }
-<<<<<<< Updated upstream
 
     IEnumerator ResetIsDoAction()
     {
         yield return new WaitForSeconds(2f); // sesuaikan durasi animasi kick
         animator.SetBool("isDoAction", false);
     }
-=======
->>>>>>> Stashed changes
 }
