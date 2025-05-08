@@ -4,7 +4,7 @@ public class CameraFollow : MonoBehaviour
 {
     [Header("Follow Settings")]
     public Transform target; // Target yang diikuti (player)
-    public Vector3 offset = new Vector3(0f, 2f, -5f); // Offset posisi kamera
+    public Vector3 offset = new Vector3(3f, 2f, 0f); // Offset posisi kamera
     public float smoothSpeed = 5f; // Kehalusan pergerakan kamera
 
     [Header("Boundary Settings")]
