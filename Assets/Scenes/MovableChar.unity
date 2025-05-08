@@ -413,7 +413,11 @@ MonoBehaviour:
   m_LightCookieSize: {x: 1, y: 1}
   m_LightCookieOffset: {x: 0, y: 0}
   m_SoftShadowQuality: 0
+<<<<<<< Updated upstream
 --- !u!1 &1081518247
+=======
+--- !u!1 &1283956607
+>>>>>>> Stashed changes
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -421,11 +425,18 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
+<<<<<<< Updated upstream
   - component: {fileID: 1081518252}
   - component: {fileID: 1081518251}
   - component: {fileID: 1081518250}
   - component: {fileID: 1081518249}
   - component: {fileID: 1081518248}
+=======
+  - component: {fileID: 1283956611}
+  - component: {fileID: 1283956610}
+  - component: {fileID: 1283956609}
+  - component: {fileID: 1283956608}
+>>>>>>> Stashed changes
   m_Layer: 0
   m_Name: Camera
   m_TagString: Untagged
@@ -433,12 +444,17 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+<<<<<<< Updated upstream
 --- !u!114 &1081518248
+=======
+--- !u!114 &1283956608
+>>>>>>> Stashed changes
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
+<<<<<<< Updated upstream
   m_GameObject: {fileID: 1081518247}
   m_Enabled: 1
   m_EditorHideFlags: 0
@@ -462,6 +478,9 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1081518247}
+=======
+  m_GameObject: {fileID: 1283956607}
+>>>>>>> Stashed changes
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a79441f348de89743a2939f4d699eac1, type: 3}
@@ -499,25 +518,43 @@ MonoBehaviour:
     m_MipBias: 0
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
+<<<<<<< Updated upstream
 --- !u!81 &1081518250
+=======
+--- !u!81 &1283956609
+>>>>>>> Stashed changes
 AudioListener:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
+<<<<<<< Updated upstream
   m_GameObject: {fileID: 1081518247}
   m_Enabled: 1
 --- !u!20 &1081518251
+=======
+  m_GameObject: {fileID: 1283956607}
+  m_Enabled: 1
+--- !u!20 &1283956610
+>>>>>>> Stashed changes
 Camera:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
+<<<<<<< Updated upstream
   m_GameObject: {fileID: 1081518247}
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
   m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+=======
+  m_GameObject: {fileID: 1283956607}
+  m_Enabled: 1
+  serializedVersion: 2
+  m_ClearFlags: 1
+  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 1}
+>>>>>>> Stashed changes
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -558,21 +595,36 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
+<<<<<<< Updated upstream
 --- !u!4 &1081518252
+=======
+--- !u!4 &1283956611
+>>>>>>> Stashed changes
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
+<<<<<<< Updated upstream
   m_GameObject: {fileID: 1081518247}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 4, y: 3, z: 0}
+=======
+  m_GameObject: {fileID: 1283956607}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.27272913, y: -0.6537995, z: 0.27416086, w: 0.6503852}
+  m_LocalPosition: {x: 8.12, y: 13.3, z: -2.1}
+>>>>>>> Stashed changes
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
+<<<<<<< Updated upstream
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
+=======
+  m_LocalEulerAnglesHint: {x: 45.5, y: -90.3, z: 0}
+>>>>>>> Stashed changes
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -580,4 +632,8 @@ SceneRoots:
   - {fileID: 705507995}
   - {fileID: 648612509}
   - {fileID: 351764427}
+<<<<<<< Updated upstream
   - {fileID: 1081518252}
+=======
+  - {fileID: 1283956611}
+>>>>>>> Stashed changes
