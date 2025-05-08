@@ -1,10 +1,11 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public float moveSpeed = 5f;
+    [SerializeField] public float moveSpeed = 0.000f;
     public float jumpForce = 5f;
     public bool isFightingMode = false;
     public bool doingSkill = false;
@@ -32,6 +33,8 @@ public class PlayerController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.F))
         {
+            Debug.Log("Fighting Idle");
+            Debug.Log(isFightingMode);
             isFightingMode = !isFightingMode;
             animator.SetBool("isFightIdle", isFightingMode);
         }
