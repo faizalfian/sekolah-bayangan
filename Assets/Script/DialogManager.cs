@@ -5,19 +5,17 @@ using UnityEngine.UI;
 
 public class DialogManager : MonoBehaviour
 {
+    [Header("UI Components")]
     public GameObject dialogPanel;
     public TextMeshProUGUI characterNameText;
     public TextMeshProUGUI dialogText;
     public CharacterImageAnimator characterImageAnimator;
     private TypingEffect typingEffect;
 
-    // [NEW] UI untuk pilihan
+    [Header("Choice UI")]
     public GameObject choicePanel;
     public Button[] choiceButtons;
     public TextMeshProUGUI[] choiceTexts;
-
-    // [NEW] Data keputusan pemain
-    public List<string> playerDecisions = new List<string>();
 
     [System.Serializable]
     public class DialogLine
@@ -25,18 +23,22 @@ public class DialogManager : MonoBehaviour
         public string characterName;
         public string dialog;
         public Sprite characterSprite;
-        public DialogChoice[] choices; // [NEW]
+        public DialogChoice[] choices; // null if no choice
     }
 
     public DialogLine[] dialogLines;
+
     private int currentLine = 0;
     private bool waitingForChoice = false;
+    private string pendingChoiceText = null;     // menyimpan teks pilihan
+    private int nextLineAfterChoice = -1;        // menyimpan index setelah pilihan
+    public List<string> playerDecisions = new(); // menyimpan keputusan pemain
 
     void Start()
     {
         dialogPanel.SetActive(false);
         typingEffect = dialogText.GetComponent<TypingEffect>();
-        choicePanel.SetActive(false); // [NEW]
+        choicePanel.SetActive(false);
     }
 
     public void StartDialog()
@@ -53,6 +55,22 @@ public class DialogManager : MonoBehaviour
         }
     }
 
+    void Update()
+    {
+        if (dialogPanel.activeSelf && !waitingForChoice && Input.GetKeyDown(KeyCode.Space))
+        {
+            if (pendingChoiceText != null)
+            {
+                // Setelah menampilkan pilihan pemain, lanjut ke respons NPC
+                currentLine = nextLineAfterChoice;
+                pendingChoiceText = null;
+                nextLineAfterChoice = -1;
+            }
+
+            ShowNextLine();
+        }
+    }
+
     public void ShowNextLine()
     {
         if (currentLine >= dialogLines.Length)
@@ -62,10 +80,12 @@ public class DialogManager : MonoBehaviour
         }
 
         DialogLine line = dialogLines[currentLine];
+
         characterNameText.text = line.characterName;
         typingEffect.StartTyping(line.dialog);
         characterImageAnimator.FadeIn(line.characterSprite);
 
+        // Jika ada pilihan
         if (line.choices != null && line.choices.Length > 0)
         {
             waitingForChoice = true;
@@ -73,21 +93,13 @@ public class DialogManager : MonoBehaviour
         }
         else
         {
-            currentLine++; // lanjut ke dialog berikutnya kalau tidak ada pilihan
+            currentLine++;
         }
     }
 
     void EndDialog()
     {
         dialogPanel.SetActive(false);
-    }
-
-    void Update()
-    {
-        if (dialogPanel.activeSelf && !waitingForChoice && Input.GetKeyDown(KeyCode.Space))
-        {
-            ShowNextLine();
-        }
     }
 
     void ShowChoices(DialogChoice[] choices)
@@ -100,7 +112,7 @@ public class DialogManager : MonoBehaviour
             {
                 choiceButtons[i].gameObject.SetActive(true);
                 choiceTexts[i].text = choices[i].choiceText;
-                int index = i; // penting untuk closure di lambda
+                int index = i; // untuk closure di lambda
                 choiceButtons[i].onClick.RemoveAllListeners();
                 choiceButtons[i].onClick.AddListener(() => OnChoiceSelected(choices[index]));
             }
@@ -113,10 +125,18 @@ public class DialogManager : MonoBehaviour
 
     void OnChoiceSelected(DialogChoice choice)
     {
+        // Simpan hasil keputusan pemain
         playerDecisions.Add(choice.consequenceTag);
-        currentLine = choice.nextLineIndex;
+
+        // Simpan teks yang akan ditampilkan, dan indeks baris berikutnya
+        pendingChoiceText = choice.choiceText;
+        nextLineAfterChoice = choice.nextLineIndex;
+
         choicePanel.SetActive(false);
         waitingForChoice = false;
-        ShowNextLine();
+
+        // Tampilkan teks pilihan sebagai dialog dari pemain
+        characterNameText.text = "Bisma"; // Ganti sesuai nama karakter utama
+        typingEffect.StartTyping(pendingChoiceText);
     }
 }
