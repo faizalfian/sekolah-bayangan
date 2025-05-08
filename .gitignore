@@ -74,3 +74,4 @@ crashlytics-build.properties
 *.sln
 *.csproj
 ProjectSettings/Packages/com.unity.probuilder/Settings.json
+Assembly-CSharp.csproj
