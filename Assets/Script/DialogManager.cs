@@ -6,11 +6,11 @@ using UnityEngine.UI;
 
 public class DialogManager : MonoBehaviour
 {
-    // [Header("UI Components")]
+    //[Header("UI Components")]
     public GameObject dialogPanel;
     public TextMeshProUGUI characterNameText;
     public TextMeshProUGUI dialogText;
-    public Image characterImage;
+    public CharacterImageAnimator characterImageAnimator;
     private TypingEffect typingEffect;
 
     // [Header("Dialog Data")]
@@ -37,7 +37,7 @@ public class DialogManager : MonoBehaviour
         {
             dialogPanel.SetActive(true);
             currentLine = 0;
-            dialogText.text = ""; // Kosongkan teks saat mulai dialog
+            dialogText.text = "";
             ShowNextLine();
         }
         else
@@ -51,8 +51,8 @@ public class DialogManager : MonoBehaviour
         if (currentLine < dialogLines.Length)
         {
             characterNameText.text = dialogLines[currentLine].characterName;
-            characterImage.sprite = dialogLines[currentLine].characterSprite;
-            typingEffect.StartTyping(dialogLines[currentLine].dialog); // Gunakan typing effect
+            typingEffect.StartTyping(dialogLines[currentLine].dialog);
+            characterImageAnimator.FadeIn(dialogLines[currentLine].characterSprite); // Tambahkan animasi gambar
             currentLine++;
         }
         else
