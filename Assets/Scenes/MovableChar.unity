@@ -414,7 +414,11 @@ MonoBehaviour:
   m_LightCookieOffset: {x: 0, y: 0}
   m_SoftShadowQuality: 0
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 --- !u!1 &1081518247
+=======
+--- !u!1 &1283956607
+>>>>>>> Stashed changes
 =======
 --- !u!1 &1283956607
 >>>>>>> Stashed changes
@@ -426,16 +430,22 @@ GameObject:
   serializedVersion: 6
   m_Component:
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
   - component: {fileID: 1081518252}
   - component: {fileID: 1081518251}
   - component: {fileID: 1081518250}
   - component: {fileID: 1081518249}
   - component: {fileID: 1081518248}
 =======
+=======
+>>>>>>> Stashed changes
   - component: {fileID: 1283956611}
   - component: {fileID: 1283956610}
   - component: {fileID: 1283956609}
   - component: {fileID: 1283956608}
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
   m_Layer: 0
   m_Name: Camera
@@ -445,7 +455,11 @@ GameObject:
   m_StaticEditorFlags: 0
   m_IsActive: 1
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 --- !u!114 &1081518248
+=======
+--- !u!114 &1283956608
+>>>>>>> Stashed changes
 =======
 --- !u!114 &1283956608
 >>>>>>> Stashed changes
@@ -454,6 +468,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream
   m_GameObject: {fileID: 1081518247}
   m_Enabled: 1
@@ -478,6 +493,9 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1081518247}
+=======
+  m_GameObject: {fileID: 1283956607}
+>>>>>>> Stashed changes
 =======
   m_GameObject: {fileID: 1283956607}
 >>>>>>> Stashed changes
@@ -519,7 +537,11 @@ MonoBehaviour:
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 --- !u!81 &1081518250
+=======
+--- !u!81 &1283956609
+>>>>>>> Stashed changes
 =======
 --- !u!81 &1283956609
 >>>>>>> Stashed changes
@@ -529,9 +551,15 @@ AudioListener:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
   m_GameObject: {fileID: 1081518247}
   m_Enabled: 1
 --- !u!20 &1081518251
+=======
+  m_GameObject: {fileID: 1283956607}
+  m_Enabled: 1
+--- !u!20 &1283956610
+>>>>>>> Stashed changes
 =======
   m_GameObject: {fileID: 1283956607}
   m_Enabled: 1
@@ -543,17 +571,23 @@ Camera:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
   m_GameObject: {fileID: 1081518247}
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
   m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
 =======
+=======
+>>>>>>> Stashed changes
   m_GameObject: {fileID: 1283956607}
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
   m_BackGroundColor: {r: 0, g: 0, b: 0, a: 1}
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
@@ -596,7 +630,11 @@ Camera:
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 --- !u!4 &1081518252
+=======
+--- !u!4 &1283956611
+>>>>>>> Stashed changes
 =======
 --- !u!4 &1283956611
 >>>>>>> Stashed changes
@@ -606,22 +644,32 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
   m_GameObject: {fileID: 1081518247}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 4, y: 3, z: 0}
 =======
+=======
+>>>>>>> Stashed changes
   m_GameObject: {fileID: 1283956607}
   serializedVersion: 2
   m_LocalRotation: {x: 0.27272913, y: -0.6537995, z: 0.27416086, w: 0.6503852}
   m_LocalPosition: {x: 8.12, y: 13.3, z: -2.1}
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
+=======
+  m_LocalEulerAnglesHint: {x: 45.5, y: -90.3, z: 0}
+>>>>>>> Stashed changes
 =======
   m_LocalEulerAnglesHint: {x: 45.5, y: -90.3, z: 0}
 >>>>>>> Stashed changes
@@ -633,7 +681,11 @@ SceneRoots:
   - {fileID: 648612509}
   - {fileID: 351764427}
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
   - {fileID: 1081518252}
+=======
+  - {fileID: 1283956611}
+>>>>>>> Stashed changes
 =======
   - {fileID: 1283956611}
 >>>>>>> Stashed changes
