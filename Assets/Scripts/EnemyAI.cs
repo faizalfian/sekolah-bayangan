@@ -6,17 +6,17 @@ using System.Threading.Tasks;
 public class EnemyAI : MonoBehaviour
 {
     [Header("AI Settings")]
-    public float detectionRadius = 10f;
+    public float detectionRadius = 4f;
     public float attackRadius = 2f;
     public float patrolRadius = 7f;
-    public float patrolCooldown = 3f;
+    //public float patrolCooldown = 3f;
     public Transform patrolGlobalPoint;
     public float waypointTolerance = 1f; // Jarak minimal untuk mencapai waypoint
 
     [Header("Combat Settings")]
     public Animator animator;
     public int maxHealth = 100;
-    public int attackDamage = 5;
+    public int attackDamage = 2;
     public float attackCooldown = 1f;
 
 
@@ -30,14 +30,14 @@ public class EnemyAI : MonoBehaviour
     public GameObject fighter;
 
 
-    private NavMeshAgent agent;
-    private GameObject player;
-    private Transform playerTransform;
-    private int currentHealth;
-    private float lastAttackTime;
-    private bool death;
+    protected NavMeshAgent agent;
+    protected GameObject player;
+    protected Transform playerTransform;
+    protected int currentHealth;
+    protected float lastAttackTime;
+    protected bool death;
 
-    void Start()
+    protected void Start()
     {
         agent = GetComponent<NavMeshAgent>();
         agent.avoidancePriority = Random.Range(50, 100);
@@ -65,7 +65,7 @@ public class EnemyAI : MonoBehaviour
         {
             ChasePlayer();
         }
-        else
+        else if (patrolGlobalPoint != null)
         {
             Patrol();
         }
@@ -74,14 +74,14 @@ public class EnemyAI : MonoBehaviour
         UpdateAnimations();
     }
 
-    void ChasePlayer()
+    protected void ChasePlayer()
     {
         transform.LookAt(playerTransform.position);
         transform.rotation = Quaternion.Euler(0, transform.rotation.eulerAngles.y, 0);
         agent.SetDestination(player.transform.position);
     }
 
-    void AttackPlayer()
+    protected void AttackPlayer()
     {
         transform.LookAt(playerTransform.position);
         transform.rotation = Quaternion.Euler(0, transform.rotation.eulerAngles.y, 0);
@@ -94,7 +94,7 @@ public class EnemyAI : MonoBehaviour
         }
     }
 
-    void Patrol()
+    protected void Patrol()
     {
         // Cek jika sudah mencapai titik patroli
         if (agent.enabled && !agent.pathPending && agent.remainingDistance <= waypointTolerance)
@@ -103,7 +103,7 @@ public class EnemyAI : MonoBehaviour
         }
     }
 
-    void SetNextPatrolPoint()
+    protected void SetNextPatrolPoint()
     {
         Vector3 randomPoint = patrolGlobalPoint.transform.position + Random.insideUnitSphere * patrolRadius;
         if (NavMesh.SamplePosition(randomPoint, out NavMeshHit hit, patrolRadius, NavMesh.AllAreas))
@@ -127,23 +127,23 @@ public class EnemyAI : MonoBehaviour
         }
     }
 
-    void Die()
+    protected void Die()
     {
         death = true;
         agent.enabled = false;
         GetComponent<Collider>().enabled = false;
         animator.enabled = false;
         //healthBar.enabled = false;
-        StartCoroutine(MoveToPosition(transform.position + new Vector3(0f, -3f, 0f), 1.75f));
+        StartCoroutine(MoveToPosition(transform.position + new Vector3(0f, -5f, 0f), 1.75f));
         Destroy(gameObject, 2f);
     }
 
-    void UpdateAnimations()
+    protected void UpdateAnimations()
     {
         animator.SetBool("Walk Forward", agent.velocity.magnitude > 0.1f);
     }
 
-    void UpdateHealthBarPosition()
+    protected void UpdateHealthBarPosition()
     {
         healthBar.transform.position = transform.position + healthBarOffset;
     }
@@ -155,8 +155,14 @@ public class EnemyAI : MonoBehaviour
 
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position, detectionRadius);
+
+        if (patrolGlobalPoint != null)
+        {
+            Gizmos.color = Color.green;
+            Gizmos.DrawWireSphere(patrolGlobalPoint.position, patrolRadius);
+        }
     }
-    IEnumerator MoveToPosition(Vector3 targetPos, float duration)
+    protected IEnumerator MoveToPosition(Vector3 targetPos, float duration)
     {
         Vector3 startPos = transform.position;
         float elapsed = 0f;

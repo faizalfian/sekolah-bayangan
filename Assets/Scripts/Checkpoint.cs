@@ -11,6 +11,7 @@ public class Checkpoint : MonoBehaviour
 
     [Header("Debug")]
     [SerializeField] private bool isActive = false;
+    [SerializeField] private bool hasActive = false;
 
     private SphereCollider checkpointCollider;
     private static Action<Checkpoint> OnCheckpointActivated;
@@ -33,7 +34,7 @@ public class Checkpoint : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player") && !isActive)
+        if (other.CompareTag("Player") && !isActive && !hasActive)
         {
             ActivateCheckpoint();
         }
@@ -42,6 +43,7 @@ public class Checkpoint : MonoBehaviour
     public void ActivateCheckpoint()
     {
         isActive = true;
+        hasActive = true;
 
         if (activationEffect != null)
         {
