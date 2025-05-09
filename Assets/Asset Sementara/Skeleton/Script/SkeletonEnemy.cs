@@ -37,7 +37,8 @@ public class SkeletonEnemy : MonoBehaviour
 
         if (!playerInSightRange && !playerInAttackRange)
         {
-            Patroling();
+            Debug.Log("should patroling");
+            // Patroling();
         }
         else if (playerInSightRange && !playerInAttackRange)
         {
@@ -62,11 +63,13 @@ public class SkeletonEnemy : MonoBehaviour
 
         if (walkPointSet)
         {
+            Debug.Log("patroling now");
             navAgent.SetDestination(walkPoint);
+            animator.SetFloat("Velocity", 0.2f);
         }
 
+
         Vector3 distanceToWalkPoint = transform.position - walkPoint;
-        animator.SetFloat("Velocity", 0.2f);
 
         if (distanceToWalkPoint.magnitude < 1f)
         {
@@ -76,13 +79,20 @@ public class SkeletonEnemy : MonoBehaviour
 
     private void SearchWalkPoint()
     {
+        Debug.Log("search patrol point");
         float randomZ = Random.Range(-walkPointRange, walkPointRange);
         float randomX = Random.Range(-walkPointRange, walkPointRange);
         walkPoint = new Vector3(transform.position.x + randomX, transform.position.y, transform.position.z + randomZ);
-
-        if (Physics.Raycast(walkPoint, -transform.up, 2f, groundLayer))
+        Debug.Log(walkPoint);
+        Debug.DrawRay(walkPoint, -transform.up * 2f, Color.red);
+        if (Physics.Raycast(walkPoint, -transform.up, 10f, groundLayer))
         {
+            Debug.Log("Walkpoint Set");
             walkPointSet = true;
+        }
+        else
+        {
+            walkPointSet = false;  // Jika raycast tidak mengenai tanah, jangan set walkPoint
         }
     }
 
