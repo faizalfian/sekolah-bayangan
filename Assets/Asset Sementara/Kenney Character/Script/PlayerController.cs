@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour
 
     private Rigidbody rb;
     private Animator animator;
+    public GameObject attackHitbox;
     private bool isGrounded = true;
 
 
@@ -46,6 +47,7 @@ public class PlayerController : MonoBehaviour
             animator.SetTrigger("kick");
             animator.SetBool("isDoAction", true);
             StartCoroutine(ResetIsDoAction());
+            StartCoroutine(ActivateHitbox());
         }
 
         if (Input.GetKeyDown(KeyCode.T))
@@ -90,5 +92,13 @@ public class PlayerController : MonoBehaviour
     {
         yield return new WaitForSeconds(2f); // sesuaikan durasi animasi kick
         animator.SetBool("isDoAction", false);
+    }
+
+    IEnumerator ActivateHitbox()
+    {
+        Debug.Log("Attack from player controller");
+        attackHitbox.SetActive(true);
+        yield return new WaitForSeconds(0.2f); // durasi aktif hitbox
+        attackHitbox.SetActive(false);
     }
 }
