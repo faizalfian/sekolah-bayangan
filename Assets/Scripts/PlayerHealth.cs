@@ -35,7 +35,7 @@ public class PlayerHealth : MonoBehaviour
     void Die()
     {
         isDead = true;
-        gameOverUI.SetActive(true);
+        //gameOverUI.SetActive(true);
         GetComponent<PlayerMovement>().enabled = false;
         GetComponent<PlayerCombat>().enabled = false;
     }

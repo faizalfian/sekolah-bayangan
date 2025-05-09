@@ -32,6 +32,7 @@ public class EnemyAI : MonoBehaviour
 
     private NavMeshAgent agent;
     private GameObject player;
+    private Transform playerTransform;
     private int currentHealth;
     private float lastAttackTime;
     private bool death;
@@ -40,7 +41,7 @@ public class EnemyAI : MonoBehaviour
     {
         agent = GetComponent<NavMeshAgent>();
         player = GameObject.FindGameObjectWithTag("Player");
-        healthBar.GetComponent<LookAt>().target = player.transform;
+        playerTransform = player.transform;
         Debug.Log(player);
         currentHealth = maxHealth;
 
@@ -51,10 +52,11 @@ public class EnemyAI : MonoBehaviour
 
     void Update()
     {
+
+        if (death || player == null) return;
         UpdateHealthBarPosition();
         fighter.transform.position = transform.position;
-        float distanceToPlayer = Vector3.Distance(transform.position, player.transform.position);
-
+        float distanceToPlayer = Vector3.Distance(transform.position, playerTransform.position);
         if (distanceToPlayer <= attackRadius)
         {
             AttackPlayer();
@@ -63,7 +65,7 @@ public class EnemyAI : MonoBehaviour
         {
             ChasePlayer();
         }
-        else if(!death)
+        else
         {
             Patrol();
         }
