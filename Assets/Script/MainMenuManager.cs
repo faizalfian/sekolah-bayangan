@@ -6,7 +6,7 @@ public class MainMenuManager : MonoBehaviour
     public void Play()
     {
         Debug.Log("Play clicked");
-        SceneManager.LoadScene("SekolahBayangan-GamePlay");
+        SceneManager.LoadScene("CobaStage1");
     }
 
     public void Exit()
