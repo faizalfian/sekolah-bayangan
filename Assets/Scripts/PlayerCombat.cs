@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -9,14 +10,19 @@ public class PlayerCombat : MonoBehaviour
     public LayerMask enemyLayers;
     public int attackDamage = 20;
     public float attackRate = 2f;
+    public float damageDelay = 0.5f;
 
     [Header("Effects")]
     public ParticleSystem attackEffect;
+
+    [Header("Others")]
+    public TextMeshProUGUI scoreText;
 
     private float nextAttackTime = 0f;
     private Animator animator;
     private PlayerInputAction playerInput;
     private InputAction punch;
+    private bool isAttacking = false;
 
 
     void Awake()
@@ -37,6 +43,11 @@ public class PlayerCombat : MonoBehaviour
         punch.started += Attack;
     }
 
+    private void Update()
+    {
+        scoreText.text = $"Score: {GameManager.Instance.GetCurrentScore()}\nHighscore: {GameManager.Instance.GetHighScore()}";
+    }
+
     private void OnDisable()
     {
         
@@ -44,36 +55,30 @@ public class PlayerCombat : MonoBehaviour
         punch.Disable();
     }
 
-    //void Update()
-    //{
-    //    if (Time.time >= nextAttackTime)
-    //    {
-    //        if (Input.GetMouseButtonDown(0))
-    //        {
-    //            Attack();
-    //            nextAttackTime = Time.time + 1f / attackRate;
-    //        }
-    //    }
-    //}
-
     void Attack(InputAction.CallbackContext context)
     {
-        if (Time.time >= nextAttackTime)
+        if (Time.time >= nextAttackTime && !isAttacking)
         {
-
+            isAttacking = true;
             animator.SetTrigger("PunchTrigger");
 
-            if (attackEffect != null)
-                attackEffect.Play();
+            if (attackEffect != null) attackEffect.Play();
 
-            Collider[] hitEnemies = Physics.OverlapSphere(attackPoint.position, attackRange, enemyLayers);
+            Invoke("ApplyDamage", damageDelay);
 
-            foreach (Collider enemy in hitEnemies)
-            {
-                enemy.GetComponent<EnemyAI>().TakeDamage(attackDamage);
-            }
             nextAttackTime = Time.time + 1f / attackRate;
         }
+    }
+
+    void ApplyDamage()
+    {
+        Collider[] hitEnemies = Physics.OverlapSphere(attackPoint.position, attackRange, enemyLayers);
+
+        foreach (Collider enemy in hitEnemies)
+        {
+            enemy.GetComponent<EnemyAI>().TakeDamage(attackDamage);
+        }
+        isAttacking = false;
     }
 
     void OnDrawGizmosSelected()
@@ -81,5 +86,10 @@ public class PlayerCombat : MonoBehaviour
         if (attackPoint == null) return;
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(attackPoint.position, attackRange);
+    }
+
+    public void onEnemyDead(int scoreVal)
+    {
+        GameManager.Instance.AddScore(scoreVal);
     }
 }

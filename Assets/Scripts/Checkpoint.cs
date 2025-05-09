@@ -15,6 +15,7 @@ public class Checkpoint : MonoBehaviour
 
     private SphereCollider checkpointCollider;
     private static Action<Checkpoint> OnCheckpointActivated;
+    public Action onEnter;
 
     private void Awake()
     {
@@ -34,6 +35,7 @@ public class Checkpoint : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        onEnter?.Invoke();
         if (other.CompareTag("Player") && !isActive && !hasActive)
         {
             ActivateCheckpoint();

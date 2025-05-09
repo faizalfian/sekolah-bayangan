@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.AI;
 using System.Collections;
-using System.Threading.Tasks;
+using UnityEngine.Events;
 
 public class EnemyAI : MonoBehaviour
 {
@@ -18,16 +18,22 @@ public class EnemyAI : MonoBehaviour
     public int maxHealth = 100;
     public int attackDamage = 2;
     public float attackCooldown = 1f;
+    public int scoreValue = 50; // Nilai score yang diberikan saat musuh mati
+
+    [Header("Attack Settings")]
+    public float attackAnimationDelay = 0.5f; // Waktu delay sebelum mengurangi HP
+    private bool isAttacking = false;
+    private Quaternion attackRotation;
 
 
     [Header("UI")]
     public HealthBar healthBar;
     public Vector3 healthBarOffset = new Vector3(0, 2f, 0);
 
-    
 
     [Header("Others")]
     public GameObject fighter;
+    [SerializeField] private UnityEvent<int> onEnemyDeath;
 
 
     protected NavMeshAgent agent;
@@ -69,7 +75,7 @@ public class EnemyAI : MonoBehaviour
         {
             Patrol();
         }
-        
+
 
         UpdateAnimations();
     }
@@ -83,13 +89,24 @@ public class EnemyAI : MonoBehaviour
 
     protected void AttackPlayer()
     {
+        if (isAttacking) return;
+
+        Quaternion lastRot = transform.rotation;
         transform.LookAt(playerTransform.position);
-        transform.rotation = Quaternion.Euler(0, transform.rotation.eulerAngles.y, 0);
+        transform.rotation = Quaternion.Lerp(lastRot, Quaternion.Euler(0, transform.rotation.eulerAngles.y, 0), 0.5f);
+        attackRotation = transform.rotation; // Simpan rotasi saat mulai serangan
+
         if (Time.time - lastAttackTime >= attackCooldown)
         {
+            isAttacking = true;
             animator.SetTrigger("PunchTrigger");
-            PlayerHealth playerH = player.GetComponent<PlayerHealth>();
-            playerH.TakeDamage(attackDamage);
+
+            // Lock rotation during attack
+            StartCoroutine(LockAttackRotation());
+
+            // Apply damage after animation delay
+            StartCoroutine(ApplyDamageAfterDelay());
+
             lastAttackTime = Time.time;
         }
     }
@@ -136,6 +153,7 @@ public class EnemyAI : MonoBehaviour
         //healthBar.enabled = false;
         StartCoroutine(MoveToPosition(transform.position + new Vector3(0f, -5f, 0f), 1.75f));
         Destroy(gameObject, 2f);
+        onEnemyDeath?.Invoke(scoreValue);
     }
 
     protected void UpdateAnimations()
@@ -175,5 +193,37 @@ public class EnemyAI : MonoBehaviour
         }
 
         transform.position = targetPos;
+    }
+    private IEnumerator LockAttackRotation()
+    {
+        // Tunggu sampai animasi serangan selesai
+        float attackTime = 0f;
+        float animationLength = animator.GetCurrentAnimatorStateInfo(0).length;
+
+        while (attackTime < animationLength)
+        {
+            transform.rotation = attackRotation; // Pertahankan rotasi serangan
+            attackTime += Time.deltaTime;
+            yield return null;
+        }
+
+        isAttacking = false;
+    }
+
+    private IEnumerator ApplyDamageAfterDelay()
+    {
+        yield return new WaitForSeconds(attackAnimationDelay);
+
+        if (player != null && Vector3.Distance(transform.position, player.transform.position) <= attackRadius * 1.2f)
+        {
+            PlayerHealth playerH = player.GetComponent<PlayerHealth>();
+            Vector3 directionToPlayer = (playerTransform.position - transform.position).normalized;
+            float angleToPlayer = Vector3.Angle(transform.forward, directionToPlayer);
+            if (playerH != null && angleToPlayer < 60f)
+            {
+                playerH.TakeDamage(attackDamage);
+            }
+
+        }
     }
 }

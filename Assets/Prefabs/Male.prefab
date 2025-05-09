@@ -111,6 +111,7 @@ MonoBehaviour:
     m_Bits: 128
   attackDamage: 20
   attackRate: 2
+  damageDelay: 0.3
   attackEffect: {fileID: 0}
 --- !u!114 &5728545574331166708
 MonoBehaviour:
