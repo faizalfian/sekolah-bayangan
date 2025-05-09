@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-[RequireComponent(typeof(CharacterController))]
+[RequireComponent(typeof(CharacterController)), RequireComponent(typeof(PlayerHealth))]
 public class PlayerMovement : MonoBehaviour
 {
     [Header("Movement Settings")]
@@ -30,9 +30,9 @@ public class PlayerMovement : MonoBehaviour
     // Input System
     public PlayerInputAction playerInput;
     private InputAction moveAction;
-    private InputAction jumpAction;
-    private InputAction sprintAction;
-    private InputAction punchAction;
+    //private InputAction jumpAction;
+    //private InputAction sprintAction;
+    //private InputAction punchAction;
 
     private CharacterController controller;
     private Vector3 velocity;
@@ -40,6 +40,7 @@ public class PlayerMovement : MonoBehaviour
     private float currentSpeed;
     private Vector2 moveInput;
     private Vector3 moveDir;
+    private PlayerHealth playerH;
     //private PlayerCombat playerCombat;
 
     void Awake()
@@ -50,6 +51,7 @@ public class PlayerMovement : MonoBehaviour
         //sprintAction = playerInput.actions["Sprint"];
 
         controller = GetComponent<CharacterController>();
+        playerH = GetComponent<PlayerHealth>();
         currentSpeed = walkSpeed;
     }
 
@@ -131,6 +133,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void HandleMovement()
     {
+        //Debug.Log(transform.position.ToString() + groundCheck.transform.position.ToString());
         // Get input from Input System
         moveInput = moveAction.ReadValue<Vector2>();
         fighter.transform.position = groundCheck.transform.position;
@@ -183,5 +186,12 @@ public class PlayerMovement : MonoBehaviour
     {
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(groundCheck.position + (Vector3.down * groundCheckOffset), groundDistance);
+    }
+
+    public void resetMovement()
+    {
+        moveDir = Vector3.zero;
+        moveInput = Vector2.zero;
+        velocity = Vector3.zero;
     }
 }
