@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(CharacterController))]
-public class AdvancedPlayerController : MonoBehaviour
+public class PlayerMovement : MonoBehaviour
 {
     [Header("Movement Settings")]
     public float walkSpeed = 5f;
@@ -24,9 +24,11 @@ public class AdvancedPlayerController : MonoBehaviour
     [Header("Other")]
     public Animator animator;
     public GameObject fighter;
+    public GameObject AtkPoint;
+    public Vector3 atkPointOffset;
 
     // Input System
-    private PlayerInputAction playerInput;
+    public PlayerInputAction playerInput;
     private InputAction moveAction;
     private InputAction jumpAction;
     private InputAction sprintAction;
@@ -37,16 +39,14 @@ public class AdvancedPlayerController : MonoBehaviour
     private bool isGrounded;
     private float currentSpeed;
     private Vector2 moveInput;
-    private bool isSprinting;
     private Vector3 moveDir;
+    //private PlayerCombat playerCombat;
 
     void Awake()
     {
         // Initialize Input System
         playerInput = new PlayerInputAction();
         moveAction = playerInput.Player.Move;
-        jumpAction = playerInput.Player.Jump;
-        punchAction = playerInput.Player.Punch;
         //sprintAction = playerInput.actions["Sprint"];
 
         controller = GetComponent<CharacterController>();
@@ -57,14 +57,10 @@ public class AdvancedPlayerController : MonoBehaviour
     {
         // Enable input actions
         moveAction.Enable();
-        jumpAction.Enable();
-        punchAction.Enable();
+        //punchAction.Enable();
         //sprintAction.Enable();
 
         // Setup input callbacks
-        jumpAction.started += OnJump;
-        punchAction.started += OnPunch;
-        //sprintAction.started += OnSprintStart;
         //sprintAction.canceled += OnSprintEnd;
     }
 
@@ -72,12 +68,9 @@ public class AdvancedPlayerController : MonoBehaviour
     {
         // Disable input actions
         moveAction.Disable();
-        jumpAction.Disable();
         //sprintAction.Disable();
 
         // Remove callbacks
-        jumpAction.started -= OnJump;
-        punchAction.started -= OnPunch;
         //sprintAction.started -= OnSprintStart;
         //sprintAction.canceled -= OnSprintEnd;
     }
@@ -107,13 +100,17 @@ public class AdvancedPlayerController : MonoBehaviour
             targetAngle = Mathf.Round(targetAngle / 45) * 45;
 
             // Terapkan rotasi
+            AtkPoint.transform.position = transform.position + atkPointOffset;
             fighter.transform.rotation = Quaternion.Euler(0, targetAngle, 0);
+            Vector3 dir = AtkPoint.transform.position - fighter.transform.position; // 1. Relative position
+            dir = fighter.transform.rotation * dir; // 2. Rotate
+            Vector3 point = dir + fighter.transform.position; // 3. Final position
+            AtkPoint.transform.position = point;
             // animasi berjalan
             animator.SetBool("Walk Forward", true);
         // player diam
         } else {
             animator.SetBool("Walk Forward", false);
-            animator.SetBool("Walk Backward", false);
         }
         
     }
@@ -147,7 +144,6 @@ public class AdvancedPlayerController : MonoBehaviour
     private void HandleGravity()
     {
         velocity.y += gravity * Time.deltaTime;
-        //controller.Move(velocity * Time.deltaTime);
     }
 
     private void HandleSlope()
@@ -170,33 +166,17 @@ public class AdvancedPlayerController : MonoBehaviour
         return false;
     }
 
-    // Input System Callbacks
+    //private void OnSprintStart(InputAction.CallbackContext context)
+    //{
+    //    isSprinting = true;
+    //    currentSpeed = sprintSpeed;
+    //}
 
-    private void OnPunch(InputAction.CallbackContext context)
-    {
-        animator.SetTrigger("PunchTrigger");
-    }
-
-    private void OnJump(InputAction.CallbackContext context)
-    {
-        if (isGrounded)
-        {
-            Debug.Log("jump");
-            velocity.y += jumpHeight;
-        }
-    }
-
-    private void OnSprintStart(InputAction.CallbackContext context)
-    {
-        isSprinting = true;
-        currentSpeed = sprintSpeed;
-    }
-
-    private void OnSprintEnd(InputAction.CallbackContext context)
-    {
-        isSprinting = false;
-        currentSpeed = walkSpeed;
-    }
+    //private void OnSprintEnd(InputAction.CallbackContext context)
+    //{
+    //    isSprinting = false;
+    //    currentSpeed = walkSpeed;
+    //}
 
     // Debug Visualization
     void OnDrawGizmosSelected()

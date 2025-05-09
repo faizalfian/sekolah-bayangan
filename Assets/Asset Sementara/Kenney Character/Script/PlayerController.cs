@@ -1,11 +1,14 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public float moveSpeed = 5f;
+    [SerializeField] public float moveSpeed = 0.000f;
     public float jumpForce = 5f;
+    public bool isFightingMode = false;
+    public bool doingSkill = false;
 
     private Rigidbody rb;
     private Animator animator;
@@ -23,10 +26,41 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         HandleMovement();
+        HandleFighting();
+    }
+
+    void HandleFighting()
+    {
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            Debug.Log("Fighting Idle");
+            Debug.Log(isFightingMode);
+            isFightingMode = !isFightingMode;
+            animator.SetBool("isFightIdle", isFightingMode);
+        }
+
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            isFightingMode = true;
+            animator.SetBool("isFightIdle", true);
+            animator.SetTrigger("kick");
+            animator.SetBool("isDoAction", true);
+            StartCoroutine(ResetIsDoAction());
+        }
+
+        if (Input.GetKeyDown(KeyCode.T))
+        {
+            isFightingMode = true;
+            animator.SetBool("isFightIdle", true);
+            animator.SetTrigger("blast");
+            animator.SetBool("isDoAction", true);
+            StartCoroutine(ResetIsDoAction());
+        }
     }
 
     void HandleMovement()
     {
+        if (animator.GetBool("isDoAction")) return;
         float h = Input.GetAxis("Horizontal");
         float v = Input.GetAxis("Vertical");
 
@@ -34,6 +68,8 @@ public class PlayerController : MonoBehaviour
 
         if (movement.magnitude > 0)
         {
+            isFightingMode = false;
+            animator.SetBool("isFightIdle", isFightingMode);
             transform.Translate(movement * moveSpeed * Time.deltaTime, Space.World);
             transform.forward = movement; // Menghadap ke arah gerakan
         }
@@ -48,5 +84,11 @@ public class PlayerController : MonoBehaviour
         {
             isGrounded = true;
         }
+    }
+
+    IEnumerator ResetIsDoAction()
+    {
+        yield return new WaitForSeconds(2f); // sesuaikan durasi animasi kick
+        animator.SetBool("isDoAction", false);
     }
 }
