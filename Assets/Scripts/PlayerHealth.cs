@@ -1,15 +1,16 @@
+using System.Collections;
 using UnityEngine;
-using UnityEngine.UI;
+using UnityEngine.AI;
 
 public class PlayerHealth : MonoBehaviour
 {
     [Header("Health Settings")]
-    public int maxHealth = 100;
+    public int maxHealth = 200;
     public HealthBar healthBar;
     public GameObject gameOverUI;
 
     private int currentHealth;
-    private bool isDead;
+    public bool isDead = false;
 
     void Start()
     {
@@ -23,7 +24,7 @@ public class PlayerHealth : MonoBehaviour
     {
         if (isDead) return;
 
-        currentHealth -= damage;
+        currentHealth = Mathf.Clamp(currentHealth - damage, 0, maxHealth);
         healthBar.currHP = currentHealth;
 
         if (currentHealth <= 0)
@@ -35,9 +36,36 @@ public class PlayerHealth : MonoBehaviour
     void Die()
     {
         isDead = true;
-        //gameOverUI.SetActive(true);
-        GetComponent<PlayerMovement>().enabled = false;
+        gameOverUI.SetActive(true);
+        PlayerMovement playerMov = GetComponent<PlayerMovement>();
+        playerMov.animator.enabled = false;
+        playerMov.enabled = false;
+        playerMov.resetMovement();
         GetComponent<PlayerCombat>().enabled = false;
+        Debug.Log("die");
+    }
+
+    public void Respawn()
+    {
+        // ABSOLUTE BUG!!: PLAYER POS TIDAK KE CHECKPOINT :(
+        var playerMov = GetComponent<PlayerMovement>();
+        var playerCombat = GetComponent<PlayerCombat>();
+        playerMov.enabled = false;
+        playerCombat.enabled = false;
+        Vector3 respawnPos = CheckpointManager.Instance.GetRespawnPosition();
+
+        transform.localPosition = respawnPos;
+        Debug.Log($"Respawning at: {respawnPos} | Current position: {transform.localPosition}");
+        Debug.Log($"Respawning at: {respawnPos} | Current position: {transform.position}");
+
+        // Debug posisi
+        isDead = false;
+        currentHealth = maxHealth;
+        healthBar.currHP = maxHealth;
+        gameOverUI.SetActive(false);
+        playerMov.animator.enabled = true;
+        playerMov.enabled = true;
+        playerCombat.enabled = true;
     }
 
     // Untuk healing item atau checkpoint
@@ -46,4 +74,10 @@ public class PlayerHealth : MonoBehaviour
         currentHealth = Mathf.Min(currentHealth + amount, maxHealth);
         healthBar.currHP = currentHealth;
     }
+
+    //IEnumerator RespawCoroutine()
+    //{
+
+    //yield return new WaitForEndOfFrame();
+    //}
 }

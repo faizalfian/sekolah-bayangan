@@ -8,7 +8,7 @@ public class EnemyAI : MonoBehaviour
     [Header("AI Settings")]
     public float detectionRadius = 10f;
     public float attackRadius = 2f;
-    public float patrolRadius = 15f;
+    public float patrolRadius = 7f;
     public float patrolCooldown = 3f;
     public Transform patrolGlobalPoint;
     public float waypointTolerance = 1f; // Jarak minimal untuk mencapai waypoint
@@ -16,7 +16,7 @@ public class EnemyAI : MonoBehaviour
     [Header("Combat Settings")]
     public Animator animator;
     public int maxHealth = 100;
-    public int attackDamage = 10;
+    public int attackDamage = 5;
     public float attackCooldown = 1f;
 
 
@@ -42,7 +42,6 @@ public class EnemyAI : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         player = GameObject.FindGameObjectWithTag("Player");
         playerTransform = player.transform;
-        Debug.Log(player);
         currentHealth = maxHealth;
 
         healthBar.maxHP = maxHealth;
@@ -76,15 +75,20 @@ public class EnemyAI : MonoBehaviour
 
     void ChasePlayer()
     {
+        transform.LookAt(playerTransform.position);
+        transform.rotation = Quaternion.Euler(0, transform.rotation.eulerAngles.y, 0);
         agent.SetDestination(player.transform.position);
     }
 
     void AttackPlayer()
     {
+        transform.LookAt(playerTransform.position);
+        transform.rotation = Quaternion.Euler(0, transform.rotation.eulerAngles.y, 0);
         if (Time.time - lastAttackTime >= attackCooldown)
         {
             animator.SetTrigger("PunchTrigger");
             PlayerHealth playerH = player.GetComponent<PlayerHealth>();
+            playerH.TakeDamage(attackDamage);
             lastAttackTime = Time.time;
         }
     }
