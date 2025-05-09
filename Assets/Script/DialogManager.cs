@@ -5,19 +5,21 @@ using UnityEngine.UI;
 
 public class DialogManager : MonoBehaviour
 {
+    [Header("UI Components")]
     public GameObject dialogPanel;
     public TextMeshProUGUI characterNameText;
     public TextMeshProUGUI dialogText;
-    public CharacterImageAnimator characterImageAnimator;
+    public CharacterImageAnimator characterImageAnimator; // opsional
     private TypingEffect typingEffect;
 
-    // [NEW] UI untuk pilihan
+    [Header("Choice UI")]
     public GameObject choicePanel;
     public Button[] choiceButtons;
     public TextMeshProUGUI[] choiceTexts;
 
-    // [NEW] Data keputusan pemain
-    public List<string> playerDecisions = new List<string>();
+    [Header("Character Sprites")]
+    public Image leftCharacterImage;   // MC (Bisma)
+    public Image rightCharacterImage;  // NPC / Musuh
 
     [System.Serializable]
     public class DialogLine
@@ -25,18 +27,22 @@ public class DialogManager : MonoBehaviour
         public string characterName;
         public string dialog;
         public Sprite characterSprite;
-        public DialogChoice[] choices; // [NEW]
+        public DialogChoice[] choices;
     }
 
     public DialogLine[] dialogLines;
     private int currentLine = 0;
     private bool waitingForChoice = false;
+    private string pendingChoiceText = null;
+    private int nextLineAfterChoice = -1;
+
+    public List<string> playerDecisions = new();
 
     void Start()
     {
         dialogPanel.SetActive(false);
         typingEffect = dialogText.GetComponent<TypingEffect>();
-        choicePanel.SetActive(false); // [NEW]
+        choicePanel.SetActive(false);
     }
 
     public void StartDialog()
@@ -53,6 +59,21 @@ public class DialogManager : MonoBehaviour
         }
     }
 
+    void Update()
+    {
+        if (dialogPanel.activeSelf && !waitingForChoice && Input.GetKeyDown(KeyCode.Space))
+        {
+            if (pendingChoiceText != null)
+            {
+                currentLine = nextLineAfterChoice;
+                pendingChoiceText = null;
+                nextLineAfterChoice = -1;
+            }
+
+            ShowNextLine();
+        }
+    }
+
     public void ShowNextLine()
     {
         if (currentLine >= dialogLines.Length)
@@ -64,7 +85,7 @@ public class DialogManager : MonoBehaviour
         DialogLine line = dialogLines[currentLine];
         characterNameText.text = line.characterName;
         typingEffect.StartTyping(line.dialog);
-        characterImageAnimator.FadeIn(line.characterSprite);
+        UpdateCharacterImages(line.characterName, line.characterSprite);
 
         if (line.choices != null && line.choices.Length > 0)
         {
@@ -73,21 +94,15 @@ public class DialogManager : MonoBehaviour
         }
         else
         {
-            currentLine++; // lanjut ke dialog berikutnya kalau tidak ada pilihan
+            currentLine++;
         }
     }
 
     void EndDialog()
     {
         dialogPanel.SetActive(false);
-    }
-
-    void Update()
-    {
-        if (dialogPanel.activeSelf && !waitingForChoice && Input.GetKeyDown(KeyCode.Space))
-        {
-            ShowNextLine();
-        }
+        leftCharacterImage.color = new Color(1, 1, 1, 0);
+        rightCharacterImage.color = new Color(1, 1, 1, 0);
     }
 
     void ShowChoices(DialogChoice[] choices)
@@ -100,7 +115,7 @@ public class DialogManager : MonoBehaviour
             {
                 choiceButtons[i].gameObject.SetActive(true);
                 choiceTexts[i].text = choices[i].choiceText;
-                int index = i; // penting untuk closure di lambda
+                int index = i;
                 choiceButtons[i].onClick.RemoveAllListeners();
                 choiceButtons[i].onClick.AddListener(() => OnChoiceSelected(choices[index]));
             }
@@ -114,9 +129,30 @@ public class DialogManager : MonoBehaviour
     void OnChoiceSelected(DialogChoice choice)
     {
         playerDecisions.Add(choice.consequenceTag);
-        currentLine = choice.nextLineIndex;
+        pendingChoiceText = choice.choiceText;
+        nextLineAfterChoice = choice.nextLineIndex;
         choicePanel.SetActive(false);
         waitingForChoice = false;
-        ShowNextLine();
+
+        characterNameText.text = "Bisma";
+        typingEffect.StartTyping(pendingChoiceText);
+        UpdateCharacterImages("Bisma", leftCharacterImage.sprite); // tetap pakai sprite sebelumnya
+    }
+
+    void UpdateCharacterImages(string speakerName, Sprite sprite)
+    {
+        leftCharacterImage.color = new Color(1, 1, 1, 0);
+        rightCharacterImage.color = new Color(1, 1, 1, 0);
+
+        if (speakerName == "Bisma")
+        {
+            leftCharacterImage.sprite = sprite;
+            leftCharacterImage.color = new Color(1, 1, 1, 1);
+        }
+        else
+        {
+            rightCharacterImage.sprite = sprite;
+            rightCharacterImage.color = new Color(1, 1, 1, 1);
+        }
     }
 }
