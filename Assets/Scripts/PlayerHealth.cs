@@ -47,11 +47,12 @@ public class PlayerHealth : MonoBehaviour
 
     public void Respawn()
     {
-        // ABSOLUTE BUG!!: PLAYER POS TIDAK KE CHECKPOINT :(
         var playerMov = GetComponent<PlayerMovement>();
         var playerCombat = GetComponent<PlayerCombat>();
+        var playerController = GetComponent<CharacterController>();
         playerMov.enabled = false;
         playerCombat.enabled = false;
+        playerController.enabled = false;
         Vector3 respawnPos = CheckpointManager.Instance.GetRespawnPosition();
 
         transform.localPosition = respawnPos;
@@ -63,6 +64,7 @@ public class PlayerHealth : MonoBehaviour
         currentHealth = maxHealth;
         healthBar.currHP = maxHealth;
         gameOverUI.SetActive(false);
+        playerController.enabled = true;
         playerMov.animator.enabled = true;
         playerMov.enabled = true;
         playerCombat.enabled = true;
@@ -75,9 +77,4 @@ public class PlayerHealth : MonoBehaviour
         healthBar.currHP = currentHealth;
     }
 
-    //IEnumerator RespawCoroutine()
-    //{
-
-    //yield return new WaitForEndOfFrame();
-    //}
 }

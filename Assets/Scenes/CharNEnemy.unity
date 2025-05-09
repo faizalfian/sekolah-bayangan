@@ -536,7 +536,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 3b363af9d87da1641b71c31bbcfd5d02, type: 2}
+  - {fileID: 2100000, guid: 51a6ecfe3f6d0794f9103af15dfcc31a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -820,7 +820,7 @@ GameObject:
   - component: {fileID: 782334890}
   - component: {fileID: 782334889}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: MainUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1939,12 +1939,12 @@ PrefabInstance:
     - target: {fileID: 5319635814742611478, guid: 14b2af6f381c7f54fa13f62596951812,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 100
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 5319635814742611478, guid: 14b2af6f381c7f54fa13f62596951812,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 100
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 5319635814742611478, guid: 14b2af6f381c7f54fa13f62596951812,
         type: 3}
@@ -1989,12 +1989,12 @@ PrefabInstance:
     - target: {fileID: 5319635814742611478, guid: 14b2af6f381c7f54fa13f62596951812,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 86
+      value: 150
       objectReference: {fileID: 0}
     - target: {fileID: 5319635814742611478, guid: 14b2af6f381c7f54fa13f62596951812,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -61
+      value: -50
       objectReference: {fileID: 0}
     - target: {fileID: 5319635814742611478, guid: 14b2af6f381c7f54fa13f62596951812,
         type: 3}
@@ -2010,6 +2010,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5319635814742611478, guid: 14b2af6f381c7f54fa13f62596951812,
+        type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8886352709341912284, guid: 14b2af6f381c7f54fa13f62596951812,
         type: 3}

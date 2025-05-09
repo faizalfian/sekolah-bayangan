@@ -40,6 +40,7 @@ public class EnemyAI : MonoBehaviour
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
+        agent.avoidancePriority = Random.Range(50, 100);
         player = GameObject.FindGameObjectWithTag("Player");
         playerTransform = player.transform;
         currentHealth = maxHealth;
