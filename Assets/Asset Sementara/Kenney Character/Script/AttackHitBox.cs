@@ -26,11 +26,11 @@ public class AttackHitBox : MonoBehaviour
         {
 
             Debug.Log("monster kena");
-            MonsterHealth monster = other.GetComponent<MonsterHealth>();
-            if (monster != null)
-            {
-                monster.TakeDamage(damage);
-            }
+            // MonsterHealth monster = other.GetComponent<MonsterHealth>();
+            // if (monster != null)
+            // {
+            //     monster.TakeDamage(damage);
+            // }
         }
     }
 }

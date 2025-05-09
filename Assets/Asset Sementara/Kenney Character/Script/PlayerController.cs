@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] public float moveSpeed = 0.000f;
+    [SerializeField] public float moveSpeed = 0.001f;
     public float jumpForce = 5f;
     public bool isFightingMode = false;
     public bool doingSkill = false;
