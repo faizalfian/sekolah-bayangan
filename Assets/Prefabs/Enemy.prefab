@@ -53,15 +53,13 @@ MonoBehaviour:
   patrolRadius: 15
   patrolCooldown: 3
   patrolGlobalPoint: {fileID: 0}
+  waypointTolerance: 1
   animator: {fileID: 9500000}
   maxHealth: 100
   attackDamage: 10
   attackCooldown: 1
   healthBar: {fileID: 4664817479353270875}
   healthBarOffset: {x: 0, y: 2.6, z: 0}
-  patrolPoints: []
-  waypointTolerance: 1
-  patrolSpeed: 2
   fighter: {fileID: 100114}
 --- !u!195 &268910238227250574
 NavMeshAgent:
@@ -2060,7 +2058,7 @@ Animator:
   m_GameObject: {fileID: 100114}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 3067d36b7321e7842932d94ad2dbd80b, type: 3}
-  m_Controller: {fileID: 9100000, guid: 83392664baf05634c9901893e4abd2ad, type: 2}
+  m_Controller: {fileID: 9100000, guid: 03f2d47eabd14af4a9bdd4a78995d5b4, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 2
   m_ApplyRootMotion: 1
