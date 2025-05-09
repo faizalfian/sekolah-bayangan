@@ -71,6 +71,7 @@
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\CameraController.cs" />
     <Compile Include="Assets\Scripts\PlayerHealth.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark03.cs" />
+    <Compile Include="Assets\Asset Sementara\Mini Simple Characters Skeleton Demo\Models\MonsterHealth.cs" />
     <Compile Include="Assets\Scripts\PlayerMovement.cs" />
     <Compile Include="Assets\Script\TypingEffect.cs" />
     <Compile Include="Assets\Scripts\PlayerInputAction.cs" />
@@ -99,6 +100,7 @@
     <Compile Include="Assets\Scripts\LookAt.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\ShaderPropAnimator.cs" />
     <Compile Include="Assets\Scripts\CamControl.cs" />
+    <Compile Include="Assets\Asset Sementara\Kenney Character\Script\AttackHitBox.cs" />
     <Compile Include="Assets\Script\DialogManager.cs" />
     <Compile Include="Assets\Script\DialogChoice.cs" />
     <Compile Include="Assets\Scripts\FollowTransform.cs" />
