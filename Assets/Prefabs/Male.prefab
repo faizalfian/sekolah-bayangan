@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7073271077318771457}
   - component: {fileID: 2271665624465091736}
   - component: {fileID: 3147462709537370172}
-  - component: {fileID: 5728545574331166708}
+  - component: {fileID: 160969479354467455}
   m_Layer: 3
   m_Name: Male
   m_TagString: Player
@@ -105,14 +105,36 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackPoint: {fileID: 5805511326508630999}
-  attackRange: 1
+  attackRange: 1.25
   enemyLayers:
     serializedVersion: 2
     m_Bits: 128
   attackDamage: 20
   attackRate: 2
+  damageDelay: 0.3
+  dashDistance: 5
+  dashSpeed: 15
+  dashDuration: 0.3
+  dashDamage: 10
+  pushForce: 10
+  pushRange: 2
+  pushDuration: 0.5
+  pushDisableTime: 0.8
+  dashBoxSize: {x: 2, y: 1, z: 5}
+  comboWindow: 0.3
+  dashPunchDamage: 30
+  pushPunchDamage: 25
+  dashPushForce: 15
   attackEffect: {fileID: 0}
---- !u!114 &5728545574331166708
+  dashEffect: {fileID: 0}
+  pushEffect: {fileID: 0}
+  cooldowns:
+    normal: 0.5
+    dash: 0.5
+    push: 0.5
+    combo: 0.3
+  scoreText: {fileID: 0}
+--- !u!114 &160969479354467455
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -121,12 +143,25 @@ MonoBehaviour:
   m_GameObject: {fileID: 100000}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 299105f8b257c70488367d19b84cbec9, type: 3}
+  m_Script: {fileID: 11500000, guid: 32a35b98e02a85f45a79dac02701c916, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
+  maxHealth: 200
   healthBar: {fileID: 0}
+  immuneToDamage: 0
+  canRespawn: 1
+  haveDeathscreen: 1
+  respawnTime: 3
   gameOverUI: {fileID: 0}
+  animator: {fileID: 0}
+  componentsToDisableOnDeath:
+  - {fileID: 2271665624465091736}
+  - {fileID: 3147462709537370172}
+  collidersToDisableOnDeath:
+  - {fileID: 7073271077318771457}
+  onDeath:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &100002
 GameObject:
   m_ObjectHideFlags: 0
@@ -2115,7 +2150,7 @@ Transform:
   m_GameObject: {fileID: 2325300342276569928}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.5, z: 1}
+  m_LocalPosition: {x: 0, y: 1.5, z: 1.25}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

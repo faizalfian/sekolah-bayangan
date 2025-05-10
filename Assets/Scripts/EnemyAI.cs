@@ -1,100 +1,113 @@
 using UnityEngine;
 using UnityEngine.AI;
 using System.Collections;
-using System.Threading.Tasks;
+using UnityEngine.Events;
 
+[RequireComponent(typeof(NavMeshAgent)), RequireComponent(typeof(Health))]
 public class EnemyAI : MonoBehaviour
 {
     [Header("AI Settings")]
-    public float detectionRadius = 10f;
+    public float detectionRadius = 4f;
     public float attackRadius = 2f;
     public float patrolRadius = 7f;
-    public float patrolCooldown = 3f;
     public Transform patrolGlobalPoint;
     public float waypointTolerance = 1f; // Jarak minimal untuk mencapai waypoint
 
     [Header("Combat Settings")]
     public Animator animator;
     public int maxHealth = 100;
-    public int attackDamage = 5;
+    public int attackDamage = 2;
     public float attackCooldown = 1f;
+    public int scoreValue = 50; // Nilai score yang diberikan saat musuh mati
+
+    [Header("Attack Settings")]
+    public float attackAnimationDelay = 0.5f; // Waktu delay sebelum mengurangi HP
+    private bool isAttacking = false;
+    private Quaternion attackRotation;
 
 
     [Header("UI")]
     public HealthBar healthBar;
     public Vector3 healthBarOffset = new Vector3(0, 2f, 0);
 
-    
 
     [Header("Others")]
     public GameObject fighter;
+    //[SerializeField] private UnityEvent<int> onEnemyDeath;
 
 
-    private NavMeshAgent agent;
-    private GameObject player;
-    private Transform playerTransform;
-    private int currentHealth;
-    private float lastAttackTime;
-    private bool death;
+    protected NavMeshAgent agent;
+    protected GameObject player;
+    protected Health health;
+    protected Transform playerTransform;
+    protected float lastAttackTime;
 
-    void Start()
+    protected void Start()
     {
         agent = GetComponent<NavMeshAgent>();
         agent.avoidancePriority = Random.Range(50, 100);
         player = GameObject.FindGameObjectWithTag("Player");
         playerTransform = player.transform;
-        currentHealth = maxHealth;
-
-        healthBar.maxHP = maxHealth;
-        healthBar.currHP = currentHealth;
+        health = GetComponent<Health>();
         SetNextPatrolPoint();
     }
 
     void Update()
     {
 
-        if (death || player == null) return;
+        if (health.isDeath() || player == null) return;
         UpdateHealthBarPosition();
         fighter.transform.position = transform.position;
         float distanceToPlayer = Vector3.Distance(transform.position, playerTransform.position);
-        if (distanceToPlayer <= attackRadius)
+        if (distanceToPlayer <= attackRadius && !player.GetComponent<Health>().isDeath())
         {
             AttackPlayer();
         }
-        else if (distanceToPlayer <= detectionRadius && agent.enabled)
+        else if (distanceToPlayer <= detectionRadius && agent.enabled && !player.GetComponent<Health>().isDeath())
         {
             ChasePlayer();
         }
-        else
+        else if (patrolGlobalPoint != null)
         {
             Patrol();
         }
-        
+
 
         UpdateAnimations();
     }
 
-    void ChasePlayer()
+    protected void ChasePlayer()
     {
         transform.LookAt(playerTransform.position);
         transform.rotation = Quaternion.Euler(0, transform.rotation.eulerAngles.y, 0);
         agent.SetDestination(player.transform.position);
     }
 
-    void AttackPlayer()
+    protected void AttackPlayer()
     {
+        if (isAttacking) return;
+
+        Quaternion lastRot = transform.rotation;
         transform.LookAt(playerTransform.position);
-        transform.rotation = Quaternion.Euler(0, transform.rotation.eulerAngles.y, 0);
+        transform.rotation = Quaternion.Lerp(lastRot, Quaternion.Euler(0, transform.rotation.eulerAngles.y, 0), 0.5f);
+        attackRotation = transform.rotation; // Simpan rotasi saat mulai serangan
+
         if (Time.time - lastAttackTime >= attackCooldown)
         {
+            isAttacking = true;
             animator.SetTrigger("PunchTrigger");
-            PlayerHealth playerH = player.GetComponent<PlayerHealth>();
-            playerH.TakeDamage(attackDamage);
+
+            // Lock rotation during attack
+            StartCoroutine(LockAttackRotation());
+
+            // Apply damage after animation delay
+            StartCoroutine(ApplyDamageAfterDelay());
+
             lastAttackTime = Time.time;
         }
     }
 
-    void Patrol()
+    protected void Patrol()
     {
         // Cek jika sudah mencapai titik patroli
         if (agent.enabled && !agent.pathPending && agent.remainingDistance <= waypointTolerance)
@@ -103,7 +116,7 @@ public class EnemyAI : MonoBehaviour
         }
     }
 
-    void SetNextPatrolPoint()
+    protected void SetNextPatrolPoint()
     {
         Vector3 randomPoint = patrolGlobalPoint.transform.position + Random.insideUnitSphere * patrolRadius;
         if (NavMesh.SamplePosition(randomPoint, out NavMeshHit hit, patrolRadius, NavMesh.AllAreas))
@@ -112,38 +125,35 @@ public class EnemyAI : MonoBehaviour
         }
     }
 
-    public void TakeDamage(int damage)
-    {
-        currentHealth = Mathf.Clamp(currentHealth - damage, 0, maxHealth);
-        healthBar.currHP = currentHealth;
+    //public void TakeDamage(int damage)
+    //{
+    //    currentHealth = Mathf.Clamp(currentHealth - damage, 0, maxHealth);
+    //    healthBar.currHP = currentHealth;
 
-        if (currentHealth <= 0)
-        {
-            Die();
-        }
-        else
-        {
-            ChasePlayer(); // Mengejar player ketika diserang
-        }
-    }
+    //    if (currentHealth <= 0)
+    //    {
+    //        Die();
+    //    }
+    //    else
+    //    {
+    //        ChasePlayer(); // Mengejar player ketika diserang
+    //    }
+    //}
 
-    void Die()
+    public void Die(int _)
     {
-        death = true;
+        //death = true;
         agent.enabled = false;
         GetComponent<Collider>().enabled = false;
         animator.enabled = false;
-        //healthBar.enabled = false;
-        StartCoroutine(MoveToPosition(transform.position + new Vector3(0f, -3f, 0f), 1.75f));
-        Destroy(gameObject, 2f);
     }
 
-    void UpdateAnimations()
+    protected void UpdateAnimations()
     {
         animator.SetBool("Walk Forward", agent.velocity.magnitude > 0.1f);
     }
 
-    void UpdateHealthBarPosition()
+    protected void UpdateHealthBarPosition()
     {
         healthBar.transform.position = transform.position + healthBarOffset;
     }
@@ -155,19 +165,43 @@ public class EnemyAI : MonoBehaviour
 
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position, detectionRadius);
-    }
-    IEnumerator MoveToPosition(Vector3 targetPos, float duration)
-    {
-        Vector3 startPos = transform.position;
-        float elapsed = 0f;
 
-        while (elapsed < duration)
+        if (patrolGlobalPoint != null)
         {
-            transform.position = Vector3.Lerp(startPos, targetPos, elapsed / duration);
-            elapsed += Time.deltaTime;
+            Gizmos.color = Color.green;
+            Gizmos.DrawWireSphere(patrolGlobalPoint.position, patrolRadius);
+        }
+    }
+    private IEnumerator LockAttackRotation()
+    {
+        // Tunggu sampai animasi serangan selesai
+        float attackTime = 0f;
+        float animationLength = animator.GetCurrentAnimatorStateInfo(0).length;
+
+        while (attackTime < animationLength)
+        {
+            transform.rotation = attackRotation; // Pertahankan rotasi serangan
+            attackTime += Time.deltaTime;
             yield return null;
         }
 
-        transform.position = targetPos;
+        isAttacking = false;
+    }
+
+    private IEnumerator ApplyDamageAfterDelay()
+    {
+        yield return new WaitForSeconds(attackAnimationDelay);
+
+        if (player != null && Vector3.Distance(transform.position, player.transform.position) <= attackRadius * 1.2f)
+        {
+            Health playerH = player.GetComponent<Health>();
+            Vector3 directionToPlayer = (playerTransform.position - transform.position).normalized;
+            float angleToPlayer = Vector3.Angle(transform.forward, directionToPlayer);
+            if (playerH != null && angleToPlayer < 60f)
+            {
+                playerH.TakeDamage(attackDamage);
+            }
+
+        }
     }
 }

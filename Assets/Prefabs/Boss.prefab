@@ -9,12 +9,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 400000}
-  - component: {fileID: 6098110263246766492}
   - component: {fileID: 268910238227250574}
   - component: {fileID: 1989909774140727091}
-  - component: {fileID: 345773515233814310}
+  - component: {fileID: 5357139006885618774}
+  - component: {fileID: 7211486697422333656}
   m_Layer: 7
-  m_Name: Enemy
+  m_Name: Boss
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -30,39 +30,13 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.75, y: 0.75, z: 0.75}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 400114}
   - {fileID: 4552278912377281269}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6098110263246766492
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 100000}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 25aa9f72af0178c4f9e78917b71f8e2c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  detectionRadius: 5
-  attackRadius: 1.5
-  patrolRadius: 8
-  patrolGlobalPoint: {fileID: 0}
-  waypointTolerance: 1
-  animator: {fileID: 9500000}
-  maxHealth: 100
-  attackDamage: 5
-  attackCooldown: 1
-  scoreValue: 50
-  attackAnimationDelay: 1
-  healthBar: {fileID: 4664817479353270875}
-  healthBarOffset: {x: 0, y: 2.5, z: 0}
-  fighter: {fileID: 100114}
 --- !u!195 &268910238227250574
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -73,10 +47,10 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 3.5
-  m_Acceleration: 8
+  m_Speed: 1.25
+  m_Acceleration: 4
   avoidancePriority: 50
-  m_AngularSpeed: 120
+  m_AngularSpeed: 60
   m_StoppingDistance: 0
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
@@ -104,11 +78,37 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.2
-  m_Height: 2.2
+  m_Radius: 0.5
+  m_Height: 4
   m_Direction: 1
-  m_Center: {x: 0, y: 1.18, z: 0}
---- !u!114 &345773515233814310
+  m_Center: {x: 0, y: 2, z: 0}
+--- !u!114 &5357139006885618774
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81e6ecd6664dc2a49b31504fcf18d715, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  detectionRadius: 4
+  attackRadius: 2
+  patrolRadius: 7
+  patrolGlobalPoint: {fileID: 0}
+  waypointTolerance: 1
+  animator: {fileID: 9500000}
+  maxHealth: 300
+  attackDamage: 40
+  attackCooldown: 1.5
+  scoreValue: 50
+  attackAnimationDelay: 1
+  healthBar: {fileID: 4664817479353270875}
+  healthBarOffset: {x: 0, y: 4.5, z: 0}
+  fighter: {fileID: 100114}
+--- !u!114 &7211486697422333656
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -120,7 +120,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32a35b98e02a85f45a79dac02701c916, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
+  maxHealth: 300
   healthBar: {fileID: 4664817479353270875}
   immuneToDamage: 0
   canRespawn: 0
@@ -133,7 +133,7 @@ MonoBehaviour:
   onDeath:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 6098110263246766492}
+      - m_Target: {fileID: 5357139006885618774}
         m_TargetAssemblyTypeName: EnemyAI, Assembly-CSharp
         m_MethodName: Die
         m_Mode: 0
@@ -2080,8 +2080,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0.1, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 400112}
   - {fileID: 400110}
@@ -2224,7 +2224,7 @@ PrefabInstance:
     - target: {fileID: 5319635814742611478, guid: 14b2af6f381c7f54fa13f62596951812,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 2.5
+      value: 4.5
       objectReference: {fileID: 0}
     - target: {fileID: 5319635814742611478, guid: 14b2af6f381c7f54fa13f62596951812,
         type: 3}
