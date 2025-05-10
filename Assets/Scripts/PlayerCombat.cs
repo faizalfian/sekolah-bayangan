@@ -3,6 +3,7 @@ using UnityEngine.InputSystem;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.AI;
+using TMPro;
 
 [RequireComponent(typeof(Health)), RequireComponent(typeof(PlayerMovement))]
 public class PlayerCombat : MonoBehaviour
@@ -37,6 +38,8 @@ public class PlayerCombat : MonoBehaviour
         public System.Action<PlayerCombat> execute;
         public float cooldown;
     }
+    public TextMeshProUGUI comboText;
+    public TextMeshProUGUI scoreText;
 
     private PlayerInputAction inputActions;
     private Queue<InputAction> inputBuffer = new Queue<InputAction>();
@@ -44,6 +47,7 @@ public class PlayerCombat : MonoBehaviour
     private PlayerMovement movement;
     private Animator animator;
     private float currentCooldown;
+    private bool doingCombo = false;
 
     private InputAction punchAction;
     private InputAction dashAction;
@@ -71,21 +75,21 @@ public class PlayerCombat : MonoBehaviour
                 name = "DashPunch",
                 sequence = new InputAction[] { inputActions.Player.Dash, inputActions.Player.Punch },
                 execute = pc => pc.StartCoroutine(pc.DashPunchCombo()),
-                cooldown = 1f
+                cooldown = 1.5f
             },
             new Combo
             {
                 name = "PushPunch",
                 sequence = new InputAction[] { inputActions.Player.Push, inputActions.Player.Punch },
                 execute = pc => pc.StartCoroutine(pc.PushPunchCombo()),
-                cooldown = 0.75f
+                cooldown = 1f
             },
             new Combo
             {
                 name = "DashPush",
                 sequence = new InputAction[] { inputActions.Player.Dash, inputActions.Player.Push },
                 execute = pc => pc.StartCoroutine(pc.DashPushCombo()),
-                cooldown = 0.5f
+                cooldown = 0.75f
             }
         };
     }
@@ -113,6 +117,7 @@ public class PlayerCombat : MonoBehaviour
     void Update()
     {
         if (currentCooldown > 0) currentCooldown -= Time.deltaTime;
+        scoreText.text = $"Score: {GameManager.Instance.GetCurrentScore()}\nHighscore: {GameManager.Instance.GetHighScore()}";
     }
 
     void BufferInput(InputAction action)
@@ -144,7 +149,10 @@ public class PlayerCombat : MonoBehaviour
 
         // Execute single action if no combo found
         if (currentSequence.Count > 0)
+        {
             ExecuteAction(currentSequence[0]);
+        }
+            
 
         comboCheckRoutine = null;
     }
@@ -156,8 +164,10 @@ public class PlayerCombat : MonoBehaviour
             if (SequenceMatch(combo.sequence, sequence))
             {
                 combo.execute(this);
+                doingCombo = true;
                 currentCooldown = combo.cooldown;
                 inputBuffer.Clear();
+                sequence.Clear();
                 return;
             }
         }
@@ -176,9 +186,10 @@ public class PlayerCombat : MonoBehaviour
 
     void ExecuteAction(InputAction action)
     {
-        if (action == inputActions.Player.Punch) StartCoroutine(PerformAttack());
-        else if (action == inputActions.Player.Dash) StartCoroutine(PerformDash());
-        else if (action == inputActions.Player.Push) StartCoroutine(PerformPush());
+        doingCombo = false;
+        if (action == punchAction) StartCoroutine(PerformAttack());
+        else if (action == dashAction) StartCoroutine(PerformDash());
+        else if (action == pushAction) StartCoroutine(PerformPush());
     }
 
     IEnumerator PerformAttack()
@@ -194,10 +205,11 @@ public class PlayerCombat : MonoBehaviour
 
     IEnumerator PerformDash()
     {
+        //Debug.Log("Dash");
         movement.LockMovement(true);
         animator.SetTrigger("PunchTrigger");
         //animator.SetTrigger("Dash");
-        //dashEffect?.Play();
+        dashEffect?.Play();
 
         Vector3 direction = transform.forward;
         float timer = 0;
@@ -214,10 +226,11 @@ public class PlayerCombat : MonoBehaviour
 
     IEnumerator PerformPush()
     {
+        //Debug.Log("Push");
         movement.LockMovement(true);
         animator.SetTrigger("PunchTrigger");
         //animator.SetTrigger("Push");
-        //pushEffect?.Play();
+        pushEffect?.Play();
 
         var hitEnemies = Physics.OverlapSphere(attackPoint.position, pushRange, enemyLayers);
         foreach (var enemy in hitEnemies)
@@ -232,7 +245,8 @@ public class PlayerCombat : MonoBehaviour
 
     IEnumerator PushEnemy(NavMeshAgent agent)
     {
-        var rb = agent.gameObject.AddComponent<Rigidbody>();
+        var rb = agent.GetComponent<Rigidbody>();
+        if (rb == null) rb = agent.gameObject.AddComponent<Rigidbody>();
         rb.AddForce(transform.forward * pushForce, ForceMode.Impulse);
 
         yield return new WaitForSeconds(0.5f);
@@ -244,10 +258,11 @@ public class PlayerCombat : MonoBehaviour
     // Combo Implementations
     IEnumerator DashPunchCombo()
     {
+        //Debug.Log("DashPunch");
         movement.LockMovement(true);
         animator.SetTrigger("PunchTrigger");
         //animator.SetTrigger("DashPunch");
-        //dashEffect?.Play();
+        dashEffect?.Play();
 
         float timer = 0;
         Vector3 direction = transform.forward;
@@ -268,14 +283,15 @@ public class PlayerCombat : MonoBehaviour
         }
 
         movement.LockMovement(false);
+        doingCombo = false;
     }
 
     IEnumerator DashPushCombo()
     {
+        Debug.Log("DashPush");
         movement.LockMovement(true);
         animator.SetTrigger("PunchTrigger");
-        //dashEffect?.Play();
-        //pushEffect?.Play();
+        dashEffect?.Play();
 
         float timer = 0;
         Vector3 direction = transform.forward;
@@ -289,6 +305,7 @@ public class PlayerCombat : MonoBehaviour
             if (timer >= dashDuration / 2 && !effectApplied)
             {
                 ApplyDashPushEffect(direction);
+                pushEffect?.Play();
                 effectApplied = true;
             }
 
@@ -296,14 +313,16 @@ public class PlayerCombat : MonoBehaviour
         }
 
         movement.LockMovement(false);
+        doingCombo = false;
     }
 
     IEnumerator PushPunchCombo()
     {
+        Debug.Log("PushPunch");
         movement.LockMovement(true);
         animator.SetTrigger("PunchTrigger");
         //animator.SetTrigger("PushPunch");
-        //pushEffect.Play();
+        pushEffect.Play();
 
         var hitEnemies = Physics.OverlapSphere(attackPoint.position, pushRange * 1.5f, enemyLayers);
         foreach (var enemy in hitEnemies)
@@ -315,6 +334,7 @@ public class PlayerCombat : MonoBehaviour
 
         yield return new WaitForSeconds(0.5f);
         movement.LockMovement(false);
+        doingCombo = false;
     }
 
     void ApplyDashDamage(Vector3 direction, int damage)
@@ -341,13 +361,19 @@ public class PlayerCombat : MonoBehaviour
 
     IEnumerator PushEnemy2(NavMeshAgent agent, float force)
     {
-        var rb = agent.gameObject.AddComponent<Rigidbody>();
+        var rb = agent.GetComponent<Rigidbody>();
+        if(rb == null) rb = agent.gameObject.AddComponent<Rigidbody>();
         rb.AddForce(transform.forward * force, ForceMode.Impulse);
 
         yield return new WaitForSeconds(0.8f); // Durasi knockback lebih lama
 
         if (rb != null) Destroy(rb);
         if (agent != null) agent.enabled = true;
+    }
+
+    public void onEnemyDead(int scoreVal)
+    {
+        GameManager.Instance.AddScore(scoreVal);
     }
 
     void OnDrawGizmos()

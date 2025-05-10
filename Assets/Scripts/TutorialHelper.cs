@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -10,6 +11,8 @@ public class TutorialHelper : MonoBehaviour
     private PlayerInputAction playerInput;
     private InputAction move;
     private InputAction punch;
+    private InputAction dash;
+    private InputAction push;
     public List<string> tutorialTexts;
     public TextMeshProUGUI textComponent;
     private int currentTextIndex = 0;
@@ -21,23 +24,30 @@ public class TutorialHelper : MonoBehaviour
         playerInput = new PlayerInputAction();
         move = playerInput.Player.Move;
         punch = playerInput.Player.Punch;
+        dash = playerInput.Player.Dash;
+        push = playerInput.Player.Push;
     }
 
     void Start()
     {
         updateText();
+        
     }
 
     private void OnEnable()
     {
         move.Enable();
         punch.Enable();
+        dash.Enable();
+        push.Enable();
     }
 
     private void OnDisable()
     {
         move.Disable();
         punch.Disable();
+        dash.Disable();
+        push.Disable();
     }
 
     private void LateUpdate()
@@ -47,10 +57,22 @@ public class TutorialHelper : MonoBehaviour
         {
             // Jika tombol gerak ditekan, lanjut ke teks berikutnya
             nextTutor();
-        } else if(punch.WasPerformedThisFrame() && currTutor == 1)
+        } else if (punch.WasPerformedThisFrame() && currTutor == 1)
         {
             //Jika tombol punch ditekan, lanjut ke teks berikutnya
             nextTutor();
+        } else if(dash.WasPerformedThisFrame() && currTutor == 2)
+        {
+            //Jika tombol dash ditekan, lanjut ke teks berikutnya
+            nextTutor();
+        }
+        else if (push.WasPerformedThisFrame() && currTutor == 3)
+        {
+            //Jika tombol push ditekan, lanjut ke teks berikutnya
+            nextTutor();
+        } else if (currTutor == 4)
+        {
+            StartCoroutine(nextTextWIthDelay(2f));
         }
     }
 
@@ -91,5 +113,15 @@ public class TutorialHelper : MonoBehaviour
 
         GameManager.Instance.AddScore(100);
         GameManager.Instance.LoadStage(1);
+    }
+
+    IEnumerator nextTextWIthDelay(float duration)
+    {
+        isTextChanging = true;
+        yield return new WaitForSeconds(duration);
+        currentTextIndex = (currentTextIndex + 1) % tutorialTexts.Count;
+        currTutor++;
+        updateText();
+        isTextChanging = false;
     }
 }

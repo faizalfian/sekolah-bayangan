@@ -4,29 +4,19 @@ using UnityEngine;
 
 public class EnemyBossAI : EnemyAI
 {
-    
 
-    //void Update()
-    //{
 
-    //    if (health.isDeath() || player == null) return;
-    //    UpdateHealthBarPosition();
-    //    fighter.transform.position = transform.position;
-    //    float distanceToPlayer = Vector3.Distance(transform.position, playerTransform.position);
-    //    if (distanceToPlayer <= attackRadius)
-    //    {
-    //        AttackPlayer();
-    //    }
-    //    else if (distanceToPlayer <= detectionRadius && agent.enabled)
-    //    {
-    //        ChasePlayer();
-    //    }
-    //    else if (patrolGlobalPoint != null)
-    //    {
-    //        Patrol();
-    //    }
-        
-
-    //    UpdateAnimations();
-    //}
+    protected override void Patrol()
+    {
+        // Cek jika sudah mencapai titik patroli
+        if (patrolRadius <= 1 && Vector3.Distance(transform.position, player.transform.position) > 0.2)
+        {
+            agent.SetDestination(patrolGlobalPoint.transform.position);
+            return;
+        }
+        if (agent.enabled && !agent.pathPending && agent.remainingDistance <= waypointTolerance)
+        {
+            SetNextPatrolPoint();
+        }
+    }
 }

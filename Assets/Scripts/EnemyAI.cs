@@ -107,7 +107,7 @@ public class EnemyAI : MonoBehaviour
         }
     }
 
-    protected void Patrol()
+    protected virtual void Patrol()
     {
         // Cek jika sudah mencapai titik patroli
         if (agent.enabled && !agent.pathPending && agent.remainingDistance <= waypointTolerance)
@@ -142,10 +142,7 @@ public class EnemyAI : MonoBehaviour
 
     public void Die(int _)
     {
-        //death = true;
-        agent.enabled = false;
-        GetComponent<Collider>().enabled = false;
-        animator.enabled = false;
+        StartCoroutine(disableAfterDelay());
     }
 
     protected void UpdateAnimations()
@@ -203,5 +200,11 @@ public class EnemyAI : MonoBehaviour
             }
 
         }
+    }
+
+    IEnumerator disableAfterDelay()
+    {
+        yield return new WaitForSeconds(0.65f);
+        gameObject.SetActive(false);
     }
 }

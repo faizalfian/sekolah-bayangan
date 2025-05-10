@@ -184,7 +184,7 @@ public class Health : MonoBehaviour
         Vector3 startPos = transform.position;
         Vector3 bottom = new Vector3(startPos.x, -5f, startPos.z); // Ganti dengan posisi bawah yang sesuai
         float elapsed = 0f;
-        float duration = 1f;
+        float duration = 0.75f;
 
         while (elapsed < duration)
         {
