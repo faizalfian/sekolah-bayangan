@@ -107,7 +107,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackPoint: {fileID: 5805511326508630999}
-  attackRange: 1.25
+  attackRange: 1.1
   enemyLayers:
     serializedVersion: 2
     m_Bits: 128
@@ -116,7 +116,7 @@ MonoBehaviour:
   dashSpeed: 15
   dashDuration: 0.3
   pushForce: 10
-  pushRange: 2
+  pushRange: 1.5
   comboWindow: 0.3
   combos: []
   attackEffect: {fileID: 0}
@@ -2107,7 +2107,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: 03f2d47eabd14af4a9bdd4a78995d5b4, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 2
-  m_ApplyRootMotion: 1
+  m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
   m_WarningMessage: 
@@ -7003,7 +7003,7 @@ Transform:
   m_GameObject: {fileID: 5657754359502821782}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.1366049, y: 1.6624761, z: 0.9644858}
+  m_LocalPosition: {x: 0, y: 1.6, z: 0.26}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

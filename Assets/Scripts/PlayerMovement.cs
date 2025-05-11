@@ -137,7 +137,7 @@ public class PlayerMovement : MonoBehaviour
         //Debug.Log(transform.position.ToString() + groundCheck.transform.position.ToString());
         // Get input from Input System
         moveInput = moveAction.ReadValue<Vector2>();
-        fighter.transform.position = groundCheck.transform.position;
+        //fighter.transform.position = groundCheck.transform.position;
         moveDir = new Vector3(-moveInput.y, velocity.y, moveInput.x).normalized;
 
         
