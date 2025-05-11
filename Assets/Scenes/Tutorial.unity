@@ -1507,7 +1507,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 37569153}
-  offset: {x: 7, y: 6, z: 0}
+  offset: {x: 12, y: 12, z: 0}
   smoothSpeed: 7
   useBoundaries: 0
   minX: -10
@@ -1599,11 +1599,11 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.3
+  near clip plane: 0.1
   far clip plane: 1000
   field of view: 60
-  orthographic: 0
-  orthographic size: 5
+  orthographic: 1
+  orthographic size: 3.5
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
@@ -1627,13 +1627,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1081518247}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.18301274, y: -0.6830127, z: 0.18301274, w: 0.6830127}
-  m_LocalPosition: {x: 7, y: 6, z: -10.5}
+  m_LocalRotation: {x: 0.27059805, y: -0.6532815, z: 0.27059805, w: 0.6532815}
+  m_LocalPosition: {x: 12, y: 12, z: -10.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 30, y: -90, z: 0}
+  m_LocalEulerAnglesHint: {x: 45, y: -90, z: 0}
 --- !u!1001 &1089322656
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2009,7 +2009,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tutorialTexts:
   - WASD untuk bergerak
-  - Klik kiri untuk menyerang
+  - Tekan K untuk memukul
+  - Tekan J untuk dash ke depan
+  - Tekan L untuk mendorong
+  - Kamu bisa mengkombinasikan skill skill tersebut
   - Kalahkan musuh yang ada di depan
   - Tutorial selesai!
   textComponent: {fileID: 1955356150}
