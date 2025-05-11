@@ -3,13 +3,13 @@ using UnityEngine.AI;
 using System.Collections;
 using UnityEngine.Events;
 
+[RequireComponent(typeof(NavMeshAgent)), RequireComponent(typeof(Health))]
 public class EnemyAI : MonoBehaviour
 {
     [Header("AI Settings")]
     public float detectionRadius = 4f;
     public float attackRadius = 2f;
     public float patrolRadius = 7f;
-    //public float patrolCooldown = 3f;
     public Transform patrolGlobalPoint;
     public float waypointTolerance = 1f; // Jarak minimal untuk mencapai waypoint
 
@@ -33,15 +33,14 @@ public class EnemyAI : MonoBehaviour
 
     [Header("Others")]
     public GameObject fighter;
-    [SerializeField] private UnityEvent<int> onEnemyDeath;
+    //[SerializeField] private UnityEvent<int> onEnemyDeath;
 
 
     protected NavMeshAgent agent;
     protected GameObject player;
+    protected Health health;
     protected Transform playerTransform;
-    protected int currentHealth;
     protected float lastAttackTime;
-    protected bool death;
 
     protected void Start()
     {
@@ -49,25 +48,22 @@ public class EnemyAI : MonoBehaviour
         agent.avoidancePriority = Random.Range(50, 100);
         player = GameObject.FindGameObjectWithTag("Player");
         playerTransform = player.transform;
-        currentHealth = maxHealth;
-
-        healthBar.maxHP = maxHealth;
-        healthBar.currHP = currentHealth;
+        health = GetComponent<Health>();
         SetNextPatrolPoint();
     }
 
     void Update()
     {
 
-        if (death || player == null) return;
+        if (health.isDeath() || player == null) return;
         UpdateHealthBarPosition();
         fighter.transform.position = transform.position;
         float distanceToPlayer = Vector3.Distance(transform.position, playerTransform.position);
-        if (distanceToPlayer <= attackRadius)
+        if (distanceToPlayer <= attackRadius && !player.GetComponent<Health>().isDeath())
         {
             AttackPlayer();
         }
-        else if (distanceToPlayer <= detectionRadius && agent.enabled)
+        else if (distanceToPlayer <= detectionRadius && agent.enabled && !player.GetComponent<Health>().isDeath())
         {
             ChasePlayer();
         }
@@ -129,31 +125,27 @@ public class EnemyAI : MonoBehaviour
         }
     }
 
-    public void TakeDamage(int damage)
-    {
-        currentHealth = Mathf.Clamp(currentHealth - damage, 0, maxHealth);
-        healthBar.currHP = currentHealth;
+    //public void TakeDamage(int damage)
+    //{
+    //    currentHealth = Mathf.Clamp(currentHealth - damage, 0, maxHealth);
+    //    healthBar.currHP = currentHealth;
 
-        if (currentHealth <= 0)
-        {
-            Die();
-        }
-        else
-        {
-            ChasePlayer(); // Mengejar player ketika diserang
-        }
-    }
+    //    if (currentHealth <= 0)
+    //    {
+    //        Die();
+    //    }
+    //    else
+    //    {
+    //        ChasePlayer(); // Mengejar player ketika diserang
+    //    }
+    //}
 
-    protected void Die()
+    public void Die(int _)
     {
-        death = true;
+        //death = true;
         agent.enabled = false;
         GetComponent<Collider>().enabled = false;
         animator.enabled = false;
-        //healthBar.enabled = false;
-        StartCoroutine(MoveToPosition(transform.position + new Vector3(0f, -5f, 0f), 1.75f));
-        Destroy(gameObject, 2f);
-        onEnemyDeath?.Invoke(scoreValue);
     }
 
     protected void UpdateAnimations()
@@ -180,20 +172,6 @@ public class EnemyAI : MonoBehaviour
             Gizmos.DrawWireSphere(patrolGlobalPoint.position, patrolRadius);
         }
     }
-    protected IEnumerator MoveToPosition(Vector3 targetPos, float duration)
-    {
-        Vector3 startPos = transform.position;
-        float elapsed = 0f;
-
-        while (elapsed < duration)
-        {
-            transform.position = Vector3.Lerp(startPos, targetPos, elapsed / duration);
-            elapsed += Time.deltaTime;
-            yield return null;
-        }
-
-        transform.position = targetPos;
-    }
     private IEnumerator LockAttackRotation()
     {
         // Tunggu sampai animasi serangan selesai
@@ -216,7 +194,7 @@ public class EnemyAI : MonoBehaviour
 
         if (player != null && Vector3.Distance(transform.position, player.transform.position) <= attackRadius * 1.2f)
         {
-            PlayerHealth playerH = player.GetComponent<PlayerHealth>();
+            Health playerH = player.GetComponent<Health>();
             Vector3 directionToPlayer = (playerTransform.position - transform.position).normalized;
             float angleToPlayer = Vector3.Angle(transform.forward, directionToPlayer);
             if (playerH != null && angleToPlayer < 60f)

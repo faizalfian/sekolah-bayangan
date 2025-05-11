@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-[RequireComponent(typeof(CharacterController)), RequireComponent(typeof(PlayerHealth))]
+[RequireComponent(typeof(CharacterController))]
 public class PlayerMovement : MonoBehaviour
 {
     [Header("Movement Settings")]
@@ -40,8 +40,6 @@ public class PlayerMovement : MonoBehaviour
     private float currentSpeed;
     private Vector2 moveInput;
     private Vector3 moveDir;
-    private PlayerHealth playerH;
-    //private PlayerCombat playerCombat;
 
     void Awake()
     {
@@ -51,7 +49,6 @@ public class PlayerMovement : MonoBehaviour
         //sprintAction = playerInput.actions["Sprint"];
 
         controller = GetComponent<CharacterController>();
-        playerH = GetComponent<PlayerHealth>();
         currentSpeed = walkSpeed;
     }
 
@@ -103,9 +100,9 @@ public class PlayerMovement : MonoBehaviour
 
             // Terapkan rotasi
             AtkPoint.transform.position = transform.position + atkPointOffset;
-            fighter.transform.rotation = Quaternion.Euler(0, targetAngle, 0);
+            transform.rotation = Quaternion.Euler(0, targetAngle, 0);
             Vector3 dir = AtkPoint.transform.position - fighter.transform.position; // 1. Relative position
-            dir = fighter.transform.rotation * dir; // 2. Rotate
+            dir = transform.rotation * dir; // 2. Rotate
             Vector3 point = dir + fighter.transform.position; // 3. Final position
             AtkPoint.transform.position = point;
             // animasi berjalan
@@ -193,5 +190,21 @@ public class PlayerMovement : MonoBehaviour
         moveDir = Vector3.zero;
         moveInput = Vector2.zero;
         velocity = Vector3.zero;
+    }
+
+    public void Move(Vector3 dir)
+    {
+        controller.Move(dir);
+    }
+    public void LockMovement(bool shouldLock)
+    {
+        if (shouldLock)
+        {
+            moveAction.Disable();
+        }
+        else
+        {
+            moveAction.Enable();
+        }
     }
 }
