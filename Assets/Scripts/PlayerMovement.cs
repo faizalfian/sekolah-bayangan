@@ -126,6 +126,10 @@ public class PlayerMovement : MonoBehaviour
         {
             velocity.y = 0;
         }
+        if(transform.position.y < -20)
+        {
+            GetComponent<Health>().TakeDamage(1000);
+        }
     }
 
     private void HandleMovement()

@@ -94,14 +94,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81e6ecd6664dc2a49b31504fcf18d715, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  detectionRadius: 4
+  detectionRadius: 7
   attackRadius: 2
   patrolRadius: 7
   patrolGlobalPoint: {fileID: 0}
   waypointTolerance: 1
   animator: {fileID: 9500000}
   maxHealth: 300
-  attackDamage: 40
+  attackDamage: 30
   attackCooldown: 1.5
   scoreValue: 50
   attackAnimationDelay: 1
