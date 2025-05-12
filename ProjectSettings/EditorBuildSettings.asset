@@ -5,7 +5,7 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Settings/Scenes/SampleScene.unity
     guid: 99c9720ab356a0642a771bea13969a05
   - enabled: 1
@@ -14,10 +14,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scene/SekolahBayangan-GamePlay.unity
     guid: c018566d9c8fa71498c4613850ca8fb8
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Tutorial.unity
     guid: ecd8f690a888ee64d89106db6c318193
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Stage1.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
+  - enabled: 1
+    path: Assets/Scene/LoadScreenScene.unity
+    guid: 749c05a42579ae84abe80fc4f6f1024d
   m_configObjects: {}
