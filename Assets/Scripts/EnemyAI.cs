@@ -19,11 +19,12 @@ public class EnemyAI : MonoBehaviour
     public int attackDamage = 2;
     public float attackCooldown = 1f;
     public int scoreValue = 50; // Nilai score yang diberikan saat musuh mati
+    public float mass = 2f;
 
     [Header("Attack Settings")]
     public float attackAnimationDelay = 0.5f; // Waktu delay sebelum mengurangi HP
-    private bool isAttacking = false;
-    private Quaternion attackRotation;
+    protected bool isAttacking = false;
+    protected Quaternion attackRotation;
 
 
     [Header("UI")]
@@ -31,8 +32,8 @@ public class EnemyAI : MonoBehaviour
     public Vector3 healthBarOffset = new Vector3(0, 2f, 0);
 
 
-    [Header("Others")]
-    public GameObject fighter;
+    //[Header("Others")]
+    //public GameObject fighter;
     //[SerializeField] private UnityEvent<int> onEnemyDeath;
 
 
@@ -57,13 +58,13 @@ public class EnemyAI : MonoBehaviour
 
         if (health.isDeath() || player == null) return;
         UpdateHealthBarPosition();
-        fighter.transform.position = transform.position;
+        //fighter.transform.position = transform.position;
         float distanceToPlayer = Vector3.Distance(transform.position, playerTransform.position);
         if (distanceToPlayer <= attackRadius && !player.GetComponent<Health>().isDeath())
         {
             AttackPlayer();
         }
-        else if (distanceToPlayer <= detectionRadius && agent.enabled && !player.GetComponent<Health>().isDeath())
+        else if (distanceToPlayer <= detectionRadius && distanceToPlayer > attackRadius && agent.enabled && !player.GetComponent<Health>().isDeath())
         {
             ChasePlayer();
         }
@@ -76,16 +77,24 @@ public class EnemyAI : MonoBehaviour
         UpdateAnimations();
     }
 
-    protected void ChasePlayer()
+    protected virtual void ChasePlayer()
     {
         transform.LookAt(playerTransform.position);
         transform.rotation = Quaternion.Euler(0, transform.rotation.eulerAngles.y, 0);
         agent.SetDestination(player.transform.position);
+        if(agent.isStopped) agent.isStopped = false;
     }
 
-    protected void AttackPlayer()
+    protected virtual void AttackPlayer()
     {
         if (isAttacking) return;
+        if (!agent.isStopped)
+        {
+            Debug.Log("Stop?");
+            agent.ResetPath();
+            agent.velocity = Vector3.zero;
+            agent.isStopped = true;
+        }
 
         Quaternion lastRot = transform.rotation;
         transform.LookAt(playerTransform.position);
@@ -95,7 +104,8 @@ public class EnemyAI : MonoBehaviour
         if (Time.time - lastAttackTime >= attackCooldown)
         {
             isAttacking = true;
-            animator.SetTrigger("PunchTrigger");
+            //animator.ResetTrigger("Attack");
+            animator.SetTrigger("Attack");
 
             // Lock rotation during attack
             StartCoroutine(LockAttackRotation());
@@ -114,6 +124,7 @@ public class EnemyAI : MonoBehaviour
         {
             SetNextPatrolPoint();
         }
+        if(agent.isStopped) agent.isStopped = false;
     }
 
     protected void SetNextPatrolPoint()
@@ -125,29 +136,15 @@ public class EnemyAI : MonoBehaviour
         }
     }
 
-    //public void TakeDamage(int damage)
-    //{
-    //    currentHealth = Mathf.Clamp(currentHealth - damage, 0, maxHealth);
-    //    healthBar.currHP = currentHealth;
-
-    //    if (currentHealth <= 0)
-    //    {
-    //        Die();
-    //    }
-    //    else
-    //    {
-    //        ChasePlayer(); // Mengejar player ketika diserang
-    //    }
-    //}
-
-    public void Die(int _)
+    public virtual void Die(int _)
     {
+        animator.SetTrigger("Dead");
         StartCoroutine(disableAfterDelay());
     }
 
-    protected void UpdateAnimations()
+    protected virtual void UpdateAnimations()
     {
-        animator.SetBool("Walk Forward", agent.velocity.magnitude > 0.1f);
+        animator.SetBool("Walking", agent.velocity.magnitude > 0.1f);
     }
 
     protected void UpdateHealthBarPosition()
@@ -169,7 +166,7 @@ public class EnemyAI : MonoBehaviour
             Gizmos.DrawWireSphere(patrolGlobalPoint.position, patrolRadius);
         }
     }
-    private IEnumerator LockAttackRotation()
+    protected IEnumerator LockAttackRotation()
     {
         // Tunggu sampai animasi serangan selesai
         float attackTime = 0f;
@@ -185,7 +182,7 @@ public class EnemyAI : MonoBehaviour
         isAttacking = false;
     }
 
-    private IEnumerator ApplyDamageAfterDelay()
+    protected IEnumerator ApplyDamageAfterDelay()
     {
         yield return new WaitForSeconds(attackAnimationDelay);
 
@@ -202,7 +199,7 @@ public class EnemyAI : MonoBehaviour
         }
     }
 
-    IEnumerator disableAfterDelay()
+    protected IEnumerator disableAfterDelay()
     {
         yield return new WaitForSeconds(0.65f);
         gameObject.SetActive(false);

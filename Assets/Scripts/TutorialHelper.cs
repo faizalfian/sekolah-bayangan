@@ -18,6 +18,7 @@ public class TutorialHelper : MonoBehaviour
     private int currentTextIndex = 0;
     private int currTutor = 0;
     private bool isTextChanging = false;
+    private bool tutorEnd = false;
 
     void Awake()
     {
@@ -81,16 +82,6 @@ public class TutorialHelper : MonoBehaviour
         textComponent.text = tutorialTexts[currentTextIndex];
     }
 
-    public void onPlayerEnter()
-    {
-        if(GameObject.FindGameObjectsWithTag("Creeps").Length == 0)
-        {
-            // Jika tidak ada musuh, lanjut ke teks berikutnya
-            nextTutor();
-            StartCoroutine(toStage1(1.5f));
-        }
-    }
-
     public void nextTutor()
     {
         isTextChanging = true;
@@ -107,10 +98,24 @@ public class TutorialHelper : MonoBehaviour
         isTextChanging = false;
     }
 
-    IEnumerator toStage1(float duration)
+    public void OnEnemyDead(int _)
     {
-        yield return new WaitForSeconds(duration);
+        Invoke(nameof(CheckAfterDelay), 1.6f);
+    }
 
+    void CheckAfterDelay()
+    {
+        if (tutorEnd) return;
+        if (GameObject.FindGameObjectsWithTag("Creeps").Length == 0)
+        {
+            nextTutor();
+            Invoke(nameof(toStage1), 1.5f);
+            tutorEnd = true;
+        }
+    }
+
+    void toStage1()
+    {
         GameManager.Instance.AddScore(100);
         GameManager.Instance.LoadStage(1);
     }

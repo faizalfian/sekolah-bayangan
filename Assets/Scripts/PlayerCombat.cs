@@ -118,6 +118,7 @@ public class PlayerCombat : MonoBehaviour
     {
         if (currentCooldown > 0) currentCooldown -= Time.deltaTime;
         scoreText.text = $"Score: {GameManager.Instance.GetCurrentScore()}\nHighscore: {GameManager.Instance.GetHighScore()}";
+        comboText.text = doingCombo ? "COMBO!" : "";
     }
 
     void BufferInput(InputAction action)
@@ -216,7 +217,7 @@ public class PlayerCombat : MonoBehaviour
 
         while (timer < dashDuration)
         {
-            movement.Move(direction * dashSpeed * Time.deltaTime);
+            movement.Move(direction * dashSpeed * 1.8f * Time.deltaTime);
             timer += Time.deltaTime;
             yield return null;
         }
@@ -247,6 +248,7 @@ public class PlayerCombat : MonoBehaviour
     {
         var rb = agent.GetComponent<Rigidbody>();
         if (rb == null) rb = agent.gameObject.AddComponent<Rigidbody>();
+        rb.mass = agent.GetComponent<EnemyAI>().mass;
         rb.AddForce(transform.forward * pushForce, ForceMode.Impulse);
 
         yield return new WaitForSeconds(0.5f);
@@ -270,12 +272,12 @@ public class PlayerCombat : MonoBehaviour
 
         while (timer < dashDuration)
         {
-            movement.Move(direction * dashSpeed * 1.7f * Time.deltaTime);
+            movement.Move(direction * dashSpeed * 1.3f * Time.deltaTime);
             timer += Time.deltaTime;
 
             if (timer >= dashDuration / 2 && !damageApplied)
             {
-                ApplyDashDamage(direction, Mathf.RoundToInt(attackDamage * 0.75f));
+                ApplyDashDamage(direction, Mathf.RoundToInt(attackDamage));
                 damageApplied = true;
             }
 
@@ -288,7 +290,7 @@ public class PlayerCombat : MonoBehaviour
 
     IEnumerator DashPushCombo()
     {
-        Debug.Log("DashPush");
+        //Debug.Log("DashPush");
         movement.LockMovement(true);
         animator.SetTrigger("PunchTrigger");
         dashEffect?.Play();
@@ -351,11 +353,11 @@ public class PlayerCombat : MonoBehaviour
         {
             // Damage kecil untuk combo ini
             Health enemyHealth = enemy.GetComponent<Health>();
-            enemyHealth.TakeDamage(Mathf.RoundToInt(attackDamage * 0.5f));
+            enemyHealth.TakeDamage(Mathf.RoundToInt(attackDamage * 0.25f));
 
             // Efek knockback kuat
             var agent = enemy.GetComponent<NavMeshAgent>();
-            if (agent) StartCoroutine(PushEnemy2(agent, pushForce * 0.5f));
+            if (agent) StartCoroutine(PushEnemy2(agent, pushForce * 0.75f));
         }
     }
 
@@ -381,6 +383,6 @@ public class PlayerCombat : MonoBehaviour
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(attackPoint.position, attackRange);
         Gizmos.color = Color.blue;
-        Gizmos.DrawWireSphere(transform.position + transform.forward * 2f, 3f);
+        Gizmos.DrawWireSphere(attackPoint.position, pushRange);
     }
 }
