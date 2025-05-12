@@ -123,6 +123,7 @@
     <Compile Include="Assets\Asset Sementara\Kenney Character\Script\AttackHitBox.cs" />
     <Compile Include="Assets\Script\DialogManager.cs" />
     <Compile Include="Assets\Script\DialogChoice.cs" />
+    <Compile Include="Assets\Script\PrologVideoPlayer.cs" />
     <Compile Include="Assets\Scripts\FollowTransform.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextInfoDebugTool.cs" />
     <Compile Include="Assets\Asset Sementara\Skeleton\Script\CreepController.cs" />
