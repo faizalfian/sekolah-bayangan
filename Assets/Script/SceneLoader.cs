@@ -10,25 +10,47 @@ public class SceneLoader : MonoBehaviour
 
     private void Start()
     {
-        StartCoroutine(LoadTargetScene());
+        StartCoroutine(LoadPrologThenStage());
     }
 
-    private IEnumerator LoadTargetScene()
+    private IEnumerator LoadPrologThenStage()
     {
-        AsyncOperation operation = SceneManager.LoadSceneAsync(targetScene);
-        operation.allowSceneActivation = false;
+        // Pertama-tama load prolog
+        AsyncOperation prologOperation = SceneManager.LoadSceneAsync("PrologScene");
+        prologOperation.allowSceneActivation = false;
 
-        while (!operation.isDone)
+        while (!prologOperation.isDone)
         {
-            float progress = Mathf.Clamp01(operation.progress / 0.9f) * 100f;
-            loadingText.text = $"Loading... {Mathf.RoundToInt(progress)}%";
+            float progress = Mathf.Clamp01(prologOperation.progress / 0.9f) * 100f;
+            loadingText.text = $"Loading Prolog... {Mathf.RoundToInt(progress)}%";
 
-            if (operation.progress >= 0.9f)
+            if (prologOperation.progress >= 0.9f)
             {
-                loadingText.text = "Press any key to continue";
+                loadingText.text = "Tekan tombol apa saja untuk melanjutkan ke stage 1";
                 if (Input.anyKeyDown)
                 {
-                    operation.allowSceneActivation = true;
+                    prologOperation.allowSceneActivation = true;
+                }
+            }
+
+            yield return null;
+        }
+
+        // Setelah prolog selesai, load stage 1
+        AsyncOperation stageOperation = SceneManager.LoadSceneAsync("Stage1");
+        stageOperation.allowSceneActivation = false;
+
+        while (!stageOperation.isDone)
+        {
+            float progress = Mathf.Clamp01(stageOperation.progress / 0.9f) * 100f;
+            loadingText.text = $"Loading Stage 1... {Mathf.RoundToInt(progress)}%";
+
+            if (stageOperation.progress >= 0.9f)
+            {
+                loadingText.text = "Tekan tombol apa saja untuk melanjutkan";
+                if (Input.anyKeyDown)
+                {
+                    stageOperation.allowSceneActivation = true;
                 }
             }
 
