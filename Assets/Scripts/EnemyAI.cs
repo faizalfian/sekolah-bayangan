@@ -64,7 +64,7 @@ public class EnemyAI : MonoBehaviour
         {
             AttackPlayer();
         }
-        else if (distanceToPlayer <= detectionRadius && agent.enabled && !player.GetComponent<Health>().isDeath())
+        else if (distanceToPlayer <= detectionRadius && distanceToPlayer > attackRadius && agent.enabled && !player.GetComponent<Health>().isDeath())
         {
             ChasePlayer();
         }
@@ -77,16 +77,24 @@ public class EnemyAI : MonoBehaviour
         UpdateAnimations();
     }
 
-    protected void ChasePlayer()
+    protected virtual void ChasePlayer()
     {
         transform.LookAt(playerTransform.position);
         transform.rotation = Quaternion.Euler(0, transform.rotation.eulerAngles.y, 0);
         agent.SetDestination(player.transform.position);
+        if(agent.isStopped) agent.isStopped = false;
     }
 
     protected virtual void AttackPlayer()
     {
         if (isAttacking) return;
+        if (!agent.isStopped)
+        {
+            Debug.Log("Stop?");
+            agent.ResetPath();
+            agent.velocity = Vector3.zero;
+            agent.isStopped = true;
+        }
 
         Quaternion lastRot = transform.rotation;
         transform.LookAt(playerTransform.position);
@@ -116,6 +124,7 @@ public class EnemyAI : MonoBehaviour
         {
             SetNextPatrolPoint();
         }
+        if(agent.isStopped) agent.isStopped = false;
     }
 
     protected void SetNextPatrolPoint()

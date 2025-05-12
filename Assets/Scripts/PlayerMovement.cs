@@ -76,7 +76,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        
+        if(GetComponent<Health>().isDeath()) return;
         HandleGroundCheck();
         HandleGravity();
         HandleMovement();
