@@ -11,16 +11,19 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/dist/Scenes/1. SekolahBayangan-MainMenu.unity
     guid: 685c0e994f32b0c4483ea41a2baa1952
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scene/SekolahBayangan-GamePlay.unity
     guid: c018566d9c8fa71498c4613850ca8fb8
   - enabled: 0
     path: Assets/Scenes/Tutorial.unity
     guid: ecd8f690a888ee64d89106db6c318193
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/Stage1.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
   - enabled: 1
     path: Assets/dist/Scenes/_LoadingScreenScene.unity
     guid: 749c05a42579ae84abe80fc4f6f1024d
+  - enabled: 1
+    path: Assets/Scene/PrologScene.unity
+    guid: c2a7482762763ae4093ae91811a465d4
   m_configObjects: {}
