@@ -6,7 +6,7 @@ public class MainMenuManager : MonoBehaviour
     public void Play()
     {
         Debug.Log("Play clicked");
-        GameManagers.Instance.LoadScene("SekolahBayangan-GamePlay");
+        GameManagers.Instance.LoadScene("2. PrologScene");
     }
 
 

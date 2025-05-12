@@ -39,6 +39,6 @@ public class SceneLoader : MonoBehaviour
     public static void LoadScene(string sceneName)
     {
         targetScene = sceneName;
-        SceneManager.LoadScene("LoadScreenScene");
+        SceneManager.LoadScene("_LoadingScreenScene");
     }
 }
