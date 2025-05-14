@@ -179,9 +179,9 @@ public class DialogManager : MonoBehaviour
         choicePanel.SetActive(false);
         waitingForChoice = false;
 
-        characterNameText.text = "Bisma";
+        characterNameText.text = "Bima";
         typingEffect.StartTyping(pendingChoiceText);
-        UpdateCharacterImages("Bisma", leftCharacterImage.sprite);
+        UpdateCharacterImages("Bima", leftCharacterImage.sprite);
 
         // Setelah menampilkan choice text, langsung lanjut ke next line
         if (nextLineAfterChoice != -1)
@@ -203,7 +203,7 @@ public class DialogManager : MonoBehaviour
         leftCharacterImage.color = new Color(1, 1, 1, 0);
         rightCharacterImage.color = new Color(1, 1, 1, 0);
 
-        if (speakerName == "Bisma")
+        if (speakerName == "Bima")
         {
             leftCharacterImage.sprite = sprite;
             leftCharacterImage.color = new Color(1, 1, 1, 1);

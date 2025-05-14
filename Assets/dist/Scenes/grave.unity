@@ -203,6 +203,15 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 7439774678447485, guid: 2e34ede1516ca3741a113f650b117137, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -119.294975
+      objectReference: {fileID: 0}
+    - target: {fileID: 168418396700326204, guid: 2e34ede1516ca3741a113f650b117137,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -176
+      objectReference: {fileID: 0}
     - target: {fileID: 413064824408125845, guid: 2e34ede1516ca3741a113f650b117137,
         type: 3}
       propertyPath: m_Name
@@ -222,6 +231,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_SortingOrder
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1840327003993908166, guid: 2e34ede1516ca3741a113f650b117137,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: -723.3028
+      objectReference: {fileID: 0}
+    - target: {fileID: 1840327003993908166, guid: 2e34ede1516ca3741a113f650b117137,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -218.98929
       objectReference: {fileID: 0}
     - target: {fileID: 3359821598467412946, guid: 2e34ede1516ca3741a113f650b117137,
         type: 3}
@@ -343,6 +362,16 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5546820667619238504, guid: 2e34ede1516ca3741a113f650b117137,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -119.29498
+      objectReference: {fileID: 0}
+    - target: {fileID: 5969637624082586041, guid: 2e34ede1516ca3741a113f650b117137,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -119.294975
+      objectReference: {fileID: 0}
     - target: {fileID: 7280230481403902448, guid: 2e34ede1516ca3741a113f650b117137,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -366,79 +395,98 @@ PrefabInstance:
     - target: {fileID: 8808676148656803481, guid: 2e34ede1516ca3741a113f650b117137,
         type: 3}
       propertyPath: dialogLines.Array.size
-      value: 12
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 8808676148656803481, guid: 2e34ede1516ca3741a113f650b117137,
         type: 3}
       propertyPath: dialogLines.Array.data[0].dialog
-      value: Tidak mungkin..... bagaimana bisa kau mengalahkanku!
+      value: Kau tidak mengerti. Ini bukan tentang benar atau salah. Ini tentang
+        siapa yang bisa bertahan hidup, siapa yang lebih kuat!
       objectReference: {fileID: 0}
     - target: {fileID: 8808676148656803481, guid: 2e34ede1516ca3741a113f650b117137,
         type: 3}
       propertyPath: dialogLines.Array.data[1].dialog
-      value: ...
+      value: Kekuatan sejati bukanlah kekuatan fisik atau kemampuan untuk melukai.
+        Kekuatan yang sejati adalah kemampuan untuk memilih jalan yang lebih baik
       objectReference: {fileID: 0}
     - target: {fileID: 8808676148656803481, guid: 2e34ede1516ca3741a113f650b117137,
         type: 3}
       propertyPath: dialogLines.Array.data[2].dialog
-      value: Kenapa kau diam? apa kau takut? hahaha
+      value: "\u2014untuk mengendalikan diri, untuk memaafkan, untuk berhenti melukai
+        orang lain hanya karena kita merasa terluka. Kekuatan sejati adalah kemampuan
+        untuk melawan godaan seperti kamu."
       objectReference: {fileID: 0}
     - target: {fileID: 8808676148656803481, guid: 2e34ede1516ca3741a113f650b117137,
         type: 3}
       propertyPath: dialogLines.Array.data[3].dialog
-      value: (berpikir)
+      value: Kau benar-benar percaya itu bisa berhasil? Kau percaya ada yang mau
+        mendengarkanmu?
       objectReference: {fileID: 0}
     - target: {fileID: 8808676148656803481, guid: 2e34ede1516ca3741a113f650b117137,
         type: 3}
       propertyPath: dialogLines.Array.data[4].dialog
-      value: Baiklah, mungkin kamu berusaha membunuhku, tapi aku tak akan membunuhmu.Aku
-        akan memafkanmu
+      value: Ya, aku percaya. Karena aku tahu, di dalam hati mereka, setiap orang
+        ingin keluar dari lingkaran kebencian itu. Aku akan membantu mereka, dan
+        kita semua bisa mengubah ini.
       objectReference: {fileID: 0}
     - target: {fileID: 8808676148656803481, guid: 2e34ede1516ca3741a113f650b117137,
         type: 3}
       propertyPath: dialogLines.Array.data[5].dialog
-      value: Mengapa?
+      value: Kau tidak mengerti... Ini bukan tentang benar atau salah... Tapi tentang
+        siapa yang bertahan hidup. Siapa yang lebih kuat...!
       objectReference: {fileID: 0}
     - target: {fileID: 8808676148656803481, guid: 2e34ede1516ca3741a113f650b117137,
         type: 3}
       propertyPath: dialogLines.Array.data[6].dialog
-      value: Kau masih memiliki kesempatan untuk berubah. Cobalah untuk berusaha.
-        Bagaimana kau bisa seperti ini?
+      value: ...
       objectReference: {fileID: 0}
     - target: {fileID: 8808676148656803481, guid: 2e34ede1516ca3741a113f650b117137,
         type: 3}
       propertyPath: dialogLines.Array.data[7].dialog
-      value: Dulu aku selalu sendiri, aku pernah mencoba berteman, tapi tak ada yang
-        mau, aku hanya bisa melihat mereka bersenang-senang, sedangkan aku... sendirian...
-        tanpa TEMAN.
+      value: "Tapi kemampuan untuk memilih jalan yang lebih baik\u2014mengendalikan
+        diri, memaafkan, berhenti menyakiti hanya karena kita sendiri terluka."
       objectReference: {fileID: 0}
     - target: {fileID: 8808676148656803481, guid: 2e34ede1516ca3741a113f650b117137,
         type: 3}
       propertyPath: dialogLines.Array.data[8].dialog
-      value: Mereka tak ingin tahu tentangku, aku... akan... membalas mereka!
+      value: "Aku percaya\u2026 setiap orang ingin keluar dari lingkaran kebencian.
+        Dan aku akan membantu mereka."
       objectReference: {fileID: 0}
     - target: {fileID: 8808676148656803481, guid: 2e34ede1516ca3741a113f650b117137,
         type: 3}
       propertyPath: dialogLines.Array.data[9].dialog
-      value: Kau tidak boleh begitu, mungkin kamu belum bertemu dengan orang yang
-        cocok, di luar sana pasti ada yang mau berteman denganmu, ayolah. Kau harus
-        memafkan mereka, kau harus berubah
+      value: "Kau benar-benar percaya\u2026 ada yang mau mendengarkanmu?"
       objectReference: {fileID: 0}
     - target: {fileID: 8808676148656803481, guid: 2e34ede1516ca3741a113f650b117137,
         type: 3}
       propertyPath: dialogLines.Array.data[10].dialog
-      value: Hahaha, terima kasih, mungkin kamu benar, aku hanya belum bertemu orang
-        yang cocok. Aku akan pergi... jaga dirimu....
+      value: Ya. Karena aku pun dulunya terjebak di sana.
       objectReference: {fileID: 0}
     - target: {fileID: 8808676148656803481, guid: 2e34ede1516ca3741a113f650b117137,
         type: 3}
       propertyPath: dialogLines.Array.data[11].dialog
-      value: TIDAKKK!!!
+      value: Kau memilih jalan kekerasan. Dan sekarang, kau harus menerima akibatnya.
+      objectReference: {fileID: 0}
+    - target: {fileID: 8808676148656803481, guid: 2e34ede1516ca3741a113f650b117137,
+        type: 3}
+      propertyPath: dialogLines.Array.data[12].dialog
+      value: "Heh\u2026 Jadi kamu pikir kamu pahlawan?"
+      objectReference: {fileID: 0}
+    - target: {fileID: 8808676148656803481, guid: 2e34ede1516ca3741a113f650b117137,
+        type: 3}
+      propertyPath: dialogLines.Array.data[13].dialog
+      value: Pahlawan tidak akan bisa menyelamatkan semua orang...
+      objectReference: {fileID: 0}
+    - target: {fileID: 8808676148656803481, guid: 2e34ede1516ca3741a113f650b117137,
+        type: 3}
+      propertyPath: dialogLines.Array.data[14].dialog
+      value: Tapi aku tidak akan membiarkan lebih banyak orang terluka hanya karena
+        kita takut untuk bertindak.
       objectReference: {fileID: 0}
     - target: {fileID: 8808676148656803481, guid: 2e34ede1516ca3741a113f650b117137,
         type: 3}
       propertyPath: dialogLines.Array.data[0].characterName
-      value: Boss
+      value: Garaga
       objectReference: {fileID: 0}
     - target: {fileID: 8808676148656803481, guid: 2e34ede1516ca3741a113f650b117137,
         type: 3}
@@ -448,7 +496,7 @@ PrefabInstance:
     - target: {fileID: 8808676148656803481, guid: 2e34ede1516ca3741a113f650b117137,
         type: 3}
       propertyPath: dialogLines.Array.data[1].characterName
-      value: Bisma
+      value: Bima
       objectReference: {fileID: 0}
     - target: {fileID: 8808676148656803481, guid: 2e34ede1516ca3741a113f650b117137,
         type: 3}
@@ -458,7 +506,7 @@ PrefabInstance:
     - target: {fileID: 8808676148656803481, guid: 2e34ede1516ca3741a113f650b117137,
         type: 3}
       propertyPath: dialogLines.Array.data[2].characterName
-      value: Boss
+      value: Bima
       objectReference: {fileID: 0}
     - target: {fileID: 8808676148656803481, guid: 2e34ede1516ca3741a113f650b117137,
         type: 3}
@@ -468,17 +516,17 @@ PrefabInstance:
     - target: {fileID: 8808676148656803481, guid: 2e34ede1516ca3741a113f650b117137,
         type: 3}
       propertyPath: dialogLines.Array.data[3].characterName
-      value: Bisma
+      value: Garaga
       objectReference: {fileID: 0}
     - target: {fileID: 8808676148656803481, guid: 2e34ede1516ca3741a113f650b117137,
         type: 3}
       propertyPath: dialogLines.Array.data[3].nextLineIndex
-      value: -1
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 8808676148656803481, guid: 2e34ede1516ca3741a113f650b117137,
         type: 3}
       propertyPath: dialogLines.Array.data[4].characterName
-      value: Bisma
+      value: Bima
       objectReference: {fileID: 0}
     - target: {fileID: 8808676148656803481, guid: 2e34ede1516ca3741a113f650b117137,
         type: 3}
@@ -488,7 +536,7 @@ PrefabInstance:
     - target: {fileID: 8808676148656803481, guid: 2e34ede1516ca3741a113f650b117137,
         type: 3}
       propertyPath: dialogLines.Array.data[5].characterName
-      value: Boss
+      value: Gegara
       objectReference: {fileID: 0}
     - target: {fileID: 8808676148656803481, guid: 2e34ede1516ca3741a113f650b117137,
         type: 3}
@@ -498,7 +546,7 @@ PrefabInstance:
     - target: {fileID: 8808676148656803481, guid: 2e34ede1516ca3741a113f650b117137,
         type: 3}
       propertyPath: dialogLines.Array.data[6].characterName
-      value: Bisma
+      value: Bima
       objectReference: {fileID: 0}
     - target: {fileID: 8808676148656803481, guid: 2e34ede1516ca3741a113f650b117137,
         type: 3}
@@ -508,7 +556,7 @@ PrefabInstance:
     - target: {fileID: 8808676148656803481, guid: 2e34ede1516ca3741a113f650b117137,
         type: 3}
       propertyPath: dialogLines.Array.data[7].characterName
-      value: Boss
+      value: Bima
       objectReference: {fileID: 0}
     - target: {fileID: 8808676148656803481, guid: 2e34ede1516ca3741a113f650b117137,
         type: 3}
@@ -518,7 +566,7 @@ PrefabInstance:
     - target: {fileID: 8808676148656803481, guid: 2e34ede1516ca3741a113f650b117137,
         type: 3}
       propertyPath: dialogLines.Array.data[8].characterName
-      value: Boss
+      value: Bima
       objectReference: {fileID: 0}
     - target: {fileID: 8808676148656803481, guid: 2e34ede1516ca3741a113f650b117137,
         type: 3}
@@ -528,7 +576,7 @@ PrefabInstance:
     - target: {fileID: 8808676148656803481, guid: 2e34ede1516ca3741a113f650b117137,
         type: 3}
       propertyPath: dialogLines.Array.data[9].characterName
-      value: Bisma
+      value: Garaga
       objectReference: {fileID: 0}
     - target: {fileID: 8808676148656803481, guid: 2e34ede1516ca3741a113f650b117137,
         type: 3}
@@ -538,7 +586,7 @@ PrefabInstance:
     - target: {fileID: 8808676148656803481, guid: 2e34ede1516ca3741a113f650b117137,
         type: 3}
       propertyPath: dialogLines.Array.data[10].characterName
-      value: Boss
+      value: Bima
       objectReference: {fileID: 0}
     - target: {fileID: 8808676148656803481, guid: 2e34ede1516ca3741a113f650b117137,
         type: 3}
@@ -548,48 +596,78 @@ PrefabInstance:
     - target: {fileID: 8808676148656803481, guid: 2e34ede1516ca3741a113f650b117137,
         type: 3}
       propertyPath: dialogLines.Array.data[11].characterName
-      value: Boss
+      value: Bima
       objectReference: {fileID: 0}
     - target: {fileID: 8808676148656803481, guid: 2e34ede1516ca3741a113f650b117137,
         type: 3}
       propertyPath: dialogLines.Array.data[11].nextLineIndex
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 8808676148656803481, guid: 2e34ede1516ca3741a113f650b117137,
+        type: 3}
+      propertyPath: dialogLines.Array.data[12].characterName
+      value: Gegara
+      objectReference: {fileID: 0}
+    - target: {fileID: 8808676148656803481, guid: 2e34ede1516ca3741a113f650b117137,
+        type: 3}
+      propertyPath: dialogLines.Array.data[12].nextLineIndex
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 8808676148656803481, guid: 2e34ede1516ca3741a113f650b117137,
+        type: 3}
+      propertyPath: dialogLines.Array.data[13].characterName
+      value: Gegara
+      objectReference: {fileID: 0}
+    - target: {fileID: 8808676148656803481, guid: 2e34ede1516ca3741a113f650b117137,
+        type: 3}
+      propertyPath: dialogLines.Array.data[13].nextLineIndex
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 8808676148656803481, guid: 2e34ede1516ca3741a113f650b117137,
+        type: 3}
+      propertyPath: dialogLines.Array.data[14].characterName
+      value: Bima
+      objectReference: {fileID: 0}
+    - target: {fileID: 8808676148656803481, guid: 2e34ede1516ca3741a113f650b117137,
+        type: 3}
+      propertyPath: dialogLines.Array.data[14].nextLineIndex
       value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 8808676148656803481, guid: 2e34ede1516ca3741a113f650b117137,
         type: 3}
       propertyPath: dialogLines.Array.data[0].characterSprite
       value: 
-      objectReference: {fileID: 21300000, guid: f30185a900c67294492613740668a5a5,
+      objectReference: {fileID: 21300000, guid: d20059d7f9d37b34398205d84ec49b21,
         type: 3}
     - target: {fileID: 8808676148656803481, guid: 2e34ede1516ca3741a113f650b117137,
         type: 3}
       propertyPath: dialogLines.Array.data[1].characterSprite
       value: 
-      objectReference: {fileID: 21300000, guid: 8c9f736e1810306469456522acfeea60,
+      objectReference: {fileID: 21300000, guid: 1435898af93fcd04f8d425b996b638fb,
         type: 3}
     - target: {fileID: 8808676148656803481, guid: 2e34ede1516ca3741a113f650b117137,
         type: 3}
       propertyPath: dialogLines.Array.data[2].characterSprite
       value: 
-      objectReference: {fileID: 21300000, guid: f30185a900c67294492613740668a5a5,
+      objectReference: {fileID: 21300000, guid: 1435898af93fcd04f8d425b996b638fb,
         type: 3}
     - target: {fileID: 8808676148656803481, guid: 2e34ede1516ca3741a113f650b117137,
         type: 3}
       propertyPath: dialogLines.Array.data[3].characterSprite
       value: 
-      objectReference: {fileID: 21300000, guid: 8c9f736e1810306469456522acfeea60,
+      objectReference: {fileID: 21300000, guid: b4fd7d0e9270b7f42b89af6702e2fb49,
         type: 3}
     - target: {fileID: 8808676148656803481, guid: 2e34ede1516ca3741a113f650b117137,
         type: 3}
       propertyPath: dialogLines.Array.data[4].characterSprite
       value: 
-      objectReference: {fileID: 21300000, guid: 8c9f736e1810306469456522acfeea60,
+      objectReference: {fileID: 21300000, guid: 40de7c986f4c9d54aa1e15d9ba755aaf,
         type: 3}
     - target: {fileID: 8808676148656803481, guid: 2e34ede1516ca3741a113f650b117137,
         type: 3}
       propertyPath: dialogLines.Array.data[5].characterSprite
       value: 
-      objectReference: {fileID: 21300000, guid: f30185a900c67294492613740668a5a5,
+      objectReference: {fileID: 21300000, guid: b4fd7d0e9270b7f42b89af6702e2fb49,
         type: 3}
     - target: {fileID: 8808676148656803481, guid: 2e34ede1516ca3741a113f650b117137,
         type: 3}
@@ -601,31 +679,49 @@ PrefabInstance:
         type: 3}
       propertyPath: dialogLines.Array.data[7].characterSprite
       value: 
-      objectReference: {fileID: 21300000, guid: f30185a900c67294492613740668a5a5,
+      objectReference: {fileID: 21300000, guid: 40de7c986f4c9d54aa1e15d9ba755aaf,
         type: 3}
     - target: {fileID: 8808676148656803481, guid: 2e34ede1516ca3741a113f650b117137,
         type: 3}
       propertyPath: dialogLines.Array.data[8].characterSprite
       value: 
-      objectReference: {fileID: 21300000, guid: f30185a900c67294492613740668a5a5,
+      objectReference: {fileID: 21300000, guid: 40de7c986f4c9d54aa1e15d9ba755aaf,
         type: 3}
     - target: {fileID: 8808676148656803481, guid: 2e34ede1516ca3741a113f650b117137,
         type: 3}
       propertyPath: dialogLines.Array.data[9].characterSprite
       value: 
-      objectReference: {fileID: 21300000, guid: 8c9f736e1810306469456522acfeea60,
+      objectReference: {fileID: 21300000, guid: d20059d7f9d37b34398205d84ec49b21,
         type: 3}
     - target: {fileID: 8808676148656803481, guid: 2e34ede1516ca3741a113f650b117137,
         type: 3}
       propertyPath: dialogLines.Array.data[10].characterSprite
       value: 
-      objectReference: {fileID: 21300000, guid: f30185a900c67294492613740668a5a5,
+      objectReference: {fileID: 21300000, guid: 40de7c986f4c9d54aa1e15d9ba755aaf,
         type: 3}
     - target: {fileID: 8808676148656803481, guid: 2e34ede1516ca3741a113f650b117137,
         type: 3}
       propertyPath: dialogLines.Array.data[11].characterSprite
       value: 
-      objectReference: {fileID: 21300000, guid: f30185a900c67294492613740668a5a5,
+      objectReference: {fileID: 21300000, guid: c4dd9c96bbc80e947962c33072dabc8c,
+        type: 3}
+    - target: {fileID: 8808676148656803481, guid: 2e34ede1516ca3741a113f650b117137,
+        type: 3}
+      propertyPath: dialogLines.Array.data[12].characterSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 1e571538252c16044acbb785d1fc8521,
+        type: 3}
+    - target: {fileID: 8808676148656803481, guid: 2e34ede1516ca3741a113f650b117137,
+        type: 3}
+      propertyPath: dialogLines.Array.data[13].characterSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 1e571538252c16044acbb785d1fc8521,
+        type: 3}
+    - target: {fileID: 8808676148656803481, guid: 2e34ede1516ca3741a113f650b117137,
+        type: 3}
+      propertyPath: dialogLines.Array.data[14].characterSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: c4dd9c96bbc80e947962c33072dabc8c,
         type: 3}
     - target: {fileID: 8808676148656803481, guid: 2e34ede1516ca3741a113f650b117137,
         type: 3}
@@ -650,7 +746,7 @@ PrefabInstance:
     - target: {fileID: 8808676148656803481, guid: 2e34ede1516ca3741a113f650b117137,
         type: 3}
       propertyPath: dialogLines.Array.data[6].choices.Array.size
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8808676148656803481, guid: 2e34ede1516ca3741a113f650b117137,
         type: 3}
@@ -705,12 +801,12 @@ PrefabInstance:
     - target: {fileID: 8808676148656803481, guid: 2e34ede1516ca3741a113f650b117137,
         type: 3}
       propertyPath: dialogLines.Array.data[6].choices.Array.data[0].choiceText
-      value: Bunuh
+      value: Kau memilih jalan kekerasan. Dan sekarang, kau harus menerima akibatnya.
       objectReference: {fileID: 0}
     - target: {fileID: 8808676148656803481, guid: 2e34ede1516ca3741a113f650b117137,
         type: 3}
       propertyPath: dialogLines.Array.data[6].choices.Array.data[1].choiceText
-      value: Maafkan
+      value: Kekuatan sejati bukanlah kekuatan untuk melukai
       objectReference: {fileID: 0}
     - target: {fileID: 8808676148656803481, guid: 2e34ede1516ca3741a113f650b117137,
         type: 3}
@@ -775,7 +871,12 @@ PrefabInstance:
     - target: {fileID: 8808676148656803481, guid: 2e34ede1516ca3741a113f650b117137,
         type: 3}
       propertyPath: dialogLines.Array.data[6].choices.Array.data[0].nextLineIndex
-      value: 1
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 8808676148656803481, guid: 2e34ede1516ca3741a113f650b117137,
+        type: 3}
+      propertyPath: dialogLines.Array.data[6].choices.Array.data[1].nextLineIndex
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 8808676148656803481, guid: 2e34ede1516ca3741a113f650b117137,
         type: 3}
@@ -830,12 +931,12 @@ PrefabInstance:
     - target: {fileID: 8808676148656803481, guid: 2e34ede1516ca3741a113f650b117137,
         type: 3}
       propertyPath: dialogLines.Array.data[6].choices.Array.data[0].consequenceTag
-      value: KilledBoss
+      value: help
       objectReference: {fileID: 0}
     - target: {fileID: 8808676148656803481, guid: 2e34ede1516ca3741a113f650b117137,
         type: 3}
       propertyPath: dialogLines.Array.data[6].choices.Array.data[1].consequenceTag
-      value: Forgive
+      value: punish
       objectReference: {fileID: 0}
     - target: {fileID: 8808676148656803481, guid: 2e34ede1516ca3741a113f650b117137,
         type: 3}
@@ -15038,6 +15139,26 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 168418396700326204, guid: 2e34ede1516ca3741a113f650b117137,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 828.7529
+      objectReference: {fileID: 0}
+    - target: {fileID: 168418396700326204, guid: 2e34ede1516ca3741a113f650b117137,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 40.669
+      objectReference: {fileID: 0}
+    - target: {fileID: 168418396700326204, guid: 2e34ede1516ca3741a113f650b117137,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -15.0884
+      objectReference: {fileID: 0}
+    - target: {fileID: 168418396700326204, guid: 2e34ede1516ca3741a113f650b117137,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -56.705
+      objectReference: {fileID: 0}
     - target: {fileID: 413064824408125845, guid: 2e34ede1516ca3741a113f650b117137,
         type: 3}
       propertyPath: m_Name
@@ -15052,6 +15173,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_SortingOrder
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1840327003993908166, guid: 2e34ede1516ca3741a113f650b117137,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -343
       objectReference: {fileID: 0}
     - target: {fileID: 3359821598467412946, guid: 2e34ede1516ca3741a113f650b117137,
         type: 3}
@@ -15196,37 +15322,292 @@ PrefabInstance:
     - target: {fileID: 8808676148656803481, guid: 2e34ede1516ca3741a113f650b117137,
         type: 3}
       propertyPath: dialogLines.Array.size
-      value: 5
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 8808676148656803481, guid: 2e34ede1516ca3741a113f650b117137,
+        type: 3}
+      propertyPath: dialogLines.Array.data[0].dialog
+      value: Si.. Siapa kamu ?
+      objectReference: {fileID: 0}
+    - target: {fileID: 8808676148656803481, guid: 2e34ede1516ca3741a113f650b117137,
+        type: 3}
+      propertyPath: dialogLines.Array.data[1].dialog
+      value: 'Apa yang kamu inginkan dariku?" '
+      objectReference: {fileID: 0}
+    - target: {fileID: 8808676148656803481, guid: 2e34ede1516ca3741a113f650b117137,
+        type: 3}
+      propertyPath: dialogLines.Array.data[2].dialog
+      value: "Keberanianmu sungguh lucu, Bima. Aku adalah manifestasi dari semua
+        kekerasan yang terjadi di dunia nyata\u2014tawuran, kekerasan antar sekolah,
+        permusuhan yang tak pernah selesai"
+      objectReference: {fileID: 0}
+    - target: {fileID: 8808676148656803481, guid: 2e34ede1516ca3741a113f650b117137,
+        type: 3}
+      propertyPath: dialogLines.Array.data[3].dialog
+      value: Aku tidak akan menyerah padamu, atau pada apa pun yang kau wakili. Tawuran
+        itu tidak akan menyelesaikan apa-apa. Kekerasan hanya akan melahirkan lebih
+        banyak kebencian, lebih banyak permusuhan. Itu bukan cara untuk menyelesaikan
+        masalah
       objectReference: {fileID: 0}
     - target: {fileID: 8808676148656803481, guid: 2e34ede1516ca3741a113f650b117137,
         type: 3}
       propertyPath: dialogLines.Array.data[4].dialog
-      value: Kau akan tetap ku habisi
+      value: 'Begitu mudahnya kau bicara tentang perdamaian! Kau tidak tahu apa yang
+        terjadi di dunia luar. '
       objectReference: {fileID: 0}
     - target: {fileID: 8808676148656803481, guid: 2e34ede1516ca3741a113f650b117137,
         type: 3}
       propertyPath: dialogLines.Array.data[5].dialog
-      value: Kau akan tetap ku habisi
+      value: Aku lahir dari rasa sakit dan keputusasaan, dari keinginan untuk menunjukkan
+        kekuatan
       objectReference: {fileID: 0}
     - target: {fileID: 8808676148656803481, guid: 2e34ede1516ca3741a113f650b117137,
         type: 3}
       propertyPath: dialogLines.Array.data[6].dialog
-      value: ...
+      value: Mereka yang berjuang dalam tawuran merasakan kekuasaan, merasakan bahwa
+        mereka penting. Kau pikir kata-kata itu cukup untuk menghentikanku?
+      objectReference: {fileID: 0}
+    - target: {fileID: 8808676148656803481, guid: 2e34ede1516ca3741a113f650b117137,
+        type: 3}
+      propertyPath: dialogLines.Array.data[7].dialog
+      value: "Kadang, kata-kata memang tidak cukup. Tapi tindakan yang benar bisa
+        mengubah segalanya. Tawuran hanya akan merusak semuanya\u2014bukan hanya
+        fisik, tapi juga hati dan pikiran"
+      objectReference: {fileID: 0}
+    - target: {fileID: 8808676148656803481, guid: 2e34ede1516ca3741a113f650b117137,
+        type: 3}
+      propertyPath: dialogLines.Array.data[8].dialog
+      value: Mereka yang berpartisipasi dalam tawuran, mereka hanya sedang mencari
+        tempat untuk melampiaskan rasa kesepian dan frustasi mereka. Aku tahu itu,
+        karena aku pernah merasakannya.
+      objectReference: {fileID: 0}
+    - target: {fileID: 8808676148656803481, guid: 2e34ede1516ca3741a113f650b117137,
+        type: 3}
+      propertyPath: dialogLines.Array.data[9].dialog
+      value: Ah, jadi kau merasa kasihan pada mereka? Mereka yang memilih jalan kekerasan
+        untuk merasa hidup? Kau pikir kamu bisa menghentikanku hanya dengan kata-kata
+        manis itu?
+      objectReference: {fileID: 0}
+    - target: {fileID: 8808676148656803481, guid: 2e34ede1516ca3741a113f650b117137,
+        type: 3}
+      propertyPath: dialogLines.Array.data[10].dialog
+      value: Tidak, aku tidak hanya mengandalkan kata-kata. Aku tahu aku tidak bisa
+        mengubah dunia dalam semalam
+      objectReference: {fileID: 0}
+    - target: {fileID: 8808676148656803481, guid: 2e34ede1516ca3741a113f650b117137,
+        type: 3}
+      propertyPath: dialogLines.Array.data[11].dialog
+      value: Tapi setiap tindakan kecil yang benar bisa meruntuhkan dunia yang dibangun
+        atas kekerasan
+      objectReference: {fileID: 0}
+    - target: {fileID: 8808676148656803481, guid: 2e34ede1516ca3741a113f650b117137,
+        type: 3}
+      propertyPath: dialogLines.Array.data[12].dialog
+      value: Jika aku bisa membantu mereka yang terjebak dalam lingkaran ini, menunjukkan
+        bahwa ada cara lain untuk merasa kuat, maka aku sudah menang
+      objectReference: {fileID: 0}
+    - target: {fileID: 8808676148656803481, guid: 2e34ede1516ca3741a113f650b117137,
+        type: 3}
+      propertyPath: dialogLines.Array.data[0].characterName
+      value: Bima
+      objectReference: {fileID: 0}
+    - target: {fileID: 8808676148656803481, guid: 2e34ede1516ca3741a113f650b117137,
+        type: 3}
+      propertyPath: dialogLines.Array.data[1].characterName
+      value: Bima
+      objectReference: {fileID: 0}
+    - target: {fileID: 8808676148656803481, guid: 2e34ede1516ca3741a113f650b117137,
+        type: 3}
+      propertyPath: dialogLines.Array.data[2].characterName
+      value: Garaga
+      objectReference: {fileID: 0}
+    - target: {fileID: 8808676148656803481, guid: 2e34ede1516ca3741a113f650b117137,
+        type: 3}
+      propertyPath: dialogLines.Array.data[2].nextLineIndex
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8808676148656803481, guid: 2e34ede1516ca3741a113f650b117137,
+        type: 3}
+      propertyPath: dialogLines.Array.data[3].characterName
+      value: Bima
+      objectReference: {fileID: 0}
+    - target: {fileID: 8808676148656803481, guid: 2e34ede1516ca3741a113f650b117137,
+        type: 3}
+      propertyPath: dialogLines.Array.data[3].nextLineIndex
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8808676148656803481, guid: 2e34ede1516ca3741a113f650b117137,
+        type: 3}
+      propertyPath: dialogLines.Array.data[4].characterName
+      value: Garaga
       objectReference: {fileID: 0}
     - target: {fileID: 8808676148656803481, guid: 2e34ede1516ca3741a113f650b117137,
         type: 3}
       propertyPath: dialogLines.Array.data[4].nextLineIndex
-      value: -1
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8808676148656803481, guid: 2e34ede1516ca3741a113f650b117137,
+        type: 3}
+      propertyPath: dialogLines.Array.data[5].characterName
+      value: Garaga
       objectReference: {fileID: 0}
     - target: {fileID: 8808676148656803481, guid: 2e34ede1516ca3741a113f650b117137,
         type: 3}
       propertyPath: dialogLines.Array.data[5].nextLineIndex
-      value: -1
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8808676148656803481, guid: 2e34ede1516ca3741a113f650b117137,
+        type: 3}
+      propertyPath: dialogLines.Array.data[6].characterName
+      value: Garaga
       objectReference: {fileID: 0}
     - target: {fileID: 8808676148656803481, guid: 2e34ede1516ca3741a113f650b117137,
         type: 3}
       propertyPath: dialogLines.Array.data[6].nextLineIndex
-      value: -1
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 8808676148656803481, guid: 2e34ede1516ca3741a113f650b117137,
+        type: 3}
+      propertyPath: dialogLines.Array.data[7].characterName
+      value: Bima
+      objectReference: {fileID: 0}
+    - target: {fileID: 8808676148656803481, guid: 2e34ede1516ca3741a113f650b117137,
+        type: 3}
+      propertyPath: dialogLines.Array.data[7].nextLineIndex
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8808676148656803481, guid: 2e34ede1516ca3741a113f650b117137,
+        type: 3}
+      propertyPath: dialogLines.Array.data[8].characterName
+      value: Bima
+      objectReference: {fileID: 0}
+    - target: {fileID: 8808676148656803481, guid: 2e34ede1516ca3741a113f650b117137,
+        type: 3}
+      propertyPath: dialogLines.Array.data[8].nextLineIndex
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 8808676148656803481, guid: 2e34ede1516ca3741a113f650b117137,
+        type: 3}
+      propertyPath: dialogLines.Array.data[9].characterName
+      value: Garaga
+      objectReference: {fileID: 0}
+    - target: {fileID: 8808676148656803481, guid: 2e34ede1516ca3741a113f650b117137,
+        type: 3}
+      propertyPath: dialogLines.Array.data[9].nextLineIndex
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 8808676148656803481, guid: 2e34ede1516ca3741a113f650b117137,
+        type: 3}
+      propertyPath: dialogLines.Array.data[10].characterName
+      value: Bima
+      objectReference: {fileID: 0}
+    - target: {fileID: 8808676148656803481, guid: 2e34ede1516ca3741a113f650b117137,
+        type: 3}
+      propertyPath: dialogLines.Array.data[10].nextLineIndex
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 8808676148656803481, guid: 2e34ede1516ca3741a113f650b117137,
+        type: 3}
+      propertyPath: dialogLines.Array.data[11].characterName
+      value: Bima
+      objectReference: {fileID: 0}
+    - target: {fileID: 8808676148656803481, guid: 2e34ede1516ca3741a113f650b117137,
+        type: 3}
+      propertyPath: dialogLines.Array.data[11].nextLineIndex
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 8808676148656803481, guid: 2e34ede1516ca3741a113f650b117137,
+        type: 3}
+      propertyPath: dialogLines.Array.data[12].characterName
+      value: Bima
+      objectReference: {fileID: 0}
+    - target: {fileID: 8808676148656803481, guid: 2e34ede1516ca3741a113f650b117137,
+        type: 3}
+      propertyPath: dialogLines.Array.data[12].nextLineIndex
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 8808676148656803481, guid: 2e34ede1516ca3741a113f650b117137,
+        type: 3}
+      propertyPath: dialogLines.Array.data[0].characterSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: b90ce3cb359807d41b1e9cda2bd57a7c,
+        type: 3}
+    - target: {fileID: 8808676148656803481, guid: 2e34ede1516ca3741a113f650b117137,
+        type: 3}
+      propertyPath: dialogLines.Array.data[1].characterSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: b90ce3cb359807d41b1e9cda2bd57a7c,
+        type: 3}
+    - target: {fileID: 8808676148656803481, guid: 2e34ede1516ca3741a113f650b117137,
+        type: 3}
+      propertyPath: dialogLines.Array.data[2].characterSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 3a05d09b1595bf24bbc6c3db36969ff5,
+        type: 3}
+    - target: {fileID: 8808676148656803481, guid: 2e34ede1516ca3741a113f650b117137,
+        type: 3}
+      propertyPath: dialogLines.Array.data[3].characterSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: b90ce3cb359807d41b1e9cda2bd57a7c,
+        type: 3}
+    - target: {fileID: 8808676148656803481, guid: 2e34ede1516ca3741a113f650b117137,
+        type: 3}
+      propertyPath: dialogLines.Array.data[4].characterSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: fcfee07fb9239f145b10834988429152,
+        type: 3}
+    - target: {fileID: 8808676148656803481, guid: 2e34ede1516ca3741a113f650b117137,
+        type: 3}
+      propertyPath: dialogLines.Array.data[5].characterSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: fcfee07fb9239f145b10834988429152,
+        type: 3}
+    - target: {fileID: 8808676148656803481, guid: 2e34ede1516ca3741a113f650b117137,
+        type: 3}
+      propertyPath: dialogLines.Array.data[6].characterSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: fcfee07fb9239f145b10834988429152,
+        type: 3}
+    - target: {fileID: 8808676148656803481, guid: 2e34ede1516ca3741a113f650b117137,
+        type: 3}
+      propertyPath: dialogLines.Array.data[7].characterSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: c4dd9c96bbc80e947962c33072dabc8c,
+        type: 3}
+    - target: {fileID: 8808676148656803481, guid: 2e34ede1516ca3741a113f650b117137,
+        type: 3}
+      propertyPath: dialogLines.Array.data[8].characterSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: c4dd9c96bbc80e947962c33072dabc8c,
+        type: 3}
+    - target: {fileID: 8808676148656803481, guid: 2e34ede1516ca3741a113f650b117137,
+        type: 3}
+      propertyPath: dialogLines.Array.data[9].characterSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 98aab69142f0c7f44981e49bf5ae8b71,
+        type: 3}
+    - target: {fileID: 8808676148656803481, guid: 2e34ede1516ca3741a113f650b117137,
+        type: 3}
+      propertyPath: dialogLines.Array.data[10].characterSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 1435898af93fcd04f8d425b996b638fb,
+        type: 3}
+    - target: {fileID: 8808676148656803481, guid: 2e34ede1516ca3741a113f650b117137,
+        type: 3}
+      propertyPath: dialogLines.Array.data[11].characterSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 1435898af93fcd04f8d425b996b638fb,
+        type: 3}
+    - target: {fileID: 8808676148656803481, guid: 2e34ede1516ca3741a113f650b117137,
+        type: 3}
+      propertyPath: dialogLines.Array.data[12].characterSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 1435898af93fcd04f8d425b996b638fb,
+        type: 3}
+    - target: {fileID: 8808676148656803481, guid: 2e34ede1516ca3741a113f650b117137,
+        type: 3}
+      propertyPath: dialogLines.Array.data[2].choices.Array.size
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8808676148656803481, guid: 2e34ede1516ca3741a113f650b117137,
         type: 3}

@@ -758,6 +758,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   videoPlayer: {fileID: 2061101943}
   nextSceneName: grave
+  videoName: prolog.mov
 --- !u!1 &2102393566
 GameObject:
   m_ObjectHideFlags: 0
