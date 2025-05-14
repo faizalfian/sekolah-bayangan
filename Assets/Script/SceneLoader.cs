@@ -1,56 +1,60 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
+using UnityEngine.Video;
 using System.Collections;
+using System.IO;
 
 public class SceneLoader : MonoBehaviour
 {
     public static string targetScene;
+
+    [Header("Loading UI")]
     [SerializeField] private TMP_Text loadingText;
+
+    [Header("Optional Video Prolog")]
+    public bool playPrologVideo = false;
+    public VideoPlayer videoPlayer;
+    public string videoFileName = "prolog.mov";
+    public string stageSceneName = "Stage1";
+
+    private bool hasEnded = false;
 
     private void Start()
     {
-        StartCoroutine(LoadPrologThenStage());
+        if (playPrologVideo && videoPlayer != null)
+        {
+            StartCoroutine(PlayPrologThenLoadStage());
+        }
+        else
+        {
+            StartCoroutine(LoadTargetSceneRoutine());
+        }
     }
 
-    private IEnumerator LoadPrologThenStage()
+    // 🔹 Panggil dari scene manapun
+    public static void LoadScene(string sceneName)
     {
-        // Pertama-tama load prolog
-        AsyncOperation prologOperation = SceneManager.LoadSceneAsync("PrologScene");
-        prologOperation.allowSceneActivation = false;
+        targetScene = sceneName;
+        SceneManager.LoadScene("LoadScreenScene"); // harus ada di Build Settings
+    }
 
-        while (!prologOperation.isDone)
+    private IEnumerator LoadTargetSceneRoutine()
+    {
+        AsyncOperation async = SceneManager.LoadSceneAsync(targetScene);
+        async.allowSceneActivation = false;
+
+        while (!async.isDone)
         {
-            float progress = Mathf.Clamp01(prologOperation.progress / 0.9f) * 100f;
-            loadingText.text = $"Loading Prolog... {Mathf.RoundToInt(progress)}%";
+            float progress = Mathf.Clamp01(async.progress / 0.9f) * 100f;
+            loadingText.text = $"Loading {targetScene}... {Mathf.RoundToInt(progress)}%";
 
-            if (prologOperation.progress >= 0.9f)
-            {
-                loadingText.text = "Tekan tombol apa saja untuk melanjutkan ke stage 1";
-                if (Input.anyKeyDown)
-                {
-                    prologOperation.allowSceneActivation = true;
-                }
-            }
-
-            yield return null;
-        }
-
-        // Setelah prolog selesai, load stage 1
-        AsyncOperation stageOperation = SceneManager.LoadSceneAsync("Stage1");
-        stageOperation.allowSceneActivation = false;
-
-        while (!stageOperation.isDone)
-        {
-            float progress = Mathf.Clamp01(stageOperation.progress / 0.9f) * 100f;
-            loadingText.text = $"Loading Stage 1... {Mathf.RoundToInt(progress)}%";
-
-            if (stageOperation.progress >= 0.9f)
+            if (async.progress >= 0.9f)
             {
                 loadingText.text = "Tekan tombol apa saja untuk melanjutkan";
                 if (Input.anyKeyDown)
                 {
-                    stageOperation.allowSceneActivation = true;
+                    async.allowSceneActivation = true;
                 }
             }
 
@@ -58,9 +62,56 @@ public class SceneLoader : MonoBehaviour
         }
     }
 
-    public static void LoadScene(string sceneName)
+    private IEnumerator PlayPrologThenLoadStage()
     {
-        targetScene = sceneName;
-        SceneManager.LoadScene("LoadScreenScene");
+        // 🔸 Atur path ke StreamingAssets
+        string fullPath = Path.Combine(Application.streamingAssetsPath, videoFileName);
+        videoPlayer.url = fullPath;
+
+        videoPlayer.loopPointReached += OnVideoEnd;
+        videoPlayer.Play();
+
+        loadingText.text = "Memutar prolog... Tekan SPACE untuk skip";
+
+        while (!hasEnded)
+        {
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                videoPlayer.Stop();
+                OnVideoEnd(videoPlayer);
+            }
+            yield return null;
+        }
+    }
+
+    private void OnVideoEnd(VideoPlayer vp)
+    {
+        if (hasEnded) return;
+        hasEnded = true;
+
+        StartCoroutine(LoadStageAfterProlog());
+    }
+
+    private IEnumerator LoadStageAfterProlog()
+    {
+        AsyncOperation stageOp = SceneManager.LoadSceneAsync(stageSceneName);
+        stageOp.allowSceneActivation = false;
+
+        while (!stageOp.isDone)
+        {
+            float progress = Mathf.Clamp01(stageOp.progress / 0.9f) * 100f;
+            loadingText.text = $"Loading {stageSceneName}... {Mathf.RoundToInt(progress)}%";
+
+            if (stageOp.progress >= 0.9f)
+            {
+                loadingText.text = "Tekan tombol apa saja untuk lanjut ke gameplay";
+                if (Input.anyKeyDown)
+                {
+                    stageOp.allowSceneActivation = true;
+                }
+            }
+
+            yield return null;
+        }
     }
 }

@@ -6,7 +6,7 @@ using UnityEngine.EventSystems;
 
 public class DialogManager : MonoBehaviour
 {
-
+    public System.Action OnDialogEnd; // 🔹 Tambahan: Event setelah dialog selesai
     private int selectedChoiceIndex = 0;
 
     [Header("UI Components")]
@@ -82,7 +82,6 @@ public class DialogManager : MonoBehaviour
                 }
                 else if (Input.GetKeyDown(KeyCode.Return))
                 {
-                    // Pilih opsi yang sedang disorot
                     choiceButtons[selectedChoiceIndex].onClick.Invoke();
                 }
             }
@@ -100,7 +99,6 @@ public class DialogManager : MonoBehaviour
         }
     }
 
-
     public void ShowNextLine()
     {
         if (currentLine < 0 || currentLine >= dialogLines.Length)
@@ -116,7 +114,6 @@ public class DialogManager : MonoBehaviour
 
         if (line.choices != null && line.choices.Length > 0)
         {
-            // Jika ada pilihan, tampilkan pilihan
             waitingForChoice = true;
             ShowChoices(line.choices);
         }
@@ -124,12 +121,10 @@ public class DialogManager : MonoBehaviour
         {
             if (jumpToManualLine)
             {
-                // Jika ada pilihan yang telah dipilih, melanjutkan ke line yang ditentukan
-                jumpToManualLine = false; // reset flag
-                return; // Tidak perlu melanjutkan ke baris berikutnya sekarang
+                jumpToManualLine = false;
+                return;
             }
 
-            // Jika baris dialog memiliki nextLineIndex, lanjutkan ke baris tersebut
             if (line.nextLineIndex != -1)
             {
                 currentLine = line.nextLineIndex;
@@ -146,33 +141,30 @@ public class DialogManager : MonoBehaviour
         dialogPanel.SetActive(false);
         leftCharacterImage.color = new Color(1, 1, 1, 0);
         rightCharacterImage.color = new Color(1, 1, 1, 0);
+        OnDialogEnd?.Invoke(); // 🔹 Panggil event setelah dialog selesai
     }
 
-
-void ShowChoices(DialogChoice[] choices)
-{
-    choicePanel.SetActive(true);
-    selectedChoiceIndex = 0;
-
-    for (int i = 0; i < choiceButtons.Length; i++)
+    void ShowChoices(DialogChoice[] choices)
     {
-        if (i < choices.Length)
-        {
-            choiceButtons[i].gameObject.SetActive(true);
-            choiceButtons[i].onClick.RemoveAllListeners();
-            int index = i;
-            choiceButtons[i].onClick.AddListener(() => OnChoiceSelected(choices[index]));
+        choicePanel.SetActive(true);
+        selectedChoiceIndex = 0;
 
-            // Tambahkan ">" hanya pada pilihan pertama
-            choiceTexts[i].text = (i == selectedChoiceIndex ? "> " : "") + choices[i].choiceText;
-        }
-        else
+        for (int i = 0; i < choiceButtons.Length; i++)
         {
-            choiceButtons[i].gameObject.SetActive(false);
+            if (i < choices.Length)
+            {
+                choiceButtons[i].gameObject.SetActive(true);
+                choiceButtons[i].onClick.RemoveAllListeners();
+                int index = i;
+                choiceButtons[i].onClick.AddListener(() => OnChoiceSelected(choices[index]));
+                choiceTexts[i].text = (i == selectedChoiceIndex ? "> " : "") + choices[i].choiceText;
+            }
+            else
+            {
+                choiceButtons[i].gameObject.SetActive(false);
+            }
         }
     }
-}
-
 
     void OnChoiceSelected(DialogChoice choice)
     {
@@ -207,16 +199,13 @@ void ShowChoices(DialogChoice[] choices)
 
     void UpdateChoiceSelection(int direction)
     {
-     // Hilangkan simbol ">" dari yang sebelumnya
         choiceTexts[selectedChoiceIndex].text = dialogLines[currentLine].choices[selectedChoiceIndex].choiceText;
 
         int choicesCount = dialogLines[currentLine].choices.Length;
         selectedChoiceIndex = (selectedChoiceIndex + direction + choicesCount) % choicesCount;
 
-        // Tambahkan simbol ">" ke pilihan yang baru
         choiceTexts[selectedChoiceIndex].text = "> " + dialogLines[currentLine].choices[selectedChoiceIndex].choiceText;
 
-        // Fokuskan tombol baru secara visual agar tersorot
         EventSystem.current.SetSelectedGameObject(choiceButtons[selectedChoiceIndex].gameObject);
     }
 }
