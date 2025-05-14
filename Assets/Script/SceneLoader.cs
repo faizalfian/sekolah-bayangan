@@ -16,7 +16,7 @@ public class SceneLoader : MonoBehaviour
     private IEnumerator LoadPrologThenStage()
     {
         // Pertama-tama load prolog
-        AsyncOperation prologOperation = SceneManager.LoadSceneAsync("PrologScene");
+        AsyncOperation prologOperation = SceneManager.LoadSceneAsync("2. PrologScene");
         prologOperation.allowSceneActivation = false;
 
         while (!prologOperation.isDone)
@@ -61,6 +61,6 @@ public class SceneLoader : MonoBehaviour
     public static void LoadScene(string sceneName)
     {
         targetScene = sceneName;
-        SceneManager.LoadScene("LoadScreenScene");
+        SceneManager.LoadScene("_LoadingScreenScene");
     }
 }

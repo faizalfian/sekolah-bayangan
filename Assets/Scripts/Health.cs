@@ -39,6 +39,8 @@ public class Health : MonoBehaviour
     {
         if (isDead || immuneToDamage) return;
 
+        Debug.Log("Take Damage");
+
         currHP  = Mathf.Clamp(currHP - damage, 0, maxHealth);
 
         updateHealthBar();
@@ -145,7 +147,7 @@ public class Health : MonoBehaviour
         // Reset health
         currHP = maxHealth;
 
-        transform.position += new Vector3(0f, 5f, 0f);
+        transform.position += new Vector3(0f, 1.5f, 0f);
 
         // Aktifkan kembali komponen yang dimatikan
         foreach (var component in componentsToDisableOnDeath)
