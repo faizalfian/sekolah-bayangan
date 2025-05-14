@@ -95,7 +95,7 @@ public class DialogManager : MonoBehaviour
                 if (pendingChoiceText != null)
                 {
                     currentLine = nextLineAfterChoice;
-                    Debug.Log(currentLine);
+                    Debug.Log(currentLine + "pendingChoice");
                     pendingChoiceText = null;
                     nextLineAfterChoice = -1;
                     jumpToManualLine = true;
@@ -107,8 +107,10 @@ public class DialogManager : MonoBehaviour
 
     public void ShowNextLine()
     {
+        Debug.Log(currentLine);
         if (currentLine < 0 || currentLine >= dialogLines.Length)
         {
+            Debug.Log(currentLine + "end");
             EndDialog();
             return;
         }
@@ -122,24 +124,19 @@ public class DialogManager : MonoBehaviour
         {
             waitingForChoice = true;
             ShowChoices(line.choices);
+            return; // Keluar setelah menampilkan choices
+        }
+
+        // Jika ada nextLineIndex, update currentLine tapi jangan tampilkan sekarang
+        if (line.nextLineIndex != -1)
+        {
+            currentLine = line.nextLineIndex;
         }
         else
         {
-            if (jumpToManualLine)
-            {
-                jumpToManualLine = false;
-                return;
-            }
-
-            if (line.nextLineIndex != -1)
-            {
-                currentLine = line.nextLineIndex;
-            }
-            else
-            {
-                EndDialog();
-            }
+            currentLine++; // Lanjut ke line berikutnya secara default
         }
+
     }
 
     void EndDialog()
@@ -178,13 +175,27 @@ public class DialogManager : MonoBehaviour
         playerDecisions.Add(choice.consequenceTag);
         pendingChoiceText = choice.choiceText;
         nextLineAfterChoice = choice.nextLineIndex;
-        jumpToManualLine = true;
+
         choicePanel.SetActive(false);
         waitingForChoice = false;
 
         characterNameText.text = "Bisma";
         typingEffect.StartTyping(pendingChoiceText);
         UpdateCharacterImages("Bisma", leftCharacterImage.sprite);
+
+        // Setelah menampilkan choice text, langsung lanjut ke next line
+        if (nextLineAfterChoice != -1)
+        {
+            currentLine = nextLineAfterChoice;
+            pendingChoiceText = null;
+            nextLineAfterChoice = -1;
+            ShowNextLine(); // Panggil manual untuk line berikutnya
+        }
+        else
+        {
+            // Jika tidak ada next line, akhiri dialog
+            EndDialog();
+        }
     }
 
     void UpdateCharacterImages(string speakerName, Sprite sprite)
