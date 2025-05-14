@@ -928,6 +928,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &640130238 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3108354473329827177, guid: e53416c188d47c446aa7796adbbaa3c9,
+    type: 3}
+  m_PrefabInstance: {fileID: 905428403}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &645067260
 GameObject:
   m_ObjectHideFlags: 0
@@ -1877,6 +1889,18 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dc2c7f2577a953e4bb74f63395b14244, type: 3}
+--- !u!114 &1147908299 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6165342258527798906, guid: e53416c188d47c446aa7796adbbaa3c9,
+    type: 3}
+  m_PrefabInstance: {fileID: 905428403}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1885bb926fb0b0d479dd1f3e6b9383f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1189663256
 GameObject:
   m_ObjectHideFlags: 0
@@ -2343,7 +2367,7 @@ PrefabInstance:
         type: 3}
       propertyPath: healthBar
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1147908299}
     - target: {fileID: 160969479354467455, guid: cea68b1172d3dfb44ad41012c7e4dd7c,
         type: 3}
       propertyPath: gameOverUI
@@ -2353,12 +2377,12 @@ PrefabInstance:
         type: 3}
       propertyPath: comboText
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 2043392870}
     - target: {fileID: 3147462709537370172, guid: cea68b1172d3dfb44ad41012c7e4dd7c,
         type: 3}
       propertyPath: scoreText
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 640130238}
     - target: {fileID: 5728545574331166708, guid: cea68b1172d3dfb44ad41012c7e4dd7c,
         type: 3}
       propertyPath: healthBar
@@ -3078,6 +3102,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1999754836}
   m_CullTransparentMesh: 1
+--- !u!114 &2043392870 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3239365502038768915, guid: e53416c188d47c446aa7796adbbaa3c9,
+    type: 3}
+  m_PrefabInstance: {fileID: 905428403}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
