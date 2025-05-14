@@ -35,14 +35,9 @@ public class SceneLoader : MonoBehaviour
     // 🔹 Panggil dari scene manapun
     public static void LoadScene(string sceneName)
     {
-        targetScene = sceneName;
-        SceneManager.LoadScene("LoadScreenScene"); // harus ada di Build Settings
-    }
-
-    private IEnumerator LoadTargetSceneRoutine()
-    {
-        AsyncOperation async = SceneManager.LoadSceneAsync(targetScene);
-        async.allowSceneActivation = false;
+        // Pertama-tama load prolog
+        AsyncOperation prologOperation = SceneManager.LoadSceneAsync("PrologScene");
+        prologOperation.allowSceneActivation = false;
 
         while (!async.isDone)
         {
@@ -113,5 +108,11 @@ public class SceneLoader : MonoBehaviour
 
             yield return null;
         }
+    }
+
+    public static void LoadScene(string sceneName)
+    {
+        targetScene = sceneName;
+        SceneManager.LoadScene("LoadScreenScene");
     }
 }

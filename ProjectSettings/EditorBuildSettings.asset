@@ -9,21 +9,39 @@ EditorBuildSettings:
     path: Assets/Settings/Scenes/SampleScene.unity
     guid: 99c9720ab356a0642a771bea13969a05
   - enabled: 1
-    path: Assets/Scene/SekolahBayangan-MainMenu.unity
+    path: Assets/dist/Scenes/1. MainMenu.unity
     guid: 685c0e994f32b0c4483ea41a2baa1952
   - enabled: 0
     path: Assets/Scene/SekolahBayangan-GamePlay.unity
     guid: c018566d9c8fa71498c4613850ca8fb8
   - enabled: 0
-    path: Assets/Scenes/Tutorial.unity
+    path: Assets/dist/Scenes/3. Tutorial.unity
     guid: ecd8f690a888ee64d89106db6c318193
-  - enabled: 1
-    path: Assets/Scenes/Stage1.unity
+  - enabled: 0
+    path: Assets/dist/Scenes/3. Stage1.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
   - enabled: 1
-    path: Assets/Scene/LoadScreenScene.unity
+    path: Assets/dist/Scenes/_LoadingScreenScene.unity
     guid: 749c05a42579ae84abe80fc4f6f1024d
   - enabled: 1
-    path: Assets/Scene/PrologScene.unity
+    path: Assets/dist/Scenes/2. PrologScene.unity
     guid: c2a7482762763ae4093ae91811a465d4
+  - enabled: 1
+    path: Assets/dist/Scenes/Stage 1 - new.unity
+    guid: 066806794dcc369458cb759f438fbd46
+  - enabled: 0
+    path: Assets/Bricktown/testScene.unity
+    guid: cfd2a08b462127949aa45a6dcc2587f0
+  - enabled: 0
+    path: Assets/Customizable Skybox/Scenes/DemoScene.unity
+    guid: 1811a0c822d2a6c45b5d1435bf7d07d2
+  - enabled: 0
+    path: Assets/Scenes/CobaStage1.unity
+    guid: 2eb08cd193529c549a37dc54b7acfa7f
+  - enabled: 1
+    path: Assets/dist/Scenes/grave.unity
+    guid: 6a254dec8c5668c48a2c04357fde9d4e
+  - enabled: 0
+    path: Assets/dist/Scenes/4. DialogScene.unity
+    guid: 576527ee3e10b7d41896eb124b7f9332
   m_configObjects: {}

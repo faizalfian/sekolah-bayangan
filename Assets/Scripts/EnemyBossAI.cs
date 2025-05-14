@@ -25,6 +25,7 @@ public class EnemyBossAI : EnemyAI
     {
         animator.SetTrigger("Dead");
         StartCoroutine(disableAfterDelay());
+        gm.removeEnemy();
     }
 
     protected override void UpdateAnimations()

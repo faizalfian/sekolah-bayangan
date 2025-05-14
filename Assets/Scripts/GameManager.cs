@@ -15,6 +15,14 @@ public class GameManager : MonoBehaviour
     [SerializeField] private int _currentScore = 0;
     [SerializeField] private int _highScore = 0;
 
+    List<int> enemies = new List<int>();
+    [SerializeField]
+    BimaMvController playerMovement;
+
+    public bool isPlaying = false;
+    public bool isOver = false;
+    public bool isDialog = true;
+
     private void Awake()
     {
         if (Instance == null)
@@ -26,6 +34,29 @@ public class GameManager : MonoBehaviour
         else
         {
             Destroy(gameObject);
+        }
+    }
+
+    void Start()
+    {
+        playerMovement.LockMovement(true);
+    }
+
+    public void addEnemy()
+    {
+        Debug.Log("Enemy Added");
+        enemies.Add(1);
+    }
+
+    public void removeEnemy()
+    {
+        Debug.Log(enemies);
+        // this.enemies.RemoveAt(0);
+        Debug.Log(enemies);
+        Debug.Log("Enemy Removed");
+        if (enemies.Count == 0)
+        {
+            Debug.Log("Game Over");
         }
     }
 
@@ -69,7 +100,7 @@ public class GameManager : MonoBehaviour
     // Memuat stage berdasarkan index
     public void LoadStage(int stageIndex)
     {
-        Debug.Log("Loading stage: "+stageIndex);
+        Debug.Log("Loading stage: " + stageIndex);
         if (stageIndex >= 0 && stageIndex < stageSequence.Count)
         {
             _currentStageIndex = stageIndex;
@@ -80,6 +111,13 @@ public class GameManager : MonoBehaviour
         {
             Debug.LogError("Stage index out of range!");
         }
+    }
+
+
+    public void goToDialogScene()
+    {
+        Debug.Log("Oke finish stage");
+        SceneManager.LoadScene("4. DialogScene");
     }
 
     // Memuat stage berikutnya dalam urutan
