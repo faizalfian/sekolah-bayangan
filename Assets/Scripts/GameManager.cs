@@ -22,7 +22,7 @@ public class GameManager : MonoBehaviour
     DialogManager dialogBegin;
     [SerializeField]
     DialogManager dialogEnd;
-    [SerializeField] EnemyBossAI boss;
+    [SerializeField] GameObject boss;
 
     public bool isPlaying = false;
     public bool isOver = false;
@@ -89,6 +89,8 @@ public class GameManager : MonoBehaviour
                 Destroy(boss);
             };
             Debug.Log("Game Over");
+            // ganti scene
+            //...
         }
     }
 
