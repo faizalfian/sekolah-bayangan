@@ -117,8 +117,8 @@ public class PlayerCombat : MonoBehaviour
     void Update()
     {
         if (currentCooldown > 0) currentCooldown -= Time.deltaTime;
-        scoreText.text = $"Score: {GameManager.Instance.GetCurrentScore()}\nHighscore: {GameManager.Instance.GetHighScore()}";
-        comboText.text = doingCombo ? "COMBO!" : "";
+        // scoreText.text = $"Score: {GameManager.Instance.GetCurrentScore()}\nHighscore: {GameManager.Instance.GetHighScore()}";
+        // comboText.text = doingCombo ? "COMBO!" : "";
     }
 
     void BufferInput(InputAction action)
