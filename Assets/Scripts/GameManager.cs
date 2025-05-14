@@ -23,6 +23,8 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     DialogManager dialogEnd;
     [SerializeField] EnemyBossAI boss;
+    [SerializeField]
+    AudioSource backgroundMusic;
 
     public bool isPlaying = false;
     public bool isOver = false;
@@ -65,6 +67,7 @@ public class GameManager : MonoBehaviour
         playerMovement.GetComponent<BimaCombat>().enabled = true;
         isDialog = false;
         isPlaying = true;
+        backgroundMusic.volume = 0.4f;
     }
 
     public void addEnemy()

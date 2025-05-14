@@ -23,7 +23,7 @@ public class EnemyBossAI : EnemyAI
 
     public override void Die(int _)
     {
-        animator.SetTrigger("Dead");
+        animator.SetBool("dead", true);
         gm.removeEnemy();
         //Invoke(nameof(disableAnimation), 2f);
         //StartCoroutine(disableAfterDelay());
