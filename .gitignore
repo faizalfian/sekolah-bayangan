@@ -78,3 +78,4 @@ Assembly-CSharp.csproj
 ProjectSettings/Packages/com.unity.probuilder/Settings.json
 *.csproj
 *.csproj
+/Build
