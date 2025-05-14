@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManagers : MonoBehaviour
 {
@@ -19,6 +20,6 @@ public class GameManagers : MonoBehaviour
 
     public void LoadScene(string sceneName)
     {
-        SceneLoader.LoadScene(sceneName); // Delegasi ke SceneLoader
+        SceneManager.LoadScene(sceneName); // Delegasi ke SceneLoader
     }
 }

@@ -58,28 +58,38 @@ public class EnemyAI : MonoBehaviour
 
     void Update()
     {
-        Debug.Log(gm.isPlaying);
-        if (!gm.isPlaying) return;
+        //Debug.Log(gm.isPlaying);
+        if (!gm.isPlaying)
+        {
+            if (!agent.isStopped)
+            {
+                Debug.Log("Stop?");
+                agent.ResetPath();
+                agent.velocity = Vector3.zero;
+                agent.isStopped = true;
+            }
+            return;
+        }
 
-        // if (health.isDeath() || player == null) return;
-        // UpdateHealthBarPosition();
-        // //fighter.transform.position = transform.position;
-        // float distanceToPlayer = Vector3.Distance(transform.position, playerTransform.position);
-        // if (distanceToPlayer <= attackRadius && !player.GetComponent<Health>().isDeath())
-        // {
-        //     AttackPlayer();
-        // }
-        // else if (distanceToPlayer <= detectionRadius && distanceToPlayer > attackRadius && agent.enabled && !player.GetComponent<Health>().isDeath())
-        // {
-        //     ChasePlayer();
-        // }
-        // else if (patrolGlobalPoint != null)
-        // {
-        //     Patrol();
-        // }
+        if (health.isDeath() || player == null) return;
+        UpdateHealthBarPosition();
+        //fighter.transform.position = transform.position;
+        float distanceToPlayer = Vector3.Distance(transform.position, playerTransform.position);
+        if (distanceToPlayer <= attackRadius && !player.GetComponent<Health>().isDeath())
+        {
+            AttackPlayer();
+        }
+        else if (distanceToPlayer <= detectionRadius && distanceToPlayer > attackRadius && agent.enabled && !player.GetComponent<Health>().isDeath())
+        {
+            ChasePlayer();
+        }
+        else if (patrolGlobalPoint != null)
+        {
+            Patrol();
+        }
 
 
-        // UpdateAnimations();
+        UpdateAnimations();
     }
 
     protected virtual void ChasePlayer()

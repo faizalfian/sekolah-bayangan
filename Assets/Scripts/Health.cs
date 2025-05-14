@@ -16,6 +16,7 @@ public class Health : MonoBehaviour
     [Header("Respawn Settings")]
     public bool canRespawn = false;
     public bool haveDeathscreen = false;
+    public bool doNothingWHenDie = false;
     public float respawnTime = 3f; // Waktu respawn dalam detik
     public GameObject gameOverUI;
     public Animator animator;
@@ -126,10 +127,14 @@ public class Health : MonoBehaviour
         {
             StartCoroutine(MoveToBottom());
             StartCoroutine(RespawnAfterDelay());
-        } else if(haveDeathscreen)
+        }
+        else if (haveDeathscreen)
         {
             // Jika ada deathscreen, tampilkan deathscreen
             showDeathsreen();
+        } else if(doNothingWHenDie)
+        {
+            onDeath?.Invoke(CalculateScoreValue());
         }
         else
         {

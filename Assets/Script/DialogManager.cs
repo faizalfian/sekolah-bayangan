@@ -3,6 +3,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using UnityEngine.Events;
 
 public class DialogManager : MonoBehaviour
 {
@@ -11,6 +12,7 @@ public class DialogManager : MonoBehaviour
 
     [Header("UI Components")]
     public GameObject dialogPanel;
+    public GameObject bgPanel;
     public TextMeshProUGUI characterNameText;
     public TextMeshProUGUI dialogText;
     public CharacterImageAnimator characterImageAnimator; // opsional
@@ -46,9 +48,11 @@ public class DialogManager : MonoBehaviour
 
     void Start()
     {
+        bgPanel.SetActive(false);
         dialogPanel.SetActive(false);
-        typingEffect = dialogText.GetComponent<TypingEffect>();
         choicePanel.SetActive(false);
+        typingEffect = dialogText.GetComponent<TypingEffect>();
+        //gameObject.SetActive(false);
     }
 
     public void StartDialog()
@@ -56,6 +60,7 @@ public class DialogManager : MonoBehaviour
         if (dialogLines.Length > 0)
         {
             dialogPanel.SetActive(true);
+            bgPanel.SetActive(true);
             currentLine = 0;
             ShowNextLine();
         }
@@ -90,6 +95,7 @@ public class DialogManager : MonoBehaviour
                 if (pendingChoiceText != null)
                 {
                     currentLine = nextLineAfterChoice;
+                    Debug.Log(currentLine);
                     pendingChoiceText = null;
                     nextLineAfterChoice = -1;
                     jumpToManualLine = true;
@@ -139,6 +145,7 @@ public class DialogManager : MonoBehaviour
     void EndDialog()
     {
         dialogPanel.SetActive(false);
+        bgPanel.SetActive(false);
         leftCharacterImage.color = new Color(1, 1, 1, 0);
         rightCharacterImage.color = new Color(1, 1, 1, 0);
         OnDialogEnd?.Invoke(); // 🔹 Panggil event setelah dialog selesai

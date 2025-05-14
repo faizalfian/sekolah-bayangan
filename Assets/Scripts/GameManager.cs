@@ -18,6 +18,11 @@ public class GameManager : MonoBehaviour
     List<int> enemies = new List<int>();
     [SerializeField]
     BimaMvController playerMovement;
+    [SerializeField]
+    DialogManager dialogBegin;
+    [SerializeField]
+    DialogManager dialogEnd;
+    [SerializeField] EnemyBossAI boss;
 
     public bool isPlaying = false;
     public bool isOver = false;
@@ -39,7 +44,27 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+        startDialog();
+        dialogBegin.OnDialogEnd += () => {
+            endDialog();
+        };
+    }
+
+    void startDialog()
+    {
+        if (isDialog) dialogBegin.StartDialog();
         playerMovement.LockMovement(true);
+        playerMovement.enabled = false;
+        playerMovement.GetComponent<BimaCombat>().enabled = false;
+    }
+
+    void endDialog()
+    {
+        playerMovement.LockMovement(false);
+        playerMovement.enabled = true;
+        playerMovement.GetComponent<BimaCombat>().enabled = true;
+        isDialog = false;
+        isPlaying = true;
     }
 
     public void addEnemy()
@@ -51,11 +76,18 @@ public class GameManager : MonoBehaviour
     public void removeEnemy()
     {
         Debug.Log(enemies);
-        // this.enemies.RemoveAt(0);
-        Debug.Log(enemies);
+        enemies.RemoveAt(0);
+        //Debug.Log(enemies);
         Debug.Log("Enemy Removed");
         if (enemies.Count == 0)
         {
+            startDialog();
+            dialogEnd.StartDialog();
+            dialogEnd.OnDialogEnd = () =>
+            {
+                endDialog();
+                Destroy(boss);
+            };
             Debug.Log("Game Over");
         }
     }
