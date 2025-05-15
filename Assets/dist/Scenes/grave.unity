@@ -411,11 +411,11 @@ MonoBehaviour:
   maxHealth: 100
   healthBar: {fileID: 1128424518}
   immuneToDamage: 0
-  canRespawn: 0
-  haveDeathscreen: 0
+  canRespawn: 1
+  haveDeathscreen: 1
   doNothingWHenDie: 0
   respawnTime: 3
-  gameOverUI: {fileID: 0}
+  gameOverUI: {fileID: 1588922670}
   animator: {fileID: 0}
   componentsToDisableOnDeath: []
   collidersToDisableOnDeath: []
@@ -13796,7 +13796,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 83384478}
         m_TargetAssemblyTypeName: Health, Assembly-CSharp
         m_MethodName: Respawn
         m_Mode: 1
