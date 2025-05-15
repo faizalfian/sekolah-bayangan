@@ -208,7 +208,7 @@ public class BimaCombat : MonoBehaviour
     {
         //Debug.Log("Dash");
         movement.LockMovement(true);
-        animator.SetTrigger("PunchTrigger");
+        //animator.SetTrigger("PunchTrigger");
         //animator.SetTrigger("Dash");
         dashEffect?.Play();
 
