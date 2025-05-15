@@ -408,7 +408,7 @@ MonoBehaviour:
   damageDelay: 0.5
   dashSpeed: 20
   dashDuration: 0.3
-  pushForce: 10
+  pushForce: 5
   pushRange: 0.4
   comboWindow: 0.25
   combos: []
@@ -8025,6 +8025,11 @@ PrefabInstance:
       objectReference: {fileID: 1623707296}
     - target: {fileID: 6098110263246766492, guid: 50a13d6697180e649af21b055d1fcde0,
         type: 3}
+      propertyPath: mass
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6098110263246766492, guid: 50a13d6697180e649af21b055d1fcde0,
+        type: 3}
       propertyPath: attackDamage
       value: 5
       objectReference: {fileID: 0}
@@ -13464,6 +13469,11 @@ PrefabInstance:
       objectReference: {fileID: 1623707296}
     - target: {fileID: 6098110263246766492, guid: 50a13d6697180e649af21b055d1fcde0,
         type: 3}
+      propertyPath: mass
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6098110263246766492, guid: 50a13d6697180e649af21b055d1fcde0,
+        type: 3}
       propertyPath: attackDamage
       value: 5
       objectReference: {fileID: 0}
@@ -15175,6 +15185,11 @@ PrefabInstance:
       objectReference: {fileID: 1623707296}
     - target: {fileID: 6098110263246766492, guid: 50a13d6697180e649af21b055d1fcde0,
         type: 3}
+      propertyPath: mass
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6098110263246766492, guid: 50a13d6697180e649af21b055d1fcde0,
+        type: 3}
       propertyPath: attackDamage
       value: 5
       objectReference: {fileID: 0}
@@ -15686,6 +15701,11 @@ PrefabInstance:
       propertyPath: gm
       value: 
       objectReference: {fileID: 1623707296}
+    - target: {fileID: 5357139006885618774, guid: d87a3539650493d44abf2b09f551478e,
+        type: 3}
+      propertyPath: mass
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 5357139006885618774, guid: d87a3539650493d44abf2b09f551478e,
         type: 3}
       propertyPath: scoreValue
@@ -16790,6 +16810,11 @@ PrefabInstance:
       propertyPath: gm
       value: 
       objectReference: {fileID: 1623707296}
+    - target: {fileID: 6098110263246766492, guid: 50a13d6697180e649af21b055d1fcde0,
+        type: 3}
+      propertyPath: mass
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6098110263246766492, guid: 50a13d6697180e649af21b055d1fcde0,
         type: 3}
       propertyPath: attackDamage
