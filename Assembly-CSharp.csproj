@@ -52,6 +52,7 @@
     <Compile Include="Assets\dist\Models\Characters\Bima\Scripts\BimaMvController.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexShakeA.cs" />
     <Compile Include="Assets\Script\FadeManager.cs" />
+    <Compile Include="Assets\Script\DialogBranchRouter.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\EnvMapAnimator.cs" />
     <Compile Include="Assets\Scripts\PlayerCombat.cs" />
     <Compile Include="Assets\Bricktown\materials\BrickBuildingColorChange.cs" />

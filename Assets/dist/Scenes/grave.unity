@@ -1150,6 +1150,55 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 1394657171}
   m_SourcePrefab: {fileID: 100100000, guid: b7296d5515d23844b88668359d702859, type: 3}
+--- !u!1 &269191034
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 269191036}
+  - component: {fileID: 269191035}
+  m_Layer: 0
+  m_Name: DialogBranchRouter
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &269191035
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 269191034}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8b97473639053043962b8adabf17854, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogManager: {fileID: 1480042416}
+  tagFight: Forgive
+  sceneForFight: TebasanBayangan
+  tagPeace: Skill
+  sceneForPeace: LedakanDendam
+--- !u!4 &269191036
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 269191034}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 535.9963, y: 268.92145, z: -1.4020243}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &288648724 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8808676148656803481, guid: 2e34ede1516ca3741a113f650b117137,
@@ -1390,12 +1439,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3424239925404028286, guid: b59cbd86aca4971449bf09c19f408f2e,
     type: 3}
   m_PrefabInstance: {fileID: 318448236}
-  m_PrefabAsset: {fileID: 0}
---- !u!224 &328889714 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 2958860683908054417, guid: e53416c188d47c446aa7796adbbaa3c9,
-    type: 3}
-  m_PrefabInstance: {fileID: 113394479}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &367732367
 GameObject:
@@ -14147,7 +14190,7 @@ RectTransform:
   m_LocalScale: {x: 2.5, y: 2.5, z: 2.5}
   m_ConstrainProportionsScale: 1
   m_Children: []
-  m_Father: {fileID: 328889714}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
@@ -14359,6 +14402,63 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1468208000}
   m_CullTransparentMesh: 1
+--- !u!1 &1480042415
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1480042417}
+  - component: {fileID: 1480042416}
+  m_Layer: 0
+  m_Name: DialogManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1480042416
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1480042415}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22ee1c51480eda245a0adbfaf263c236, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogPanel: {fileID: 0}
+  bgPanel: {fileID: 0}
+  characterNameText: {fileID: 0}
+  dialogText: {fileID: 0}
+  characterImageAnimator: {fileID: 0}
+  typingEffect: {fileID: 0}
+  choicePanel: {fileID: 0}
+  choiceButtons: []
+  choiceTexts: []
+  leftCharacterImage: {fileID: 0}
+  rightCharacterImage: {fileID: 0}
+  dialogLines: []
+  playerDecisions: []
+--- !u!4 &1480042417
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1480042415}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 535.9963, y: 268.92145, z: -1.4020243}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1496445278 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2899684668293481074, guid: 3410fe058b03f6544a51196feb5df00c,
@@ -15021,8 +15121,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 290, y: -382}
-  m_SizeDelta: {x: 615, y: 205}
+  m_AnchoredPosition: {x: 106, y: -363}
+  m_SizeDelta: {x: 150, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1689414345
 MonoBehaviour:
@@ -15044,7 +15144,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 4f542153797176e4bb0adc86b070beef, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 41870003f83b1ab4184554c22986d906, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -17088,3 +17188,6 @@ SceneRoots:
   - {fileID: 674487785}
   - {fileID: 60383488}
   - {fileID: 1831619970}
+  - {fileID: 1393520263}
+  - {fileID: 269191036}
+  - {fileID: 1480042417}

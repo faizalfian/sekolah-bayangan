@@ -47,4 +47,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/dist/Scenes/0. InterludeScene.unity
     guid: 7d86736fba2af6546b01950e9694540c
+  - enabled: 1
+    path: Assets/dist/Scenes/TebasanBayangan.unity
+    guid: 2f20b3c7a56988e40bcdd233415ad925
+  - enabled: 1
+    path: Assets/dist/Scenes/LedakanDendam.unity
+    guid: a68ea8e99bb2ffc4eb7ae859f1fe9f5d
   m_configObjects: {}
