@@ -86,6 +86,7 @@ public class Health : MonoBehaviour
         Vector3 respawnPos = CheckpointManager.Instance.GetRespawnPosition();
 
         transform.position = respawnPos;
+        Debug.Log(transform.position);
 
         resetHP();
 
