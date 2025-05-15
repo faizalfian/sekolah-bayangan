@@ -5,46 +5,61 @@ public class DialogBranchRouter : MonoBehaviour
 {
     public DialogManager dialogManager;
 
-    [Header("Nama Scene berdasarkan Tag Konsekuensi")]
-    public string tagFight = "Fight";        // contoh consequenceTag
-    public string sceneForFight = "Cutscene_Fight";
+    [Header("Penghubung consequenceTag ke scene")]
+    public string tagUnlockSkill = "UnlockSkill";
+    public string sceneForUnlockSkill = "Scene_UnlockSkill";
+
+    public string tagToEpilog = "Epilog";
+    public string sceneForEpilog = "Scene_Epilog";
+
+    public string tagFight = "Fight";
+    public string sceneForFight = "Scene_Fight";
 
     public string tagPeace = "Peace";
-    public string sceneForPeace = "Cutscene_Peace";
+    public string sceneForPeace = "Scene_Peace";
 
     void Start()
     {
         if (dialogManager != null)
         {
-            dialogManager.OnDialogEnd = CekPilihanDanPindahScene;
+            dialogManager.OnDialogEnd = CekPilihanDanLanjutScene;
         }
         else
         {
-            Debug.LogError("DialogManager belum disambungkan di DialogBranchRouter!");
+            Debug.LogError("DialogManager belum disambungkan.");
         }
     }
 
-    void CekPilihanDanPindahScene()
+    void CekPilihanDanLanjutScene()
     {
         if (dialogManager.playerDecisions.Count == 0)
         {
-            Debug.LogWarning("Belum ada pilihan yang diambil.");
+            Debug.LogWarning("Belum ada keputusan diambil.");
             return;
         }
 
-        string lastTag = dialogManager.playerDecisions[dialogManager.playerDecisions.Count - 1];
+        string tag = dialogManager.playerDecisions[dialogManager.playerDecisions.Count - 1];
+        Debug.Log("Pilihan terakhir: " + tag);
 
-        if (lastTag == tagFight)
+        if (tag == tagUnlockSkill)
+        {
+            SceneManager.LoadScene(sceneForUnlockSkill);
+        }
+        else if (tag == tagToEpilog)
+        {
+            SceneManager.LoadScene(sceneForEpilog);
+        }
+        else if (tag == tagFight)
         {
             SceneManager.LoadScene(sceneForFight);
         }
-        else if (lastTag == tagPeace)
+        else if (tag == tagPeace)
         {
             SceneManager.LoadScene(sceneForPeace);
         }
         else
         {
-            Debug.LogWarning("Tag tidak dikenali: " + lastTag);
+            Debug.LogWarning("Tag tidak dikenali: " + tag);
         }
     }
 }

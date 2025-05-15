@@ -1047,6 +1047,55 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 113394479}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &183146468
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 183146470}
+  - component: {fileID: 183146469}
+  m_Layer: 0
+  m_Name: SkillUnlockRouter
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &183146469
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 183146468}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88e0f645daeb30a42ab51cc3cdcd3dc6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogManager: {fileID: 2111400793}
+  tagMembunuh: kill
+  tagMemaafkan: forgive
+  sceneKillSkill: LedakanDendam
+  sceneForgiveSkill: TebasanBayangan
+--- !u!4 &183146470
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 183146468}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 504.00623, y: 295.93436, z: 0.062107787}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &263204314
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1150,55 +1199,6 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 1394657171}
   m_SourcePrefab: {fileID: 100100000, guid: b7296d5515d23844b88668359d702859, type: 3}
---- !u!1 &269191034
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 269191036}
-  - component: {fileID: 269191035}
-  m_Layer: 0
-  m_Name: DialogBranchRouter
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &269191035
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 269191034}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c8b97473639053043962b8adabf17854, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dialogManager: {fileID: 1480042416}
-  tagFight: Forgive
-  sceneForFight: TebasanBayangan
-  tagPeace: Skill
-  sceneForPeace: LedakanDendam
---- !u!4 &269191036
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 269191034}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 535.9963, y: 268.92145, z: -1.4020243}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &288648724 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8808676148656803481, guid: 2e34ede1516ca3741a113f650b117137,
@@ -14412,63 +14412,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1468208000}
   m_CullTransparentMesh: 1
---- !u!1 &1480042415
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1480042417}
-  - component: {fileID: 1480042416}
-  m_Layer: 0
-  m_Name: DialogManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1480042416
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1480042415}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 22ee1c51480eda245a0adbfaf263c236, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dialogPanel: {fileID: 0}
-  bgPanel: {fileID: 0}
-  characterNameText: {fileID: 0}
-  dialogText: {fileID: 0}
-  characterImageAnimator: {fileID: 0}
-  typingEffect: {fileID: 0}
-  choicePanel: {fileID: 0}
-  choiceButtons: []
-  choiceTexts: []
-  leftCharacterImage: {fileID: 0}
-  rightCharacterImage: {fileID: 0}
-  dialogLines: []
-  playerDecisions: []
---- !u!4 &1480042417
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1480042415}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 535.9963, y: 268.92145, z: -1.4020243}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1496445278 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2899684668293481074, guid: 3410fe058b03f6544a51196feb5df00c,
@@ -17214,5 +17157,4 @@ SceneRoots:
   - {fileID: 60383488}
   - {fileID: 1831619970}
   - {fileID: 1393520263}
-  - {fileID: 269191036}
-  - {fileID: 1480042417}
+  - {fileID: 183146470}
