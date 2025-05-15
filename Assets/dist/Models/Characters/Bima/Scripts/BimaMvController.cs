@@ -65,6 +65,7 @@ public class BimaMvController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (GameManager.Instance.isDialog) return;
         HandleMovement();
     }
 
@@ -101,7 +102,18 @@ public class BimaMvController : MonoBehaviour
         controller.Move(dir);
     }
 
-
+    public void enableMovement(bool b)
+    {
+        if (!b)
+        {
+            animator.SetBool("isMoving", false);
+            animator.ResetTrigger("PunchTrigger");
+            animator.ResetTrigger("tRoll");
+        }
+        LockMovement(b);
+        controller.enabled = b;
+        enabled = b;
+    }
 
     void OnCollisionEnter(Collision collision)
     {

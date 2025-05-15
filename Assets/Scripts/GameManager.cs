@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections.Generic;
+using System.Collections;
 
 public class GameManager : MonoBehaviour
 {
@@ -47,6 +48,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         startDialog();
+        dialogBegin.StartDialog();
         dialogBegin.OnDialogEnd += () => {
             endDialog();
         };
@@ -54,20 +56,28 @@ public class GameManager : MonoBehaviour
 
     void startDialog()
     {
-        if (isDialog) dialogBegin.StartDialog();
-        playerMovement.LockMovement(true);
-        playerMovement.enabled = false;
-        playerMovement.GetComponent<BimaCombat>().enabled = false;
+        isDialog = true;
+        isPlaying = false;
+
+        // Beri delay sebelum mengunci movement
+        StartCoroutine(DelayedMovementLock());
     }
 
     void endDialog()
     {
-        playerMovement.LockMovement(false);
-        playerMovement.enabled = true;
+        playerMovement.enableMovement(true);
         playerMovement.GetComponent<BimaCombat>().enabled = true;
         isDialog = false;
         isPlaying = true;
         backgroundMusic.volume = 0.4f;
+    }
+
+    IEnumerator DelayedMovementLock()
+    {
+        // Biarkan bergerak selama 1 detik sebelum dikunci
+        yield return new WaitForSeconds(1f);
+        playerMovement.enableMovement(false);
+        playerMovement.GetComponent<BimaCombat>().enabled = false;
     }
 
     public void addEnemy()
@@ -90,6 +100,8 @@ public class GameManager : MonoBehaviour
             {
                 endDialog();
                 Destroy(boss);
+                SceneLoader.nextSceneName = "0. InterludeScene";
+                SceneManager.LoadScene("_LoadingScreenScene");
             };
             Debug.Log("Game Over");
         }
