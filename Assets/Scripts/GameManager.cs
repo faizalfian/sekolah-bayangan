@@ -96,12 +96,12 @@ public class GameManager : MonoBehaviour
         {
             startDialog();
             dialogEnd.StartDialog();
-            dialogEnd.OnDialogEnd = () =>
+            dialogEnd.OnDialogEnd += () =>
             {
                 endDialog();
                 Destroy(boss);
-                SceneLoader.nextSceneName = "0. InterludeScene";
-                SceneManager.LoadScene("_LoadingScreenScene");
+                //SceneLoader.nextSceneName = "0. InterludeScene";
+                //SceneManager.LoadScene("_LoadingScreenScene");
             };
             Debug.Log("Game Over");
         }

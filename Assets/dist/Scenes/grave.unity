@@ -23,10 +23,10 @@ RenderSettings:
   m_AmbientSkyColor: {r: 0.212, g: 0.227, b: 0.259, a: 1}
   m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
-  m_AmbientIntensity: 1
+  m_AmbientIntensity: 0.5
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 2100000, guid: fbb1e58f482701f4baab16664c19ebfe, type: 2}
+  m_SkyboxMaterial: {fileID: 2100000, guid: 1f8859155a90f5a4abf0fd5b1d811f88, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -1179,10 +1179,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8b97473639053043962b8adabf17854, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dialogManager: {fileID: 1480042416}
-  tagFight: Forgive
+  dialogManager: {fileID: 2111400793}
+  tagFight: kill
   sceneForFight: TebasanBayangan
-  tagPeace: Skill
+  tagPeace: forgive
   sceneForPeace: LedakanDendam
 --- !u!4 &269191036
 Transform:
@@ -14600,7 +14600,7 @@ Light:
   m_Type: 1
   m_Shape: 0
   m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
-  m_Intensity: 1
+  m_Intensity: 0.1
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208

@@ -16,7 +16,7 @@ public class DialogBranchRouter : MonoBehaviour
     {
         if (dialogManager != null)
         {
-            dialogManager.OnDialogEnd = CekPilihanDanPindahScene;
+            dialogManager.OnDialogEnd += CekPilihanDanPindahScene;
         }
         else
         {
