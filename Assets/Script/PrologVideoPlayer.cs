@@ -2,37 +2,58 @@
 using UnityEngine.Video;
 using UnityEngine.SceneManagement;
 using System.IO;
+using System.Collections;
 
 public class PrologVideoPlayer : MonoBehaviour
 {
     public VideoPlayer videoPlayer;
-    public string nextSceneName;
-    [SerializeField]
     public string videoName;
+    public ScreenFader screenFader;  // reference ke fader
 
     void Start()
     {
-        // 👉 Set path video ke dalam StreamingAssets
+	videoPlayer.errorReceived += OnVideoError;
+        StartCoroutine(PlayWithFade());
+    }
+
+    IEnumerator PlayWithFade()
+    {
+        // Fade in dulu (layar dari hitam jadi terlihat)
+        yield return StartCoroutine(screenFader.FadeIn());
+
+        // Set path video
         string fullPath = Path.Combine(Application.streamingAssetsPath, videoName);
         videoPlayer.url = fullPath;
+	    videoPlayer.isLooping = false;
+        videoPlayer.skipOnDrop = false;
 
-        // Mulai play setelah path diset
-        videoPlayer.loopPointReached += OnVideoEnd;
+        // Prepare video dulu sebelum play supaya lancar
+        videoPlayer.Prepare();
+        while (!videoPlayer.isPrepared)
+        {
+            yield return null;
+        }
+
+        // Play video dan daftarkan event end video
         videoPlayer.Play();
+        videoPlayer.loopPointReached += OnVideoEnd;
     }
 
     void OnVideoEnd(VideoPlayer vp)
     {
-        SceneLoader.nextSceneName = "grave";
+        // Mulai coroutine fade out, baru pindah scene
+        StartCoroutine(FadeOutAndLoadNext());
+    }
+
+    IEnumerator FadeOutAndLoadNext()
+    {
+        yield return StartCoroutine(screenFader.FadeOut());
+        SceneLoader.nextSceneName = "grave";  // sesuaikan nama scene berikutnya
         SceneManager.LoadScene("_LoadingScreenScene");
     }
 
-    void Update()
+    void OnVideoError(VideoPlayer vp, string message)
     {
-        // if (Input.GetKeyDown(KeyCode.Space))
-        // {
-        //     videoPlayer.Stop();
-        //     SceneManager.LoadScene(nextSceneName);
-        // }
+        Debug.LogError("VideoPlayer error: " + message);
     }
 }

@@ -121,6 +121,7 @@
     <Compile Include="Assets\Script\AutoDialogStarter.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\ShaderPropAnimator.cs" />
     <Compile Include="Assets\Scripts\CamControl.cs" />
+    <Compile Include="Assets\Script\ScreenFader.cs" />
     <Compile Include="Assets\Asset Sementara\Kenney Character\Script\AttackHitBox.cs" />
     <Compile Include="Assets\Script\DialogManager.cs" />
     <Compile Include="Assets\Script\DialogChoice.cs" />
