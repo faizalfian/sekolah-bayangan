@@ -100,6 +100,8 @@ public class GameManager : MonoBehaviour
             {
                 endDialog();
                 Destroy(boss);
+                SceneLoader.nextSceneName = "0. InterludeScene";
+                SceneManager.LoadScene("_LoadingScreenScene");
             };
             Debug.Log("Game Over");
         }
