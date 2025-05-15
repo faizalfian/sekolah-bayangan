@@ -22,7 +22,7 @@ public class GameManager : MonoBehaviour
     DialogManager dialogBegin;
     [SerializeField]
     DialogManager dialogEnd;
-    [SerializeField] EnemyBossAI boss;
+    [SerializeField] GameObject boss;
     [SerializeField]
     AudioSource backgroundMusic;
 

@@ -127,15 +127,23 @@ public class DialogManager : MonoBehaviour
             return; // Keluar setelah menampilkan choices
         }
 
-        // Jika ada nextLineIndex, update currentLine tapi jangan tampilkan sekarang
-        if (line.nextLineIndex != -1)
+        // Tentukan line berikutnya
+        if (line.nextLineIndex == -1)
         {
+            // Jika nextLineIndex = -1, akhiri dialog setelah line ini selesai
+            currentLine = dialogLines.Length; // Akan memicu EndDialog() di pemanggilan berikutnya
+        }
+        else if (line.nextLineIndex >= 0)
+        {
+            // Jika ada nextLineIndex yang valid, lompat ke line tersebut
             currentLine = line.nextLineIndex;
         }
         else
         {
-            currentLine++; // Lanjut ke line berikutnya secara default
+            // Default: lanjut ke line berikutnya secara sequential
+            currentLine++;
         }
+
 
     }
 
