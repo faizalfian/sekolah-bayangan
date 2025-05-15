@@ -136,6 +136,7 @@ MonoBehaviour:
   characterNameText: {fileID: 7177081689424334332}
   dialogText: {fileID: 5336912254303398476}
   characterImageAnimator: {fileID: 2769846391437163074}
+  typingEffect: {fileID: 4828881311460317719}
   choicePanel: {fileID: 1655808604814163558}
   choiceButtons:
   - {fileID: 5080883352155907919}

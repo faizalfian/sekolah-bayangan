@@ -16,7 +16,7 @@ public class DialogManager : MonoBehaviour
     public TextMeshProUGUI characterNameText;
     public TextMeshProUGUI dialogText;
     public CharacterImageAnimator characterImageAnimator; // opsional
-    private TypingEffect typingEffect;
+    public TypingEffect typingEffect;
 
     [Header("Choice UI")]
     public GameObject choicePanel;
@@ -46,13 +46,32 @@ public class DialogManager : MonoBehaviour
 
     public List<string> playerDecisions = new();
 
-    void Start()
+    void Awake()
     {
         bgPanel.SetActive(false);
         dialogPanel.SetActive(false);
         choicePanel.SetActive(false);
-        typingEffect = dialogText.GetComponent<TypingEffect>();
-        //gameObject.SetActive(false);
+        //// Inisialisasi yang lebih robust
+        //if (dialogText != null)
+        //{
+        //    Debug.Log("dialogtext != null");
+        //    typingEffect = dialogText.GetComponent<TypingEffect>();
+        //    Debug.Log(typingEffect);
+        //    Debug.Log(typingEffect == null);
+        //    if (typingEffect == null)
+        //    {
+        //        Debug.Log("typingEff != null");
+        //        // Jika komponen tidak ada, tambahkan secara otomatis
+        //        typingEffect = dialogText.gameObject.AddComponent<TypingEffect>();
+        //    }
+        //}
+        //else
+        //{
+        //    Debug.LogError("dialogText is not assigned in DialogManager!");
+        //}
+        //Debug.Log(dialogText);
+        //Debug.Log(typingEffect);
+        ////gameObject.SetActive(false);
     }
 
     public void StartDialog()
@@ -63,6 +82,7 @@ public class DialogManager : MonoBehaviour
             bgPanel.SetActive(true);
             currentLine = 0;
             ShowNextLine();
+
         }
         else
         {
@@ -107,7 +127,7 @@ public class DialogManager : MonoBehaviour
 
     public void ShowNextLine()
     {
-        Debug.Log(currentLine);
+        //Debug.Log(currentLine);
         if (currentLine < 0 || currentLine >= dialogLines.Length)
         {
             Debug.Log(currentLine + "end");
@@ -116,6 +136,7 @@ public class DialogManager : MonoBehaviour
         }
 
         DialogLine line = dialogLines[currentLine];
+        Debug.Log(typingEffect);
         characterNameText.text = line.characterName;
         typingEffect.StartTyping(line.dialog);
         UpdateCharacterImages(line.characterName, line.characterSprite);
