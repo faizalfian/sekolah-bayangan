@@ -5,6 +5,12 @@ using System.Collections.Generic;
 using UnityEngine.AI;
 using TMPro;
 
+
+// Control:
+// - J = dash
+// - K = punch
+// - L = push
+// PlayerInputAction -> 
 [RequireComponent(typeof(Health)), RequireComponent(typeof(BimaMvController))]
 public class BimaCombat : MonoBehaviour
 {
