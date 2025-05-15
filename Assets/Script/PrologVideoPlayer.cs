@@ -7,11 +7,13 @@ public class PrologVideoPlayer : MonoBehaviour
 {
     public VideoPlayer videoPlayer;
     public string nextSceneName;
+    [SerializeField]
+    public string videoName;
 
     void Start()
     {
         // 👉 Set path video ke dalam StreamingAssets
-        string fullPath = Path.Combine(Application.streamingAssetsPath, "prolog.mov");
+        string fullPath = Path.Combine(Application.streamingAssetsPath, videoName);
         videoPlayer.url = fullPath;
 
         // Mulai play setelah path diset
@@ -21,15 +23,16 @@ public class PrologVideoPlayer : MonoBehaviour
 
     void OnVideoEnd(VideoPlayer vp)
     {
-        SceneManager.LoadScene(nextSceneName);
+        SceneLoader.nextSceneName = "grave";
+        SceneManager.LoadScene("_LoadingScreenScene");
     }
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            videoPlayer.Stop();
-            SceneManager.LoadScene(nextSceneName);
-        }
+        // if (Input.GetKeyDown(KeyCode.Space))
+        // {
+        //     videoPlayer.Stop();
+        //     SceneManager.LoadScene(nextSceneName);
+        // }
     }
 }

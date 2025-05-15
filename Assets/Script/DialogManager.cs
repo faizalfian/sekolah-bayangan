@@ -127,15 +127,23 @@ public class DialogManager : MonoBehaviour
             return; // Keluar setelah menampilkan choices
         }
 
-        // Jika ada nextLineIndex, update currentLine tapi jangan tampilkan sekarang
-        if (line.nextLineIndex != -1)
+        // Tentukan line berikutnya
+        if (line.nextLineIndex == -1)
         {
+            // Jika nextLineIndex = -1, akhiri dialog setelah line ini selesai
+            currentLine = dialogLines.Length; // Akan memicu EndDialog() di pemanggilan berikutnya
+        }
+        else if (line.nextLineIndex >= 0)
+        {
+            // Jika ada nextLineIndex yang valid, lompat ke line tersebut
             currentLine = line.nextLineIndex;
         }
         else
         {
-            currentLine++; // Lanjut ke line berikutnya secara default
+            // Default: lanjut ke line berikutnya secara sequential
+            currentLine++;
         }
+
 
     }
 
@@ -179,9 +187,9 @@ public class DialogManager : MonoBehaviour
         choicePanel.SetActive(false);
         waitingForChoice = false;
 
-        characterNameText.text = "Bisma";
+        characterNameText.text = "Bima";
         typingEffect.StartTyping(pendingChoiceText);
-        UpdateCharacterImages("Bisma", leftCharacterImage.sprite);
+        UpdateCharacterImages("Bima", leftCharacterImage.sprite);
 
         // Setelah menampilkan choice text, langsung lanjut ke next line
         if (nextLineAfterChoice != -1)
@@ -203,7 +211,7 @@ public class DialogManager : MonoBehaviour
         leftCharacterImage.color = new Color(1, 1, 1, 0);
         rightCharacterImage.color = new Color(1, 1, 1, 0);
 
-        if (speakerName == "Bisma")
+        if (speakerName == "Bima")
         {
             leftCharacterImage.sprite = sprite;
             leftCharacterImage.color = new Color(1, 1, 1, 1);
