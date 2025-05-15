@@ -249,7 +249,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 820, y: 610}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1246447221
 MonoBehaviour:
@@ -271,7 +271,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Texture: {fileID: 0}
+  m_Texture: {fileID: 8400000, guid: 0e3a7d058df1a6d4f896d567fede055e, type: 2}
   m_UVRect:
     serializedVersion: 2
     x: 0
@@ -296,7 +296,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1290800714}
   - component: {fileID: 1290800713}
-  - component: {fileID: 1290800712}
+  - component: {fileID: 1290800715}
   m_Layer: 0
   m_Name: VideoPlayerObject
   m_TagString: Untagged
@@ -304,20 +304,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1290800712
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1290800711}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 29c15fe5f2c4b174686f44417dd8cad8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  videoPlayer: {fileID: 1290800713}
-  nextSceneName: grave
 --- !u!328 &1290800713
 VideoPlayer:
   m_ObjectHideFlags: 0
@@ -330,12 +316,12 @@ VideoPlayer:
   m_TargetCameraAlpha: 1
   m_TargetCamera3DLayout: 0
   m_TargetCamera: {fileID: 0}
-  m_TargetTexture: {fileID: 8400000, guid: 1121ab0b9c8eae141ad90a0aaa25189c, type: 2}
+  m_TargetTexture: {fileID: 8400000, guid: 0e3a7d058df1a6d4f896d567fede055e, type: 2}
   m_TimeReference: 0
   m_TargetMaterialRenderer: {fileID: 0}
   m_TargetMaterialProperty: <noninit>
   m_RenderMode: 2
-  m_AspectRatio: 2
+  m_AspectRatio: 1
   m_DataSource: 1
   m_TimeUpdateMode: 2
   m_PlaybackSpeed: 1
@@ -369,6 +355,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1290800715
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1290800711}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a295013188ad5a48afcf2b56783837d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  videoPlayer: {fileID: 1290800713}
+  videoName: fix-epilog.mp4
 --- !u!1 &1473603114
 GameObject:
   m_ObjectHideFlags: 0
