@@ -44,4 +44,7 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/dist/Scenes/4. DialogScene.unity
     guid: 576527ee3e10b7d41896eb124b7f9332
+  - enabled: 1
+    path: Assets/dist/Scenes/Epilog.unity
+    guid: 7d86736fba2af6546b01950e9694540c
   m_configObjects: {}
