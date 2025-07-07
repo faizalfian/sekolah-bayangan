@@ -42,42 +42,26 @@ public class DialogManager : MonoBehaviour
     private bool waitingForChoice = false;
     private string pendingChoiceText = null;
     private int nextLineAfterChoice = -1;
-    private bool jumpToManualLine = false;
+    private bool dialogStarted = false;
 
     public List<string> playerDecisions = new();
 
+    private PlayerInputAction inputActions;
+
     void Awake()
     {
+        inputActions = new PlayerInputAction();
         bgPanel.SetActive(false);
         dialogPanel.SetActive(false);
         choicePanel.SetActive(false);
-        //// Inisialisasi yang lebih robust
-        //if (dialogText != null)
-        //{
-        //    Debug.Log("dialogtext != null");
-        //    typingEffect = dialogText.GetComponent<TypingEffect>();
-        //    Debug.Log(typingEffect);
-        //    Debug.Log(typingEffect == null);
-        //    if (typingEffect == null)
-        //    {
-        //        Debug.Log("typingEff != null");
-        //        // Jika komponen tidak ada, tambahkan secara otomatis
-        //        typingEffect = dialogText.gameObject.AddComponent<TypingEffect>();
-        //    }
-        //}
-        //else
-        //{
-        //    Debug.LogError("dialogText is not assigned in DialogManager!");
-        //}
-        //Debug.Log(dialogText);
-        //Debug.Log(typingEffect);
-        ////gameObject.SetActive(false);
+        
     }
 
     public void StartDialog()
     {
         if (dialogLines.Length > 0)
         {
+            dialogStarted = true;
             dialogPanel.SetActive(true);
             bgPanel.SetActive(true);
             currentLine = 0;
@@ -88,6 +72,18 @@ public class DialogManager : MonoBehaviour
         {
             Debug.LogWarning("Tidak ada data dialog!");
         }
+    }
+
+    private void OnEnable()
+    {
+        inputActions.Enable();
+        inputActions.UI.Skip.performed += ctx => EndDialog();
+    }
+
+    private void OnDisable()
+    {
+        inputActions.UI.Skip.performed -= ctx => EndDialog();
+        inputActions.Disable();
     }
 
     void Update()
@@ -118,7 +114,6 @@ public class DialogManager : MonoBehaviour
                     Debug.Log(currentLine + "pendingChoice");
                     pendingChoiceText = null;
                     nextLineAfterChoice = -1;
-                    jumpToManualLine = true;
                 }
                 ShowNextLine();
             }
@@ -170,6 +165,7 @@ public class DialogManager : MonoBehaviour
 
     void EndDialog()
     {
+        if (!dialogStarted) return;
         dialogPanel.SetActive(false);
         bgPanel.SetActive(false);
         leftCharacterImage.color = new Color(1, 1, 1, 0);

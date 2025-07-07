@@ -62,7 +62,8 @@ MonoBehaviour:
   mass: 1
   attackAnimationDelay: 0.8
   healthBar: {fileID: 4664817479353270875}
-  healthBarOffset: {x: 0, y: 1.7, z: 0}
+  healthBarOffset: {x: 0, y: 0.6, z: 0}
+  gm: {fileID: 0}
 --- !u!195 &268910238227250574
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -130,6 +131,9 @@ MonoBehaviour:
   animator: {fileID: 0}
   componentsToDisableOnDeath: []
   collidersToDisableOnDeath: []
+  canRage: 0
+  rageCount: 1
+  currRageCount: 0
   onDeath:
     m_PersistentCalls:
       m_Calls:
@@ -145,6 +149,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  onRage:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &61343410887110332
 GameObject:
   m_ObjectHideFlags: 0
@@ -1708,7 +1715,7 @@ PrefabInstance:
     - target: {fileID: 5319635814742611478, guid: 14b2af6f381c7f54fa13f62596951812,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 1.7
+      value: 1.52
       objectReference: {fileID: 0}
     - target: {fileID: 5319635814742611478, guid: 14b2af6f381c7f54fa13f62596951812,
         type: 3}
@@ -1729,6 +1736,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_RenderMode
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8891733429654067764, guid: 14b2af6f381c7f54fa13f62596951812,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

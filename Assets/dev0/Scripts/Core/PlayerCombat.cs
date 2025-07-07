@@ -5,24 +5,18 @@ using System.Collections.Generic;
 using UnityEngine.AI;
 using TMPro;
 
-
-// Control:
-// - J = dash
-// - K = punch
-// - L = push
-// PlayerInputAction -> 
-[RequireComponent(typeof(Health)), RequireComponent(typeof(BimaMvController))]
-public class BimaCombat : MonoBehaviour
+[RequireComponent(typeof(Health)), RequireComponent(typeof(PlayerMovement))]
+public class PlayerCombat : MonoBehaviour
 {
     [Header("Combat Settings")]
     public Transform attackPoint;
     public float attackRange = 1f;
     public LayerMask enemyLayers;
-    public int attackDamage = 30;
+    public int attackDamage = 20;
     public float damageDelay = 0.5f;
 
     [Header("Movement Skills")]
-    public float dashSpeed = 2f;
+    public float dashSpeed = 20f;
     public float dashDuration = 0.3f;
     public float pushForce = 10f;
     public float pushRange = 2f;
@@ -41,7 +35,7 @@ public class BimaCombat : MonoBehaviour
     {
         public string name;
         public InputAction[] sequence;
-        public System.Action<BimaCombat> execute;
+        public System.Action<PlayerCombat> execute;
         public float cooldown;
     }
     public TextMeshProUGUI comboText;
@@ -50,7 +44,7 @@ public class BimaCombat : MonoBehaviour
     private PlayerInputAction inputActions;
     private Queue<InputAction> inputBuffer = new Queue<InputAction>();
     private Coroutine comboCheckRoutine;
-    private BimaMvController movement;
+    private PlayerMovement movement;
     private Animator animator;
     private float currentCooldown;
     private bool doingCombo = false;
@@ -62,8 +56,8 @@ public class BimaCombat : MonoBehaviour
 
     void Awake()
     {
-        movement = GetComponent<BimaMvController>();
-        animator = GetComponent<Animator>();
+        movement = GetComponent<PlayerMovement>();
+        animator = movement.animator;
         inputActions = new PlayerInputAction();
         punchAction = inputActions.Player.Punch;
         dashAction = inputActions.Player.Dash;
@@ -201,37 +195,27 @@ public class BimaCombat : MonoBehaviour
 
     IEnumerator PerformAttack()
     {
-        float rand = Random.value;
-        Debug.Log(rand);
-        if (rand > 0.5)
-        {
-            animator.SetTrigger("PunchTrigger");
-        }
-        else
-        {
-            animator.SetTrigger("PunchTrigger2");
-        }
+        if(Random.value > 0.5) animator.SetTrigger("punch1");
+        else animator.SetTrigger("punch2");
+        attackEffect.Play();
+
         yield return new WaitForSeconds(damageDelay);
 
         var hitEnemies = Physics.OverlapSphere(attackPoint.position, attackRange, enemyLayers);
-        foreach (var enemy in hitEnemies)
-            enemy.GetComponent<Health>().TakeDamage(attackDamage);
+        foreach (var enemy in hitEnemies) enemy.GetComponent<Health>().TakeDamage(attackDamage);
     }
 
     IEnumerator PerformDash()
     {
-        //Debug.Log("Dash");
         movement.LockMovement(true);
-        //animator.SetTrigger("PunchTrigger");
-        //animator.SetTrigger("Dash");
-        dashEffect?.Play();
+        dashEffect.Play();
 
         Vector3 direction = transform.forward;
         float timer = 0;
 
         while (timer < dashDuration)
         {
-            movement.Move(direction * dashSpeed * 0.5f * Time.deltaTime);
+            movement.Move(direction * dashSpeed * 1.8f * Time.deltaTime);
             timer += Time.deltaTime;
             yield return null;
         }
@@ -241,11 +225,9 @@ public class BimaCombat : MonoBehaviour
 
     IEnumerator PerformPush()
     {
-        //Debug.Log("Push");
         movement.LockMovement(true);
-        animator.SetTrigger("PunchTrigger");
-        //animator.SetTrigger("Push");
-        pushEffect?.Play();
+        animator.SetTrigger("push");
+        pushEffect.Play();
 
         var hitEnemies = Physics.OverlapSphere(attackPoint.position, pushRange, enemyLayers);
         foreach (var enemy in hitEnemies)
@@ -276,9 +258,9 @@ public class BimaCombat : MonoBehaviour
     {
         //Debug.Log("DashPunch");
         movement.LockMovement(true);
-        animator.SetTrigger("PunchTrigger");
-        //animator.SetTrigger("DashPunch");
-        dashEffect?.Play();
+        if (Random.value > 0.5) animator.SetTrigger("punch1");
+        else animator.SetTrigger("punch2");
+        dashEffect.Play();
 
         float timer = 0;
         Vector3 direction = transform.forward;
@@ -293,6 +275,7 @@ public class BimaCombat : MonoBehaviour
             {
                 ApplyDashDamage(direction, Mathf.RoundToInt(attackDamage));
                 damageApplied = true;
+                attackEffect.Play();
             }
 
             yield return null;
@@ -304,10 +287,9 @@ public class BimaCombat : MonoBehaviour
 
     IEnumerator DashPushCombo()
     {
-        //Debug.Log("DashPush");
         movement.LockMovement(true);
-        animator.SetTrigger("PunchTrigger");
-        dashEffect?.Play();
+        animator.SetTrigger("push");
+        dashEffect.Play();
 
         float timer = 0;
         Vector3 direction = transform.forward;
@@ -321,7 +303,7 @@ public class BimaCombat : MonoBehaviour
             if (timer >= dashDuration / 2 && !effectApplied)
             {
                 ApplyDashPushEffect(direction);
-                pushEffect?.Play();
+                pushEffect.Play();
                 effectApplied = true;
             }
 
@@ -336,9 +318,10 @@ public class BimaCombat : MonoBehaviour
     {
         Debug.Log("PushPunch");
         movement.LockMovement(true);
-        animator.SetTrigger("PunchTrigger");
-        //animator.SetTrigger("PushPunch");
+        if (Random.value > 0.5) animator.SetTrigger("punch1");
+        else animator.SetTrigger("punch2");
         pushEffect.Play();
+        attackEffect.Play();
 
         var hitEnemies = Physics.OverlapSphere(attackPoint.position, pushRange * 1.5f, enemyLayers);
         foreach (var enemy in hitEnemies)
