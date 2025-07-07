@@ -27,8 +27,6 @@ public class EnemyBossAI : EnemyAI
     {
         animator.SetTrigger("Dead");
         gm.removeEnemy();
-        //Invoke(nameof(disableAnimation), 2f);
-        //StartCoroutine(disableAfterDelay());
     }
 
     void disableAnimation()
@@ -39,7 +37,6 @@ public class EnemyBossAI : EnemyAI
     protected override void UpdateAnimations()
     {
         animator.SetBool("Walking", agent.velocity.magnitude > 0.2f);
-        //animator.SetBool("Running", agent.velocity.magnitude > 2f && isChasingPlayer);
     }
 
     protected override void AttackPlayer()
@@ -57,21 +54,7 @@ public class EnemyBossAI : EnemyAI
         transform.rotation = Quaternion.Lerp(lastRot, Quaternion.Euler(0, transform.rotation.eulerAngles.y, 0), 0.5f);
         attackRotation = transform.rotation; // Simpan rotasi saat mulai serangan
 
-        variationAttack();
-        //if (Time.time - lastAttackTime >= attackCooldown)
-        //{
-        //    isAttacking = true;
-        //    //animator.ResetTrigger("Attack");
-        //    animator.SetTrigger("Attack");
-
-        //    // Lock rotation during attack
-        //    StartCoroutine(LockAttackRotation());
-
-        //    // Apply damage after animation delay
-        //    StartCoroutine(ApplyDamageAfterDelay());
-
-        //    lastAttackTime = Time.time;
-        //}
+        if (Time.time - lastAttackTime >= attackCooldown) variationAttack();
     }
 
     protected virtual void variationAttack() {}

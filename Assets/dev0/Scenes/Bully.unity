@@ -3320,6 +3320,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: BullyEnemy-Physical (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 3139420627362132974, guid: 456a66f7212a7ca428d7ee550932adfe,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6249301681478231432, guid: 456a66f7212a7ca428d7ee550932adfe,
         type: 3}
       propertyPath: attackRadius
@@ -4489,6 +4494,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: BullyEnemy-Physical
       objectReference: {fileID: 0}
+    - target: {fileID: 3139420627362132974, guid: 456a66f7212a7ca428d7ee550932adfe,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6249301681478231432, guid: 456a66f7212a7ca428d7ee550932adfe,
         type: 3}
       propertyPath: attackRadius
@@ -5550,6 +5560,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: BullyEnemy-Verbal
+      objectReference: {fileID: 0}
+    - target: {fileID: 2398267984497737778, guid: e01a0115ecc128e43bf4783d5f62ee9c,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4693746702132765656, guid: e01a0115ecc128e43bf4783d5f62ee9c,
         type: 3}

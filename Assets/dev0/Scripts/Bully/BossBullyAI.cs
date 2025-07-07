@@ -1,12 +1,15 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class EnemyBullyBossAI : EnemyBossAI
 {
     [Header("Bully Boss Settings")]
     public float punchDamage = 15f;
     public float kickDamage = 20f;
+    public float kickForce = 10f;
     public float wordDamage = 10f;
+    public float closeAttackRadius = 2f;
     public float shockwaveDamage = 25f;
     public float shockwaveRadius = 5f;
 
@@ -14,6 +17,8 @@ public class EnemyBullyBossAI : EnemyBossAI
     public GameObject wordProjectilePrefab;
     public Transform wordSpawnPoint;
     public GameObject shockwaveEffect;
+    public ParticleSystem AtkParticle;
+    public ParticleSystem KickParticle;
 
     [Header("Audio")]
     public AudioClip punchSound;
@@ -40,36 +45,25 @@ public class EnemyBullyBossAI : EnemyBossAI
         if (isInRageMode)
         {
             // During rage, more likely to use powerful attacks
-            int attackType = Random.Range(0, 3);
-            switch (attackType)
+            if(Vector3.Distance(transform.position, player.transform.position) < closeAttackRadius * 1.2f)
             {
-                case 0:
-                    PunchAttack();
-                    break;
-                case 1:
-                    KickAttack();
-                    break;
-                case 2:
-                    WordAttack();
-                    break;
+                if (Random.value < 0.2) PunchAttack();
+                else KickAttack();
+            } else
+            {
+                WordAttack();
             }
         }
         else
         {
-            // Normal attack pattern
-            int attackType = Random.Range(0, 4);
-            switch (attackType)
+            if (Vector3.Distance(transform.position, player.transform.position) < closeAttackRadius * 1.2f)
             {
-                case 0:
-                case 1:
-                    PunchAttack();
-                    break;
-                case 2:
-                    KickAttack();
-                    break;
-                case 3:
-                    WordAttack();
-                    break;
+                if (Random.value < 0.01) PunchAttack();
+                else KickAttack();
+            }
+            else
+            {
+                WordAttack();
             }
         }
     }
@@ -77,8 +71,9 @@ public class EnemyBullyBossAI : EnemyBossAI
     private void PunchAttack()
     {
         isAttacking = true;
-        animator.SetTrigger("Punch");
+        animator.SetTrigger("Attack");
         //PlaySound(punchSound);
+        AtkParticle.Play();
 
         StartCoroutine(LockAttackRotation());
         StartCoroutine(ApplyMeleeDamageAfterDelay(punchDamage, 0.3f));
@@ -89,10 +84,12 @@ public class EnemyBullyBossAI : EnemyBossAI
     private void KickAttack()
     {
         isAttacking = true;
-        //animator.SetTrigger("Kick");
+        animator.SetTrigger("Attack");
         //PlaySound(kickSound);
+        KickParticle.Play();
 
         StartCoroutine(LockAttackRotation());
+        StartCoroutine(ApplyKickForce());
         StartCoroutine(ApplyMeleeDamageAfterDelay(kickDamage, 0.4f));
 
         lastAttackTime = Time.time;
@@ -127,6 +124,19 @@ public class EnemyBullyBossAI : EnemyBossAI
         }
 
         isAttacking = false;
+    }
+
+    private IEnumerator ApplyKickForce()
+    {
+        //player.GetComponent<PlayerMovement>().enableMovement(false);
+        //var rb = player.GetComponent<Rigidbody>();
+        //if (rb == null) rb = player.AddComponent<Rigidbody>();
+        //rb.mass = 1;
+        player.GetComponent<PlayerMovement>().Move(new Vector3(0, 0.1f, 0) + transform.forward * kickForce);
+
+        yield return new WaitForSeconds(0.5f);
+
+        //player.GetComponent<PlayerMovement>().enableMovement(true);
     }
 
     private IEnumerator SpawnWordProjectile(float delay)
